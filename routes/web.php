@@ -14,5 +14,12 @@ Route::middleware([
     Route::view('dashboard', 'dashboard')->name('dashboard');
 });
 
-require __DIR__.'/settings.php';
-require __DIR__.'/auth.php';
+Route::middleware([
+    'auth',
+    ValidateSessionWithWorkOS::class,
+])->group(function () {
+    Route::view('courses', 'courses')->name('courses');
+});
+
+require __DIR__ . '/settings.php';
+require __DIR__ . '/auth.php';
