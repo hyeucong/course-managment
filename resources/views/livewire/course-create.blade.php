@@ -12,8 +12,7 @@
             <div class="flex">
                 <flux:spacer />
                 <flux:button wire:listen="course-created" type="submit" variant="primary" wire:click="submit"
-                    class="cursor-pointer">Create
-                    Course</flux:button>
+                    class="cursor-pointer">Create Course</flux:button>
             </div>
         </div>
     </flux:modal>
