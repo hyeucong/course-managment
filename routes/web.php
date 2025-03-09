@@ -7,17 +7,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware([
-    'auth',
-    ValidateSessionWithWorkOS::class,
-])->group(function () {
+Route::middleware(['auth', ValidateSessionWithWorkOS::class])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
-});
-
-Route::middleware([
-    'auth',
-    ValidateSessionWithWorkOS::class,
-])->group(function () {
+    Route::view('analytics', 'analytics')->name('analytics');
     Route::view('courses', 'courses')->name('courses');
 });
 

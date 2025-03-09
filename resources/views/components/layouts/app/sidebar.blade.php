@@ -20,6 +20,9 @@
                         wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                     <flux:navlist.item icon="academic-cap" :href="route('courses')"
                         :current="request()->routeIs('courses')" wire:navigate>{{ __('Courses') }}</flux:navlist.item>
+                    <flux:navlist.item icon="presentation-chart-line" :href="route('analytics')"
+                        :current="request()->routeIs('analytics')" wire:navigate>{{ __('Analytics') }}
+                    </flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 
