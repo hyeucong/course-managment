@@ -11,9 +11,15 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('courses', function (Blueprint $table) {
-            $table->id()->autoIncrement();
-            $table->string('title');
-            $table->string('description');
+            $table->id();
+            $table->string('course_name');
+            $table->string('course_code')->unique();
+            $table->string('lecturer');
+            $table->date('date_start');
+            $table->date('date_end');
+            $table->json('schedule');
+            $table->text('description');
+            $table->enum('status', ['active', 'inactive', 'completed', 'pending'])->default('pending');
             $table->timestamps();
         });
     }
