@@ -11,7 +11,6 @@
         </div>
 
         <livewire:course-create />
-        <livewire:course-edit />
 
         <flux:subheading size="lg" class="mb-6">{{ __('Manage your courses and account settings') }}</flux:subheading>
         <flux:separator variant="subtle" />

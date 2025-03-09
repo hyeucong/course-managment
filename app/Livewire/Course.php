@@ -2,24 +2,22 @@
 
 namespace App\Livewire;
 
-use App\Models\Course;
 use Flux\Flux;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
-class Courses extends Component
+class Course extends Component
 {
-    public $courses = [];
     public $courseId;
 
-    public function mount()
+    public function getCourseProperty()
     {
-        $this->courses = Course::all();
+        return \App\Models\Course::findOrFail($this->courseId);
     }
 
     public function render()
     {
-        return view('livewire.courses');
+        return view('livewire.course');
     }
 
     #[On('reloadCourses')]
@@ -28,16 +26,22 @@ class Courses extends Component
         $this->courses = Course::all();
     }
 
-    public function delete($id)
+    public function edit($courseId)
     {
-        $this->courseId = $id;
+        $this->dispatch('editCourse', $courseId);
+    }
+
+    public function delete($courseId)
+    {
+        $this->courseId = $courseId;
         Flux::modal('delete-course')->show();
     }
 
     public function destroy()
     {
-        Course::findOrFail($this->courseId)->delete();
+        \App\Models\Course::findOrFail($this->courseId)->delete();
         Flux::modal('delete-course')->close();
+        redirect('courses');
         $this->reloadCourses();
     }
 }

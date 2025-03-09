@@ -23,6 +23,9 @@
                     <flux:navlist.item icon="presentation-chart-line" :href="route('analytics')"
                         :current="request()->routeIs('analytics')" wire:navigate>{{ __('Analytics') }}
                     </flux:navlist.item>
+                    <flux:navlist.item icon="credit-card" :href="route('billing')"
+                        :current="request()->routeIs('billing')" wire:navigate>{{ __('Billing') }}
+                    </flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 
