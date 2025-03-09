@@ -2,8 +2,14 @@
 
 namespace Database\Seeders;
 
-use App\Models\Course;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Attendance;
 use Illuminate\Database\Seeder;
+use App\Models\Course;
+use App\Models\Student;
+use App\Models\Enrollment;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,19 +18,35 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
 
-        Course::create([
-            'course_name' => 'Introduction to Computer Science',
-            'course_code' => 'CS101',
-            'lecturer' => 'Dr. Smith',
-            'date_start' => '2024-09-02',
-            'date_end' => '2024-12-16',
-            'schedule' => 'MWF 10:00-10:50',
-            'description' => 'A foundational course in computer science principles.',
-            'status' => 'active',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        // Create students
+        $students = Student::factory(10)->create();
+
+        // Create courses
+        $courses = Course::factory(5)->create();
+
+        // Enroll students in courses and create attendance records
+        foreach ($courses as $course) {
+            // Randomly select 3 to 6 students to enroll in the current course
+            $studentsToEnroll = $students->random(rand(3, 6));
+
+            foreach ($studentsToEnroll as $student) {
+                // Enroll the student in the course
+                $enrollment = Enrollment::factory()->create([
+                    'student_id' => $student->id,
+                    'course_id' => $course->id,
+                ]);
+
+                // Create attendance records for the enrollment
+                // Example: Create attendance records for the past 5 days
+                for ($i = 0; $i < 5; $i++) {
+                    Attendance::factory()->create([
+                        'enrollment_id' => $enrollment->id,
+                        'attendance_date' => now()->subDays($i), // Dates in the past
+                    ]);
+                }
+            }
+        }
+
     }
 }

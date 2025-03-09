@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Course extends Model
+class Student extends Model
 {
     use HasFactory;
 
-    protected $guarded = [''];
+    protected $guarded = [];
 
     /**
-     * Get the enrollments for the course.
+     * Get the enrollments for the student.
      */
     public function enrollments(): HasMany
     {
@@ -22,10 +22,11 @@ class Course extends Model
     }
 
     /**
-     * The students that belong to the course.
+     * The courses that belong to the student.
      */
-    public function students(): BelongsToMany
+    public function courses(): BelongsToMany
     {
-        return $this->belongsToMany(Student::class, 'enrollments');
+        return $this->belongsToMany(Course::class, 'enrollments');
     }
+
 }

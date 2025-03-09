@@ -15,11 +15,11 @@ return new class extends Migration {
             $table->string('course_name');
             $table->string('course_code')->unique();
             $table->string('lecturer');
-            $table->date('date_start');
-            $table->date('date_end');
-            $table->json('schedule');
-            $table->text('description');
-            $table->enum('status', ['active', 'inactive', 'completed', 'pending'])->default('pending');
+            $table->date('date_start')->nullable();
+            $table->date('date_end')->nullable();
+            $table->text('schedule')->nullable();
+            $table->text('description')->nullable();
+            $table->enum('status', ['active', 'inactive', 'completed'])->default('active');
             $table->timestamps();
         });
     }

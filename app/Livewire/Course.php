@@ -9,7 +9,6 @@ use Livewire\Component;
 class Course extends Component
 {
     public $courseId;
-
     public function getCourseProperty()
     {
         return \App\Models\Course::findOrFail($this->courseId);
@@ -17,7 +16,8 @@ class Course extends Component
 
     public function render()
     {
-        return view('livewire.course');
+        $total = \App\Models\Student::count();
+        return view('livewire.course', compact('total'));
     }
 
     #[On('reloadCourses')]

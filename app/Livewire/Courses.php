@@ -19,7 +19,8 @@ class Courses extends Component
 
     public function render()
     {
-        return view('livewire.courses');
+        $total = \App\Models\Student::count();
+        return view('livewire.courses', ['total' => $total]);
     }
 
     #[On('reloadCourses')]

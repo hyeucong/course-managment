@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class CourseCreate extends Component
 {
-    public $title, $description;
+    public $course_name, $course_code, $lecturer, $description;
 
     public function render()
     {
@@ -18,12 +18,16 @@ class CourseCreate extends Component
     public function submit()
     {
         $this->validate([
-            'title' => 'required',
-            'description' => 'required'
+            'course_name' => 'required',
+            'course_code' => 'required',
+            'lecturer' => 'required',
+            'description' => 'required',
         ]);
 
         Course::create([
-            'title' => $this->title,
+            'course_name' => $this->course_name,
+            'course_code' => $this->course_code,
+            'lecturer' => $this->lecturer,
             'description' => $this->description
         ]);
         Flux::modal("course-create")->close();
@@ -35,7 +39,9 @@ class CourseCreate extends Component
 
     public function resetForm()
     {
-        $this->title = "";
+        $this->course_name = "";
+        $this->course_code = "";
+        $this->lecturer = "";
         $this->description = "";
     }
 }
