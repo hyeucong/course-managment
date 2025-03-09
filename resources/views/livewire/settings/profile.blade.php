@@ -38,7 +38,7 @@ new class extends Component {
     }
 }; ?>
 
-<section class="w-full">
+<section class="w-full p-6">
     @include('partials.settings-heading')
 
     <x-settings.layout :heading="__('Profile')" :subheading="__('Update your name and email address')">
@@ -46,7 +46,8 @@ new class extends Component {
             <flux:input wire:model="name" :label="__('Name')" type="text" required autofocus autocomplete="name" />
 
             <div>
-                <flux:input wire:model="email" :label="__('Email')" type="email" required disabled autocomplete="email" />
+                <flux:input wire:model="email" :label="__('Email')" type="email" required disabled
+                    autocomplete="email" />
             </div>
 
             <div class="flex items-center gap-4">

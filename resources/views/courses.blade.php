@@ -1,5 +1,5 @@
 <x-layouts.app title="Courses">
-    <div class="relative mb-6 w-full">
+    <div class="relative mb-6 w-full p-6">
         <div class="flex gap-4 justify-between">
             <flux:heading size="xl" level="1">Courses</flux:heading>
 

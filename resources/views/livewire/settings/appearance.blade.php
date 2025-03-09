@@ -6,7 +6,7 @@ new class extends Component {
     //
 }; ?>
 
-<div class="flex flex-col items-start">
+<div class="flex flex-col items-start p-6">
     @include('partials.settings-heading')
 
     <x-settings.layout :heading="__('Appearance')" :subheading="__('Update your account\'s appearance settings')">

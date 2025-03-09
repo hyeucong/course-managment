@@ -70,3 +70,11 @@ select:focus[data-flux-control] {
 button {
     cursor: pointer !important;
 }
+
+.custom-tab {
+    max-width: fit-content !important;
+}
+
+.\[grid-area\:main\] {
+    padding: 0 !important;
+}

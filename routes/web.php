@@ -13,6 +13,7 @@ Route::middleware(['auth', ValidateSessionWithWorkOS::class])->group(function ()
     Route::view('analytics', 'analytics')->name('analytics');
     Route::view('billing', 'billing')->name('billing');
     Route::view('courses', 'courses')->name('courses');
+    Route::view('tests', 'tests')->name('tests');
     Route::get('/courses/{courseId}', Course::class)->name('course');
 });
 
