@@ -9,6 +9,7 @@ use Livewire\Component;
 class Course extends Component
 {
     public $courseId;
+
     public function getCourseProperty()
     {
         return \App\Models\Course::findOrFail($this->courseId);

@@ -19,7 +19,9 @@
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
                         wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                     <flux:navlist.item icon="academic-cap" :href="route('courses')"
-                        :current="request()->routeIs('courses')" wire:navigate>{{ __('Courses') }}</flux:navlist.item>
+                        :current="request()->routeIs('courses') || request()->is('courses/*')" wire:navigate>
+                        {{ __('Courses') }}
+                    </flux:navlist.item>
                     <flux:navlist.item icon="beaker" :href="route('tests')" :current="request()->routeIs('tests')"
                         wire:navigate>{{ __('Tests') }}
                     </flux:navlist.item>

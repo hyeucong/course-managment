@@ -3,11 +3,16 @@
         <div class="flex gap-4 justify-between">
             <flux:heading size="xl" level="1">Courses</flux:heading>
 
-            <flux:modal.trigger name="course-create">
-                <flux:button variant="primary" class="cursor-pointer">
-                    {{ __('Create Course') }}
-                </flux:button>
-            </flux:modal.trigger>
+            <div class="flex gap-4">
+                <div class="w-80">
+                    <flux:input icon="magnifying-glass" placeholder="Filter by..." />
+                </div>
+                <flux:modal.trigger name="course-create">
+                    <flux:button variant="primary" class="cursor-pointer">
+                        {{ __('Create Course') }}
+                    </flux:button>
+                </flux:modal.trigger>
+            </div>
         </div>
 
         <livewire:course.course-create />

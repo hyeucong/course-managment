@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class CourseEdit extends Component
 {
-    public $title, $description, $id;
+    public $course_name, $course_code, $lecturer, $description, $id;
     public function render()
     {
         return view('livewire.course-edit');
@@ -28,12 +28,16 @@ class CourseEdit extends Component
     public function update()
     {
         $this->validate([
-            'title' => 'required',
+            'course_name' => 'required',
+            'course_code' => 'required',
+            'lecturer' => 'required',
             'description' => 'required',
         ]);
 
         $course = Course::find($this->id);
-        $course->title = $this->title;
+        $course->course_name = $this->course_name;
+        $course->course_name = $this->course_name;
+        $course->lecturer = $this->lecturer;
         $course->description = $this->description;
         $course->save();
         Flux::modal('edit-course')->close();

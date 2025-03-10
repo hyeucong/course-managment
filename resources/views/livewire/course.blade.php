@@ -1,5 +1,5 @@
 <div class="relative mb-6 w-full">
-    <x-layouts.app.course-header :course="$this->course" />
+    <x-layouts.app.course-header />
 
     <div class="p-6">
         <div class="flex gap-4 justify-between">
