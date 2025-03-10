@@ -1,7 +1,7 @@
 <?php
 
-use App\Livewire\Course;
-use App\Livewire\Stream;
+use App\Livewire\Course\Course;
+use App\Livewire\Course\Stream;
 use Illuminate\Support\Facades\Route;
 use Laravel\WorkOS\Http\Middleware\ValidateSessionWithWorkOS;
 

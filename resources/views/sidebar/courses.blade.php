@@ -10,7 +10,7 @@
             </flux:modal.trigger>
         </div>
 
-        <livewire:course-create />
+        <livewire:course.course-create />
 
         <flux:subheading size="lg" class="mb-6">{{ __('Manage your courses and account settings') }}</flux:subheading>
         <flux:separator variant="subtle" />

@@ -25,7 +25,7 @@
             </a>
         </div>
 
-        <livewire:course-edit />
+        <livewire:course.course-edit />
 
         <flux:modal name="delete-course" class="min-w-[22rem]">
             <div class="space-y-6">
