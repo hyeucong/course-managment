@@ -2,9 +2,11 @@
     <div class="grid auto-rows-min gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
         @foreach ($courses as $course)
             <a class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 
-                    flex flex-col justify-between p-5 h-fit" href="{{route('course', $course)}}" wire:navigate>
+                                flex flex-col justify-between p-5 h-fit" href="{{route('course', $course)}}" wire:navigate>
                 <div class="flex flex-col gap-2">
-                    <h1 class="font-bold text-2xl mb-4">{{$course->course_name}}</h1>
+                    <h1 class="font-bold text-2xl overflow-hidden whitespace-nowrap text-ellipsis">
+                        {{$course->course_name}}
+                    </h1>
                     <div class="flex gap-2 items-center">
                         <flux:icon.book-open />
                         <p icon="home"> {{$course->course_code}}</p>

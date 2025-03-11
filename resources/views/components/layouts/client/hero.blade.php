@@ -1,8 +1,9 @@
 <div class="bg-gray-100 h-screen rounded-2xl w-full" style="height: calc(100dvh - 200px);">
-    <div class="p-15 flex flex-col md:flex-row items-center justify-between w-full h-full">
+    <div class="p-15 flex flex-col md:flex-row items-center justify-between w-full h-full gap-5">
         <div class="md:w-full text-left ">
             <h1 class="text-5xl font-bold text-gray-900 mb-6">Better classroom management for teachers</h1>
-            <p class="text-gray-700 text-lg mb-8">Teachers deserve better than Sheets. That’s why I made lecturespace,
+            <p class="text-gray-700 text-lg mb-8  text-ellipsis">Teachers deserve better than Sheets. That’s why I made
+                lecturespace,
                 the easier alternative app to create, manage, organize classroom and other learning activities with a
                 simple hover-and-click interface.</p>
             <button class="bg-black text-white py-3 px-6 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2
