@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class Details extends Component
 {
-    public $courseId;
+    public $courseId, $activeTab = 'details';
 
     public function mount()
     {

@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class Stream extends Component
 {
-    public $courseId;
+    public $courseId, $activeTab = 'stream';
 
     public function mount()
     {

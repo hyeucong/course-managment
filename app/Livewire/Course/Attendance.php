@@ -8,6 +8,8 @@ class Attendance extends Component
 {
     public $courseId;
 
+    public $activeTab = 'attendance';
+
     public function mount()
     {
         $this->course = \App\Models\Course::findOrFail($this->courseId);

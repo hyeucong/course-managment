@@ -11,6 +11,7 @@ class Course extends Component
     public $courseId;
     public $course;
     public $key;
+    public $activeTab = 'overview';
 
     public function mount()
     {
@@ -22,7 +23,8 @@ class Course extends Component
         $total = \App\Models\Student::count();
         return view('livewire.course', [
             'total' => $total,
-            'course' => $this->course
+            'course' => $this->course,
+            'activeTab' => $this->activeTab,
         ]);
     }
 

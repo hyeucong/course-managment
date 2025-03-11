@@ -1,5 +1,5 @@
 <div class="relative mb-6 w-full">
-    <x-course-header :course="$course" />
+    <x-course-header :course="$course" :activeTab="$activeTab" />
 
     <div class="p-6">
         <div class="flex gap-4 justify-between">
