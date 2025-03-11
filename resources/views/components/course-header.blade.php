@@ -1,7 +1,7 @@
 <flux:header class="block! bg-white lg:bg-zinc-50 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-700">
     <flux:navbar scrollable>
         <flux:navbar.item wire:key="nav-overview" :href="route('course', $course->id)"
-            :current="request()->routeIs('course')" wire:navigate>
+            :current="request()->routeIs('course') || request()->is('*livewire/update*')" wire:navigate>
             Overview</flux:navbar.item>
         <flux:navbar.item wire:key="nav-stream" :href="route('stream', $course->id)"
             :current="request()->routeIs('stream')" wire:navigate>
