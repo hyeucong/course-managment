@@ -3,26 +3,28 @@
 namespace App\Livewire\Course;
 
 use App\Models\Course;
-use Flux\Flux;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class CourseEdit extends Component
 {
     public $course_name, $course_code, $lecturer, $description, $id;
-    public function render()
-    {
-        return view('livewire.course-edit');
-    }
 
     #[On('editCourse')]
     public function editCourse($id)
     {
         $course = Course::find($id);
         $this->id = $course->id;
-        $this->title = $course->title;
+        $this->course_name = $course->course_name;
+        $this->course_code = $course->course_code;
+        $this->lecturer = $course->lecturer;
         $this->description = $course->description;
-        Flux::modal('edit-course')->show();
+        $this->showModal = true;
+    }
+
+    public function render()
+    {
+        return view('livewire.course-edit');
     }
 
     public function update()
@@ -40,7 +42,5 @@ class CourseEdit extends Component
         $course->lecturer = $this->lecturer;
         $course->description = $this->description;
         $course->save();
-        Flux::modal('edit-course')->close();
-        $this->dispatch('reloadCourses');
     }
 }
