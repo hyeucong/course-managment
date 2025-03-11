@@ -7,12 +7,14 @@ use Livewire\Component;
 class People extends Component
 {
     public $courseId;
-    public function getCourseProperty()
+
+    public function mount()
     {
-        return \App\Models\Course::findOrFail($this->courseId);
+        $this->course = \App\Models\Course::findOrFail($this->courseId);
     }
+
     public function render()
     {
-        return view('livewire.people');
+        return view('livewire.people', ['course' => $this->course]);
     }
 }

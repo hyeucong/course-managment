@@ -9,17 +9,23 @@ use Livewire\Component;
 class Course extends Component
 {
     public $courseId;
+    public $course;
+    public $key;
 
-    public function getCourseProperty()
+    public function mount()
     {
-        return \App\Models\Course::findOrFail($this->courseId);
+        $this->course = \App\Models\Course::findOrFail($this->courseId);
     }
 
     public function render()
     {
         $total = \App\Models\Student::count();
-        return view('livewire.course', compact('total'));
+        return view('livewire.course', [
+            'total' => $total,
+            'course' => $this->course
+        ]);
     }
+
 
     #[On('reloadCourses')]
     public function reloadCourses()

@@ -6,14 +6,16 @@ use Livewire\Component;
 
 class Settings extends Component
 {
-    public $courseId;
-    public function getCourseProperty()
+    public $courseId, $activeTab, $course;
+
+    public function mount()
     {
-        return \App\Models\Course::findOrFail($this->courseId);
+        $this->course = \App\Models\Course::findOrFail($this->courseId);
     }
+
 
     public function render()
     {
-        return view('livewire.settings');
+        return view('livewire.settings', ['course' => $this->course]);
     }
 }

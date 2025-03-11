@@ -1,16 +1,16 @@
 <div class="relative mb-6 w-full">
-    <x-layouts.app.course-header />
+    <x-course-header :course="$course" />
 
     <div class="p-6">
         <div class="flex gap-4 justify-between">
-            <flux:heading size="xl" level="1">{{$this->course->course_name}}</flux:heading>
+            <flux:heading size="xl" level="1">{{$course->course_name}}</flux:heading>
             <div class="flex justify-end gap-4">
-                <flux:button wire:click="delete({{$this->course->id}})">Delete</flux:button>
-                <flux:button wire:click="edit({{$this->course->id}})" variant="primary">Edit</flux:button>
+                <flux:button wire:click="delete({{$course->id}})">Delete</flux:button>
+                <flux:button wire:click="edit({{$course->id}})" variant="primary">Edit</flux:button>
             </div>
         </div>
 
-        <flux:subheading size="lg" class="mb-6">{{$this->course->course_code}}</flux:subheading>
+        <flux:subheading size="lg" class="mb-6">{{$course->course_code}}</flux:subheading>
         <flux:separator class="mb-6" variant="subtle" />
 
         <flux:subheading size="xl" class="mb-6">🎉 Congratulations, you've got a place to store files!</flux:subheading>
