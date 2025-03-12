@@ -4,9 +4,9 @@ namespace App\Livewire\Course;
 
 use Livewire\Component;
 
-class Details extends Component
+class ClassWork extends Component
 {
-    public $courseId, $activeTab = 'details';
+    public $courseId, $activeTab = 'classwork';
 
     public function mount()
     {
@@ -15,6 +15,6 @@ class Details extends Component
 
     public function render()
     {
-        return view('livewire.details', ['course' => $this->course]);
+        return view('livewire.classwork', ['course' => $this->course]);
     }
 }

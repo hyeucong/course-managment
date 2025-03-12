@@ -2,8 +2,19 @@
     <x-course-header :course="$course" :activeTab="$activeTab" />
 
     <div class="p-6">
-        <flux:heading size="xl" level="1">{{$course->course_name}}</flux:heading>
-        <flux:subheading size="lg" class="mb-6">{{$course->course_code}}</flux:subheading>
+        <div class="flex justify-between">
+            <div>
+                <flux:heading size="xl" level="1">{{$course->course_name}}</flux:heading>
+                <flux:subheading size="lg" class="mb-6">{{$course->course_code}}</flux:subheading>
+            </div>
+            <div
+                class="p-3 border border-neutral-200 dark:border-neutral-700 rounded-2xl w-fit mb-6 flex items-center gap-2 px-6">
+                <h1>Class Code:</h1>
+                <p>jskdaosdk</p>
+                <flux:icon.document-duplicate />
+            </div>
+        </div>
+
         <flux:separator class="mb-6" variant="subtle" />
 
         <flux:subheading size="xl" class="mb-6">🎉 Congratulations, you've got a place to store files!</flux:subheading>

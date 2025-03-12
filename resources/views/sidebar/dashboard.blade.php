@@ -1,25 +1,61 @@
 <x-layouts.app title="Dashboard">
-    <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl p-6">
-        <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div
-                class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-                <x-placeholder-pattern
-                    class="absolute inset-0 size-full stroke-gray-900/20 dark:stroke-neutral-100/20" />
+    <div class="relative mb-6 w-full p-6">
+        <div class="flex gap-4 justify-between items-center">
+            <div class="flex flex-col">
+                <flux:heading size="xl" level="1">Dashboard</flux:heading>
+                <flux:subheading size="lg" class="mb-6">Manage your courses and class settings</flux:subheading>
             </div>
-            <div
-                class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-                <x-placeholder-pattern
-                    class="absolute inset-0 size-full stroke-gray-900/20 dark:stroke-neutral-100/20" />
-            </div>
-            <div
-                class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-                <x-placeholder-pattern
-                    class="absolute inset-0 size-full stroke-gray-900/20 dark:stroke-neutral-100/20" />
+            <div class="p-3 border border-neutral-200 dark:border-neutral-700 rounded-2xl w-fit mb-6">
+                <flux:icon.bell />
             </div>
         </div>
-        <div
-            class="relative h-full flex-1 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-            <x-placeholder-pattern class="absolute inset-0 size-full stroke-gray-900/20 dark:stroke-neutral-100/20" />
+
+        <flux:separator variant="subtle" />
+
+        <div class="grid auto-rows-min gap-4 md:grid-cols-4 mt-6">
+            <div class="aspect-auto overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 
+            flex flex-col justify-between p-5">
+                <div class="flex flex-col gap-2 justify-between">
+                    <div class="p-3 border border-neutral-200 dark:border-neutral-700 rounded-2xl w-fit mb-6">
+                        <flux:icon.presentation-chart-line />
+                    </div>
+                    <h1 class="font-bold text-2xl">100</h1>
+                    <p>Average Result</p>
+                </div>
+            </div>
+            <div class="aspect-auto overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 
+            flex flex-col justify-between p-5">
+                <div class="flex flex-col gap-2 justify-between">
+                    <div class="p-3 border border-neutral-200 dark:border-neutral-700 rounded-2xl w-fit mb-6">
+                        <flux:icon.presentation-chart-line />
+                    </div>
+                    <h1 class="font-bold text-2xl">100</h1>
+                    <p>Average Result</p>
+                </div>
+            </div>
+            <div class="aspect-auto overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 
+            flex flex-col justify-between p-5">
+                <div class="flex flex-col gap-2 justify-between">
+                    <div class="p-3 border border-neutral-200 dark:border-neutral-700 rounded-2xl w-fit mb-6">
+                        <flux:icon.presentation-chart-line />
+                    </div>
+                    <h1 class="font-bold text-2xl">100</h1>
+                    <p>Average Result</p>
+                </div>
+            </div>
+            <div class="aspect-auto overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 
+            flex flex-col justify-between p-5">
+                <div class="flex flex-col gap-2 justify-between">
+                    <div class="p-3 border border-neutral-200 dark:border-neutral-700 rounded-2xl w-fit mb-6">
+                        <flux:icon.presentation-chart-line />
+                    </div>
+                    <h1 class="font-bold text-2xl">100</h1>
+                    <p>Average Result</p>
+                </div>
+            </div>
         </div>
+
+
+
     </div>
 </x-layouts.app>

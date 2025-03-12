@@ -1,4 +1,4 @@
-<div name="edit-course" class="w-lg mt-6 mb-6">
+<div name="edit-course" class="w-lg mb-6">
     <div class="space-y-6">
         <flux:input wire:model="course_name" label="Course name" placeholder="Course name" />
         <flux:input wire:model="course_code" label="Course code" placeholder="Course code" />

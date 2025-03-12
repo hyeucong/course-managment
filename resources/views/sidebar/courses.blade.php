@@ -7,6 +7,9 @@
                 <div class="w-80">
                     <flux:input icon="magnifying-glass" placeholder="Filter by..." />
                 </div>
+                <flux:button variant="primary" class="cursor-pointer">
+                    Join Class
+                </flux:button>
                 <flux:modal.trigger name="course-create">
                     <flux:button variant="primary" class="cursor-pointer">
                         Create Course

@@ -2,22 +2,18 @@
     <x-course-header :course="$course" :activeTab="$activeTab" />
 
     <div class="p-6">
-        <div class="flex">
-            <div class="mr-10 w-full pb-4 md:w-[220px]">
-                <flux:navlist>
-                    <flux:navlist.item @click="activeTab='details'">Edit
-                    </flux:navlist.item>
-                    <flux:navlist.item @click="activeTab='appearance'">Appearance
-                    </flux:navlist.item>
-                </flux:navlist>
-            </div>
-
+        <div class="flex justify-between">
             <div>
-                <div x-cloak x-show="activeTab === 'details'" class="w-full" wire:init="edit({{$course->id}})">
-                    <div>
-                        <flux:heading size="lg">Edit course</flux:heading>
-                        <flux:subheading>Add detail for the course</flux:subheading>
-                    </div>
+                <flux:heading size="xl" level="1">Settings</flux:heading>
+                <flux:subheading size="lg" class="mb-6">Configure the settings for this classes</flux:subheading>
+            </div>
+        </div>
+
+        <flux:separator class="mb-6" variant="subtle" />
+
+        <div class="flex">
+            <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
+                <div class="w-full" wire:init="edit({{$course->id}})">
                     <livewire:course.course-edit />
                     <div>
                         <flux:heading size="lg">Delete Course</flux:heading>
@@ -26,12 +22,6 @@
                             <flux:button wire:click="delete({{$course->id}})">Delete Course</flux:button>
                         </div>
                     </div>
-                </div>
-
-                <div x-cloak x-show="activeTab === 'appearance'">
-                    <h2 class="text-2xl font-bold mb-4">Appearance Settings</h2>
-                    <!-- Add your appearance settings form here -->
-                    <p>Appearance settings content goes here.</p>
                 </div>
             </div>
 
