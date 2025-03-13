@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Course;
+use App\Models\Student;
 use Flux\Flux;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -19,7 +20,7 @@ class Courses extends Component
 
     public function render()
     {
-        $total = \App\Models\Student::count();
+        $total = Student::count();
         return view('livewire.courses', ['total' => $total]);
     }
 

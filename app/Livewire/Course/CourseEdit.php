@@ -42,5 +42,7 @@ class CourseEdit extends Component
         $course->lecturer = $this->lecturer;
         $course->description = $this->description;
         $course->save();
+
+        return redirect('courses/' . $course->id . '/settings');
     }
 }

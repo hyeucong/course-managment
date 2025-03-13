@@ -8,7 +8,7 @@
                     <flux:input icon="magnifying-glass" placeholder="Filter by..." />
                 </div>
                 <flux:button variant="primary" class="cursor-pointer">
-                    Join Class
+                    Join
                 </flux:button>
                 <flux:modal.trigger name="course-create">
                     <flux:button variant="primary" class="cursor-pointer">

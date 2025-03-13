@@ -2,13 +2,12 @@
     <x-course-header :course="$course" :activeTab="$activeTab" />
 
     <div class="p-6 space-y-8">
-        <!-- Teachers Section -->
         <div>
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-semibold">Teachers</h2>
-                <flux:button variant="primary" class="cursor-pointer">
-                    Add Teacher
-                </flux:button>
+                <flux:modal.trigger name="add-teacher">
+                    <flux:button>Add Teacher</flux:button>
+                </flux:modal.trigger>
             </div>
 
             <div class="space-y-2">
@@ -37,21 +36,24 @@
         <div>
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-semibold">Students</h2>
-                <flux:button variant="primary" class="cursor-pointer">
-                    Add Student
-                </flux:button>
+                <flux:modal.trigger name="student-create">
+                    <flux:button>Add Student</flux:button>
+                </flux:modal.trigger>
             </div>
 
+            <livewire:people.student-create />
+            <livewire:people.add-teacher />
+
             <div class="space-y-2">
-                @foreach(['Alice Smith', 'Bob Johnson', 'Carol Williams', 'Alice Smith', 'Bob Johnson', 'Carol Williams', 'Alice Smith', 'Bob Johnson', 'Carol Williams', 'Alice Smith', 'Bob Johnson', 'Carol Williams'] as $student)
+                @foreach($students as $student)
                     <div
                         class="flex items-center justify-between p-4 rounded-lg border border-neutral-200 dark:border-neutral-700">
                         <div class="flex items-center gap-4">
                             <flux:icon.user class="w-8 h-8" />
                             <div>
-                                <p class="font-medium">{{ $student }}</p>
+                                <p class="font-medium">{{ $student->first_name }} {{$student->last_name}}</p>
                                 <p class="text-sm text-zinc-500">
-                                    {{ strtolower(str_replace(' ', '.', $student)) }}@example.com
+                                    {{ $student->email }}
                                 </p>
                             </div>
                         </div>
