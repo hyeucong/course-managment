@@ -16,17 +16,24 @@ class Student extends Model
     /**
      * Get the enrollments for the student.
      */
-    public function enrollments(): HasMany
+    public function enrollments()
     {
         return $this->hasMany(Enrollment::class);
     }
 
-    /**
-     * The courses that belong to the student.
-     */
-    public function courses(): BelongsToMany
+    public function courses()
     {
         return $this->belongsToMany(Course::class, 'enrollments');
+    }
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
+
+    public function grades()
+    {
+        return $this->hasMany(Grade::class);
     }
 
 }

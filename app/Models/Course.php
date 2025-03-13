@@ -2,30 +2,31 @@
 
 namespace App\Models;
 
+use App\Models\CoursePost;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Course extends Model
 {
     use HasFactory;
 
-    protected $guarded = [''];
+    protected $guarded = [];
 
     /**
      * Get the enrollments for the course.
      */
-    public function enrollments(): HasMany
+    public function enrollments()
     {
         return $this->hasMany(Enrollment::class);
     }
 
-    /**
-     * The students that belong to the course.
-     */
-    public function students(): BelongsToMany
+    public function students()
     {
         return $this->belongsToMany(Student::class, 'enrollments');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(CoursePost::class);
     }
 }

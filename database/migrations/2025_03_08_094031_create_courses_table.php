@@ -14,12 +14,14 @@ return new class extends Migration {
             $table->id();
             $table->string('course_name');
             $table->string('course_code')->unique();
+            $table->string('slug')->unique();
             $table->string('lecturer');
+            $table->string('room')->nullable();
             $table->date('date_start')->nullable();
             $table->date('date_end')->nullable();
+            $table->enum('status', ['active', 'inactive', 'completed'])->default('active');
             $table->text('schedule')->nullable();
             $table->text('description')->nullable();
-            $table->enum('status', ['active', 'inactive', 'completed'])->default('active');
             $table->timestamps();
         });
     }

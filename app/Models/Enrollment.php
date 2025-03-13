@@ -13,29 +13,17 @@ class Enrollment extends Model
     use HasFactory;
     protected $guarded = [];
 
-
-    /**
-     * Get the student that owns the enrollment.
-     */
-    public function student(): BelongsTo
+    public function student()
     {
         return $this->belongsTo(Student::class);
     }
 
-    /**
-     * Get the course that owns the enrollment.
-     */
-    public function course(): BelongsTo
+    public function course()
     {
         return $this->belongsTo(Course::class);
     }
 
-    /**
-     * Get all of the attendances for the Enrollment
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function attendances(): HasMany
+    public function attendances()
     {
         return $this->hasMany(Attendance::class);
     }
