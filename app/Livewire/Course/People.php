@@ -15,13 +15,18 @@ class People extends Component
     public function mount()
     {
         $this->course = \App\Models\Course::findOrFail($this->courseId);
-        $this->students = Student::all();
+        $this->loadEnrolledStudents();
+    }
+
+    public function loadEnrolledStudents()
+    {
+        $this->students = $this->course->students()->get();
     }
 
     #[On('reloadStudents')]
     public function reloadStudents()
     {
-        $this->students = Student::all();
+        $this->loadEnrolledStudents();
     }
 
     #[On('student-created')]
@@ -39,7 +44,7 @@ class People extends Component
                 'message' => 'Student created successfully and enrolled in the course!'
             ]);
 
-            // Reload the students list
+            // Reload the enrolled students list
             $this->reloadStudents();
         }
     }

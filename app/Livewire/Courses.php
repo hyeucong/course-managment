@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use App\Models\Course;
-use App\Models\Enrollment;
 use Flux\Flux;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -31,7 +30,6 @@ class Courses extends Component
 
     private function loadCoursesWithStudentCounts()
     {
-        // Get all courses with their enrollment counts
         $this->courses = Course::withCount('enrollments as student_count')->get();
     }
 
