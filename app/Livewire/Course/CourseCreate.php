@@ -3,6 +3,8 @@
 namespace App\Livewire\Course;
 
 use App\Models\Course;
+use App\Models\Enrollment; // Add this import
+use App\Models\Student;    // Add this import
 use Flux\Flux;
 use Livewire\Component;
 
@@ -16,10 +18,12 @@ class CourseCreate extends Component
     public $date_end;
     public $schedule;
     public $description;
+    public $selected_students = []; // Add this property for student selection
 
     public function render()
     {
-        return view('livewire.course-create');
+        $students = Student::all(); // Get all students for selection
+        return view('livewire.course-create', ['students' => $students]);
     }
 
     public function submit()
@@ -35,12 +39,8 @@ class CourseCreate extends Component
             'description' => 'required',
         ]);
 
-        $this->dispatch('notify', [
-            'type' => 'success',
-            'message' => 'Course created successfully!'
-        ]);
-
-        Course::create([
+        // Create the course
+        $course = Course::create([
             'course_name' => $this->course_name,
             'course_code' => $this->course_code,
             'lecturer' => $this->lecturer,
@@ -52,9 +52,27 @@ class CourseCreate extends Component
             'description' => $this->description,
         ]);
 
+        // Create enrollments for selected students
+        if (!empty($this->selected_students)) {
+            foreach ($this->selected_students as $studentId) {
+                Enrollment::create([
+                    'course_id' => $course->id,
+                    'student_id' => $studentId,
+                    'status' => 'active',
+                    'enrollment_date' => now(),
+                ]);
+            }
+        }
+
+        $this->dispatch('notify', [
+            'type' => 'success',
+            'message' => 'Course created successfully with enrollments!'
+        ]);
+
         Flux::modal("course-create")->close();
 
         $this->dispatch("reloadCourses");
+        $this->dispatch("reloadStudents");
 
         $this->resetForm();
     }
@@ -69,5 +87,6 @@ class CourseCreate extends Component
         $this->date_end = "";
         $this->schedule = "";
         $this->description = "";
+        $this->selected_students = [];
     }
 }

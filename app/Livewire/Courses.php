@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Course;
-use App\Models\Student;
+use App\Models\Enrollment;
 use Flux\Flux;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -15,19 +15,24 @@ class Courses extends Component
 
     public function mount()
     {
-        $this->courses = Course::all();
+        $this->loadCoursesWithStudentCounts();
     }
 
     public function render()
     {
-        $total = Student::count();
-        return view('livewire.courses', ['total' => $total]);
+        return view('livewire.courses');
     }
 
     #[On('reloadCourses')]
     public function reloadCourses()
     {
-        $this->courses = Course::all();
+        $this->loadCoursesWithStudentCounts();
+    }
+
+    private function loadCoursesWithStudentCounts()
+    {
+        // Get all courses with their enrollment counts
+        $this->courses = Course::withCount('enrollments as student_count')->get();
     }
 
     public function delete($id)

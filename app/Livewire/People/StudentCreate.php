@@ -9,6 +9,7 @@ use Livewire\Component;
 class StudentCreate extends Component
 {
     public $first_name, $last_name, $email, $phone;
+    public $studentId;
 
     public function render()
     {
@@ -24,22 +25,24 @@ class StudentCreate extends Component
             'phone' => 'required',
         ]);
 
-        $this->dispatch('notify', [
-            'type' => 'success',
-            'message' => 'Course created successfully!'
-        ]);
-
-        Student::create([
+        $student = Student::create([
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'email' => $this->email,
             'phone' => $this->phone
         ]);
 
+        $this->dispatch('notify', [
+            'type' => 'success',
+            'message' => 'Student created successfully!'
+        ]);
+
         Flux::modal("student-create")->close();
         $this->dispatch("reloadStudents");
+        $this->dispatch("student-created", $student->id);
         $this->resetForm();
     }
+
 
     public function resetForm()
     {

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Course;
 
+use App\Models\Enrollment;
 use Livewire\Component;
 
 class Course extends Component
@@ -18,7 +19,7 @@ class Course extends Component
 
     public function render()
     {
-        $total = \App\Models\Student::count();
+        $total = Enrollment::where('course_id', $this->courseId)->count();
         return view('livewire.course', [
             'total' => $total,
             'course' => $this->course,
