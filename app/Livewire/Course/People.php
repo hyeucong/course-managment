@@ -3,7 +3,6 @@
 namespace App\Livewire\Course;
 
 use App\Models\Enrollment;
-use App\Models\Student;
 use Livewire\Attributes\On;
 use Livewire\Component;
 

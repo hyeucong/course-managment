@@ -26,7 +26,7 @@
             </div>
             <div class="mr-10 pb-4 w-lg">
                 <div class="p-3 border border-neutral-200 dark:border-neutral-700 rounded-2xl mb-6 flex flex-col gap-4">
-                    <flux:textarea wire:model="description" placeholder="Announce something to your class" />
+                    <flux:textarea placeholder="Announce something to your class" />
                     <div class="flex justify-between">
                         <div class="flex gap-4">
                             <flux:icon.arrow-up-on-square />

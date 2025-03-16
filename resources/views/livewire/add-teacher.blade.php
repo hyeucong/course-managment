@@ -3,8 +3,8 @@
         <div class="space-y-6">
 
             <flux:fieldset>
-                <flux:legend size="lg">Create Student</flux:legend>
-                <div class="space-y-6">
+                <flux:legend size="lg">Add Teacher</flux:legend>
+                {{-- <div class="space-y-6">
                     <flux:input wire:model="first_name" label="First Name" placeholder="John Doe" />
                     <flux:input wire:model="last_name" label="Last Name" placeholder="John Doe" />
 
@@ -18,7 +18,7 @@
                     <flux:spacer />
                     <flux:button wire:listen="add-teacher" type="submit" variant="primary" wire:click="submit"
                         class="cursor-pointer">Create Student</flux:button>
-                </div>
+                </div> --}}
             </flux:fieldset>
         </div>
     </flux:modal>
