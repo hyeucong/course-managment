@@ -3,7 +3,7 @@
 
     <div class="p-6">
         <div class="flex justify-between mb-6">
-            <flux:heading size="lg">Classwork</flux:heading>
+            <flux:heading size="xl" level="1">Classwork</flux:heading>
             <flux:modal.trigger name="create-assignment">
                 <flux:button variant="primary">
                     <div class="flex items-center gap-2">
@@ -14,47 +14,7 @@
             </flux:modal.trigger>
         </div>
 
-        <!-- Assignment Categories -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div
-                class="aspect-auto overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 flex flex-col justify-between p-5">
-                <div class="flex flex-col gap-2 justify-between">
-                    <div class="p-3 border border-neutral-200 dark:border-neutral-700 rounded-2xl w-fit mb-4">
-                        <flux:icon.document-text />
-                    </div>
-                    <h1 class="font-bold text-xl">Assignments</h1>
-                    <p class="text-sm text-neutral-600 dark:text-neutral-400">3 pending</p>
-                </div>
-            </div>
-
-            <div
-                class="aspect-auto overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 flex flex-col justify-between p-5">
-                <div class="flex flex-col gap-2 justify-between">
-                    <div class="p-3 border border-neutral-200 dark:border-neutral-700 rounded-2xl w-fit mb-4">
-                        <flux:icon.academic-cap />
-                    </div>
-                    <h1 class="font-bold text-xl">Quizzes</h1>
-                    <p class="text-sm text-neutral-600 dark:text-neutral-400">1 upcoming</p>
-                </div>
-            </div>
-
-            <div
-                class="aspect-auto overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700 flex flex-col justify-between p-5">
-                <div class="flex flex-col gap-2 justify-between">
-                    <div class="p-3 border border-neutral-200 dark:border-neutral-700 rounded-2xl w-fit mb-4">
-                        <flux:icon.clipboard-document-check />
-                    </div>
-                    <h1 class="font-bold text-xl">Materials</h1>
-                    <p class="text-sm text-neutral-600 dark:text-neutral-400">5 resources</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Assignment List -->
         <div class="space-y-4">
-            <flux:heading>Recent Classwork</flux:heading>
-
-            <!-- Assignment Item -->
             <div
                 class="p-4 border border-neutral-200 dark:border-neutral-700 rounded-xl hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors">
                 <div class="flex items-start gap-4">
