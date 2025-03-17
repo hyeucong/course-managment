@@ -24,19 +24,47 @@
                     </div>
                 </div>
             </div>
-            <div class="mr-10 pb-4 w-lg">
+
+            <div class="flex-1 pb-4">
                 <div class="p-3 border border-neutral-200 dark:border-neutral-700 rounded-2xl mb-6 flex flex-col gap-4">
-                    <flux:textarea placeholder="Announce something to your class" />
-                    <div class="flex justify-between">
-                        <div class="flex gap-4">
-                            <flux:icon.arrow-up-on-square />
-                            <flux:icon.link />
+                    <form wire:submit.prevent="createPost">
+                        <flux:textarea wire:model="postContent" placeholder="Announce something to your class" />
+                        <div class="flex justify-between mt-4">
+                            <div class="flex gap-4 items-center">
+                                <flux:icon.arrow-up-on-square />
+                                <flux:icon.link />
+                            </div>
+                            <flux:button type="submit" variant="primary">Post</flux:button>
                         </div>
-                        <flux:button wire:listen="course-edit" type="submit" variant="primary" wire:click="update"
-                            class="cursor-pointer">Post
-                        </flux:button>
-                    </div>
+                    </form>
                 </div>
+
+                @foreach($posts as $post)
+                    <div class="p-3 border border-neutral-200 dark:border-neutral-700 rounded-2xl mb-6">
+                        <div class="flex justify-between">
+                            <div class="flex items-center mb-2">
+                                <img src="{{ $post->user->avatar }}" alt="{{ $post->user->name }}"
+                                    class="w-8 h-8 rounded-full mr-2">
+                                <span class="font-bold">{{ $post->user->name }}</span>
+                                <span class="text-gray-500 ml-2">{{ $post->created_at->diffForHumans() }}</span>
+                            </div>
+
+                            <flux:dropdown position="bottom" align="start">
+                                <flux:button variant="ghost">
+                                    <flux:icon.ellipsis-vertical />
+                                </flux:button>
+                                <flux:navmenu>
+                                    <flux:navmenu.item icon="user">Account</flux:navmenu.item>
+                                    <flux:navmenu.item icon="building-storefront">Profile</flux:navmenu.item>
+                                    <flux:navmenu.item icon="credit-card">Billing</flux:navmenu.item>
+                                    <flux:navmenu.item icon="arrow-right-start-on-rectangle">Logout</flux:navmenu.item>
+                                    <flux:navmenu.item icon="trash" variant="danger">Delete</flux:navmenu.item>
+                                </flux:navmenu>
+                            </flux:dropdown>
+                        </div>
+                        <p>{{ $post->content }}</p>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>

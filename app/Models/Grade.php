@@ -17,4 +17,9 @@ class Grade extends Model
     {
         return $this->belongsTo(Course::class);
     }
+
+    public function classwork()
+    {
+        return $this->belongsTo(Classwork::class);
+    }
 }

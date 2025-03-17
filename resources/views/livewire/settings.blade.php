@@ -11,13 +11,19 @@
 
         <flux:separator class="mb-6" variant="subtle" />
 
-        <div class="flex">
+        <div class="flex gap-5 flex-col w-fit">
             <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
                 <div class="w-full" wire:init="edit({{$course->id}})">
                     <livewire:course.course-edit />
+                </div>
+            </div>
+
+            <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
+                <div class="w-full" wire:init="edit({{$course->id}})">
                     <div>
                         <flux:heading size="lg">Delete Course</flux:heading>
-                        <flux:subheading class="mb-4">Delete this course</flux:subheading>
+                        <flux:subheading class="mb-4">The following actions are destructive and cannot be reversed.
+                        </flux:subheading>
                         <div class="flex">
                             <flux:button wire:click="delete({{$course->id}})">Delete Course</flux:button>
                         </div>

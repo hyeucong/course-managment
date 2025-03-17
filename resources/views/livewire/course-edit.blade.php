@@ -1,4 +1,4 @@
-<div name="edit-course" class="w-lg mb-6">
+<div name="edit-course" class="w-lg">
 
     <flux:fieldset>
         <flux:legend size="lg">Create a course</flux:legend>

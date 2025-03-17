@@ -24,9 +24,13 @@
                         <flux:button variant="ghost">
                             <flux:icon.ellipsis-vertical />
                         </flux:button>
-                        <flux:menu>
-                            <flux:menu.item icon="trash" variant="danger" kbd="⌘⌫">Delete</flux:menu.item>
-                        </flux:menu>
+                        <flux:navmenu>
+                            <flux:navmenu.item icon="user">Account</flux:navmenu.item>
+                            <flux:navmenu.item icon="building-storefront">Profile</flux:navmenu.item>
+                            <flux:navmenu.item icon="credit-card">Billing</flux:navmenu.item>
+                            <flux:navmenu.item icon="arrow-right-start-on-rectangle">Logout</flux:navmenu.item>
+                            <flux:navmenu.item icon="trash" variant="danger">Delete</flux:navmenu.item>
+                        </flux:navmenu>
                     </flux:dropdown>
                 </div>
             </div>
@@ -61,9 +65,13 @@
                             <flux:button variant="ghost">
                                 <flux:icon.ellipsis-vertical />
                             </flux:button>
-                            <flux:menu>
-                                <flux:menu.item icon="trash" variant="danger" kbd="⌘⌫">Delete</flux:menu.item>
-                            </flux:menu>
+                            <flux:navmenu>
+                                <flux:navmenu.item icon="user">Account</flux:navmenu.item>
+                                <flux:navmenu.item icon="building-storefront">Profile</flux:navmenu.item>
+                                <flux:navmenu.item icon="credit-card">Billing</flux:navmenu.item>
+                                <flux:navmenu.item icon="arrow-right-start-on-rectangle">Logout</flux:navmenu.item>
+                                <flux:navmenu.item icon="trash" variant="danger">Delete</flux:navmenu.item>
+                            </flux:navmenu>
                         </flux:dropdown>
                     </div>
                 @endforeach
