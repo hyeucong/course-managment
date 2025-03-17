@@ -6,7 +6,6 @@ use Flux\Flux;
 use Livewire\Component;
 use App\Models\Classwork as ClassworkModel;
 use App\Models\Course;
-use Illuminate\Support\Facades\Auth;
 
 class Classwork extends Component
 {

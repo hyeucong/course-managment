@@ -8,7 +8,6 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', ValidateSessionWithWorkOS::class])->group(function () {
-    Route::view('dashboard', 'sidebar.dashboard')->name('dashboard');
     Route::view('analytics', 'sidebar.analytics')->name('analytics');
     Route::view('billing', 'sidebar.billing')->name('billing');
     Route::view('courses', 'sidebar.courses')->name('courses');

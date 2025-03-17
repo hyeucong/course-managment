@@ -40,7 +40,7 @@
                         class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-300">Pricing</a>
                     @if (Route::has('login'))
                         @auth
-                            <a href="{{ url('/dashboard') }}"
+                            <a href="{{ url('/courses') }}"
                                 class="px-5 py-2 border border-transparent rounded-md bg-white dark:bg-gray-800 text-indigo-600 dark:text-indigo-400 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-300">
                                 Dashboard
                             </a>
@@ -63,7 +63,7 @@
                         class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-300">Pricing</a>
                     @if (Route::has('login'))
                         @auth
-                            <a href="{{ url('/dashboard') }}"
+                            <a href="{{ url('/courses') }}"
                                 class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-300">
                                 Dashboard
                             </a>
