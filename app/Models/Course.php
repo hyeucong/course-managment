@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\CoursePost;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,9 +11,6 @@ class Course extends Model
 
     protected $guarded = [];
 
-    /**
-     * Get the enrollments for the course.
-     */
     public function enrollments()
     {
         return $this->hasMany(Enrollment::class);
@@ -28,5 +24,10 @@ class Course extends Model
     public function posts()
     {
         return $this->hasMany(CoursePost::class);
+    }
+
+    public function classworks()
+    {
+        return $this->hasMany(Classwork::class);
     }
 }

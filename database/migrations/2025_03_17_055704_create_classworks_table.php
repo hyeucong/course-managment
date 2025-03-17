@@ -14,7 +14,7 @@ class CreateClassworksTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->dateTime('due_date')->nullable();
-            $table->integer('max_points')->default(100);
+            $table->integer('points')->default(100);
             $table->timestamps();
         });
     }

@@ -11,6 +11,10 @@ class Classwork extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'due_date' => 'datetime',
+    ];
+
     public function course()
     {
         return $this->belongsTo(Course::class);
