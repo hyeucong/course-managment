@@ -11,30 +11,31 @@
             </div>
 
             <div class="space-y-2">
-                <div
-                    class="flex items-center justify-between p-4 rounded-lg border border-neutral-200 dark:border-neutral-700">
-                    <div class="flex items-center gap-4">
-                        <flux:icon.user class="w-8 h-8" />
-                        <div>
-                            <p class="font-medium">John Doe</p>
-                            <p class="text-sm text-zinc-500">john.doe@example.com</p>
+                @foreach($teachers as $teacher)
+                    <div
+                        class="flex items-center justify-between p-4 rounded-lg border border-neutral-200 dark:border-neutral-700">
+                        <div class="flex items-center gap-4">
+                            <flux:icon.user class="w-8 h-8" />
+                            <div>
+                                <p class="font-medium">{{ $teacher->name }}</p>
+                                <p class="text-sm text-zinc-500">{{ $teacher->email }}</p>
+                            </div>
                         </div>
+                        <flux:dropdown position="bottom" align="start">
+                            <flux:button variant="ghost">
+                                <flux:icon.ellipsis-vertical />
+                            </flux:button>
+                            <flux:navmenu>
+                                <flux:navmenu.item icon="user">Account</flux:navmenu.item>
+                                <flux:navmenu.item icon="trash" variant="danger">Delete</flux:navmenu.item>
+                            </flux:navmenu>
+                        </flux:dropdown>
                     </div>
-                    <flux:dropdown position="bottom" align="start">
-                        <flux:button variant="ghost">
-                            <flux:icon.ellipsis-vertical />
-                        </flux:button>
-                        <flux:navmenu>
-                            <flux:navmenu.item icon="user">Account</flux:navmenu.item>
-                            <flux:navmenu.item icon="building-storefront">Profile</flux:navmenu.item>
-                            <flux:navmenu.item icon="credit-card">Billing</flux:navmenu.item>
-                            <flux:navmenu.item icon="arrow-right-start-on-rectangle">Logout</flux:navmenu.item>
-                            <flux:navmenu.item icon="trash" variant="danger">Delete</flux:navmenu.item>
-                        </flux:navmenu>
-                    </flux:dropdown>
-                </div>
+                @endforeach
             </div>
         </div>
+
+        <livewire:people.add-teacher :courseId="$courseId" />
 
         <!-- Students Section -->
         <div>
@@ -46,8 +47,6 @@
             </div>
 
             <livewire:people.student-create />
-            <livewire:people.add-teacher />
-
             <div class="space-y-2">
                 @foreach($students as $student)
                     <div
@@ -67,9 +66,6 @@
                             </flux:button>
                             <flux:navmenu>
                                 <flux:navmenu.item icon="user">Account</flux:navmenu.item>
-                                <flux:navmenu.item icon="building-storefront">Profile</flux:navmenu.item>
-                                <flux:navmenu.item icon="credit-card">Billing</flux:navmenu.item>
-                                <flux:navmenu.item icon="arrow-right-start-on-rectangle">Logout</flux:navmenu.item>
                                 <flux:navmenu.item icon="trash" variant="danger">Delete</flux:navmenu.item>
                             </flux:navmenu>
                         </flux:dropdown>

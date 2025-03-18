@@ -30,4 +30,19 @@ class Course extends Model
     {
         return $this->hasMany(Classwork::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'course_user')->withPivot('role')->withTimestamps();
+    }
+
+    public function creator()
+    {
+        return $this->belongsToMany(User::class, 'course_user')->wherePivot('role', 'creator');
+    }
+
+    public function teachers()
+    {
+        return $this->belongsToMany(User::class, 'course_user')->wherePivot('role', 'teacher');
+    }
 }

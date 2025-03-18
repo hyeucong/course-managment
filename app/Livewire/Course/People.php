@@ -9,12 +9,14 @@ use Livewire\Component;
 class People extends Component
 {
     public $students;
+    public $teachers;
     public $courseId, $activeTab = 'people', $course;
 
     public function mount()
     {
         $this->course = \App\Models\Course::findOrFail($this->courseId);
         $this->loadEnrolledStudents();
+        $this->loadTeachers();
     }
 
     public function loadEnrolledStudents()
@@ -22,11 +24,23 @@ class People extends Component
         $this->students = $this->course->students()->get();
     }
 
+    public function loadTeachers()
+    {
+        $this->teachers = $this->course->teachers()->get();
+    }
+
     #[On('reloadStudents')]
     public function reloadStudents()
     {
         $this->loadEnrolledStudents();
     }
+
+    #[On('teacher-added')]
+    public function reloadTeachers()
+    {
+        $this->loadTeachers();
+    }
+
 
     #[On('student-created')]
     public function studentCreated($studentId)
@@ -43,7 +57,6 @@ class People extends Component
                 'message' => 'Student created successfully and enrolled in the course!'
             ]);
 
-            // Reload the enrolled students list
             $this->reloadStudents();
         }
     }

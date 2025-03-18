@@ -5,6 +5,7 @@ namespace App\Livewire\Course;
 use App\Models\Course;
 use App\Models\Enrollment; // Add this import
 use App\Models\Student;    // Add this import
+use Auth;
 use Flux\Flux;
 use Livewire\Component;
 
@@ -51,6 +52,8 @@ class CourseCreate extends Component
             'schedule' => $this->schedule,
             'description' => $this->description,
         ]);
+
+        $course->teachers()->attach(Auth::id(), ['role' => 'creator']);
 
         // Create enrollments for selected students
         if (!empty($this->selected_students)) {
