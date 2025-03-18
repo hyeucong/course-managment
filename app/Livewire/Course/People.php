@@ -26,7 +26,7 @@ class People extends Component
 
     public function loadTeachers()
     {
-        $this->teachers = $this->course->teachers()->get();
+        $this->teachers = $this->course->users()->get();
     }
 
     #[On('reloadStudents')]
