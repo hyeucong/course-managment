@@ -15,7 +15,7 @@
             </a>
 
             <flux:navlist variant="outline">
-                <flux:navlist.group :heading="__('Platform')" class="grid">
+                <flux:navlist.group class="grid">
                     <flux:navlist.item icon="academic-cap" :href="route('courses')"
                         :current="request()->routeIs('courses') || request()->is('courses/*')" wire:navigate>
                         Courses
