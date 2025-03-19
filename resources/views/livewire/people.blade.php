@@ -25,10 +25,9 @@
                             <flux:button variant="ghost">
                                 <flux:icon.ellipsis-vertical />
                             </flux:button>
-                            <flux:navmenu>
-                                <flux:navmenu.item icon="user">Account</flux:navmenu.item>
-                                <flux:navmenu.item icon="trash" variant="danger">Delete</flux:navmenu.item>
-                            </flux:navmenu>
+                            <flux:menu>
+                                <flux:menu.item icon="trash" variant="danger">Remove</flux:menu.item>
+                            </flux:menu>
                         </flux:dropdown>
                     </div>
                 @endforeach
@@ -64,14 +63,37 @@
                             <flux:button variant="ghost">
                                 <flux:icon.ellipsis-vertical />
                             </flux:button>
-                            <flux:navmenu>
-                                <flux:navmenu.item icon="user">Account</flux:navmenu.item>
-                                <flux:navmenu.item icon="trash" variant="danger">Delete</flux:navmenu.item>
-                            </flux:navmenu>
+                            <flux:menu>
+                                <flux:modal.trigger name="edit-student">
+                                    <flux:menu.item icon="user" wire:click="editStudent({{ $student->id }})">Edit
+                                    </flux:menu.item>
+                                </flux:modal.trigger>
+                                <flux:menu.item icon="trash" variant="danger"
+                                    wire:click="removeStudent({{ $student->id }})">Remove</flux:menu.item>
+                            </flux:menu>
                         </flux:dropdown>
                     </div>
                 @endforeach
             </div>
+
+            <flux:modal name="edit-student" class="md:w-96">
+                <div class="space-y-6">
+                    <div>
+                        <flux:heading size="lg">Update Student</flux:heading>
+                        <flux:subheading>Make changes to the student's details.</flux:subheading>
+                    </div>
+
+                    <flux:input wire:model="studentFirstName" label="First Name" placeholder="First Name" />
+                    <flux:input wire:model="studentLastName" label="Last Name" placeholder="Last Name" />
+                    <flux:input wire:model="studentEmail" label="Email" type="email" placeholder="Email" />
+
+                    <div class="flex">
+                        <flux:spacer />
+                        <flux:button wire:click="updateStudent" type="submit" variant="primary">Save changes
+                        </flux:button>
+                    </div>
+                </div>
+            </flux:modal>
         </div>
     </div>
 </div>

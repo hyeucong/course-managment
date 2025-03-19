@@ -3,7 +3,7 @@
         <div class="space-y-6">
 
             <flux:fieldset>
-                <flux:legend size="lg">Create Student</flux:legend>
+                <flux:legend size="lg" class="text-center mb-4">Create Student</flux:legend>
                 <div class="space-y-6">
                     <flux:input wire:model="first_name" label="First Name" placeholder="John" />
                     <flux:input wire:model="last_name" label="Last Name" placeholder="Doe" />
