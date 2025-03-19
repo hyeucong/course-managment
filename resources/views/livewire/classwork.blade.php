@@ -1,5 +1,9 @@
 <div class="relative w-full">
-    <x-course-header :course="$course" :activeTab="$activeTab" />
+    @if($isStudent)
+        <x-student-header :course="$course" :activeTab="$activeTab" />
+    @else
+        <x-course-header :course="$course" :activeTab="$activeTab" />
+    @endif
 
     <div class="p-6 max-w-7xl mx-auto">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">

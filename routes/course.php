@@ -13,3 +13,9 @@ Route::middleware(['auth', ValidateSessionWithWorkOS::class, EnsureCourseAccess:
     Route::get('/courses/{courseId}/classwork', ClassWork::class)->name('classwork');
     Route::get('/courses/{courseId}/settings', Settings::class)->name('settings');
 });
+
+Route::middleware([])->group(function () {
+    Route::get('/student/courses/{courseId}/stream', Stream::class)->name('student.stream');
+    Route::get('/student/courses/{courseId}/classwork', ClassWork::class)->name('student.classwork');
+
+});

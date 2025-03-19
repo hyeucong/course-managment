@@ -5,6 +5,7 @@ namespace App\Livewire\Course;
 use Livewire\Component;
 use App\Models\StreamPost;
 use App\Models\Course;
+use Illuminate\Support\Facades\Auth;
 
 class Stream extends Component
 {
@@ -12,15 +13,21 @@ class Stream extends Component
     public $course;
     public $activeTab = 'stream';
     public $postContent = '';
+    public $isStudent = false;
 
     public function mount($courseId)
     {
         $this->courseId = $courseId;
         $this->course = Course::findOrFail($this->courseId);
+        $this->isStudent = !Auth::check();
     }
 
     public function createPost()
     {
+        if ($this->isStudent) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $this->validate([
             'postContent' => 'required|min:3',
         ]);

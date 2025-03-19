@@ -17,6 +17,7 @@ class Classwork extends Component
     public $points;
     public $dueDate;
     public $editingClassworkId;
+    public $isStudent = false;
 
     protected $rules = [
         'title' => 'required|string|max:255',
