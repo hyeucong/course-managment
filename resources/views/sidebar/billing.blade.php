@@ -23,7 +23,6 @@
                 </h1>
                 <p class="text-gray-300">No expiration.</p>
             </div>
-
         </div>
     </div>
 </x-layouts.app>

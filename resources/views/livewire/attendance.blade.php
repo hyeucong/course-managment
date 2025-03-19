@@ -12,7 +12,8 @@
             <div class="flex flex-col sm:flex-row gap-3">
                 <flux:select wire:model.live="selectedDate" class="min-w-[200px]" wire:loading.attr="disabled">
                     @foreach($availableDates as $dateValue => $dateLabel)
-                        <flux:select.option value="{{ $dateValue }}">{{ $dateLabel }}</flux:select.option>
+                        <flux:select.option value="{{ $dateValue }}">{{ $dateLabel }}
+                        </flux:select.option>
                     @endforeach
                 </flux:select>
                 <flux:button variant="primary" class="cursor-pointer" wire:click="saveAttendance"
@@ -44,7 +45,7 @@
                             <th class="px-6 py-4 text-left text-sm font-medium text-neutral-700 dark:text-neutral-300">
                                 Student Name</th>
                             <th class="px-6 py-4 text-left text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                                Student ID</th>
+                                Student Email</th>
                             <th
                                 class="px-6 py-4 text-center text-sm font-medium text-neutral-700 dark:text-neutral-300">
                                 Status</th>
@@ -68,7 +69,7 @@
                                                         </div>
                                                     </td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-600 dark:text-neutral-400">
-                                                        {{ $student->id }}
+                                                        {{ $student->email }}
                                                     </td>
                                                     <td class="px-6 py-4 text-center whitespace-nowrap">
                                                         <flux:select wire:model="attendanceStatus.{{ $student->id }}" class="w-32 mx-auto">

@@ -49,7 +49,7 @@ class Attendance extends Component
         while ($currentDate->lte($endDate)) {
             if (in_array($currentDate->dayOfWeek, [1, 3, 5])) {
                 $dateKey = $currentDate->format('Y-m-d');
-                $dateDisplay = $currentDate->format('M d (D)');
+                $dateDisplay = $currentDate->format('Y M d (D)');
                 $this->availableDates[$dateKey] = $dateDisplay;
             }
             $currentDate->addDay();
