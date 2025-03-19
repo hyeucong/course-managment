@@ -8,10 +8,8 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', ValidateSessionWithWorkOS::class])->group(function () {
-    Route::view('analytics', 'sidebar.analytics')->name('analytics');
     Route::view('billing', 'sidebar.billing')->name('billing');
     Route::view('courses', 'sidebar.courses')->name('courses');
-    Route::view('tests', 'sidebar.tests')->name('tests');
 });
 
 require __DIR__ . '/settings.php';

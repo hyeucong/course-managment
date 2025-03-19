@@ -1,4 +1,4 @@
-<div name="edit-course" class="w-lg">
+<div name="edit-course" class="w-full">
 
     <flux:fieldset>
         <flux:legend size="lg">Create a course</flux:legend>
@@ -16,10 +16,9 @@
             <flux:textarea wire:model="description" label="Your description" placeholder="Your description" />
         </div>
 
-        <div class="flex mt-6">
+        <div class="flex justify-end mt-6">
             <flux:button wire:listen="course-edit" type="submit" variant="primary" wire:click="update"
                 class="cursor-pointer">Save</flux:button>
-            <flux:spacer />
         </div>
     </flux:fieldset>
 </div>

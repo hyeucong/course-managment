@@ -26,7 +26,8 @@
                                 <flux:icon.ellipsis-vertical />
                             </flux:button>
                             <flux:menu>
-                                <flux:menu.item icon="trash" variant="danger">Remove</flux:menu.item>
+                                <flux:menu.item icon="trash" variant="danger"
+                                    wire:click="removeTeacher({{ $teacher->id }})">Remove</flux:menu.item>
                             </flux:menu>
                         </flux:dropdown>
                     </div>

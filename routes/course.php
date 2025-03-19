@@ -1,12 +1,8 @@
 <?php
 
-use App\Livewire\Course\{Attendance, Course, ClassWork, Grades, People, Settings, Stream};
+use App\Livewire\Course\{Attendance, ClassWork, Grades, People, Settings, Stream};
 use Illuminate\Support\Facades\Route;
 use Laravel\WorkOS\Http\Middleware\ValidateSessionWithWorkOS;
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::middleware(['auth', ValidateSessionWithWorkOS::class])->group(function () {
     Route::get('/courses/{courseId}/stream', Stream::class)->name('stream');

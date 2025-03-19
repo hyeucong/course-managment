@@ -20,12 +20,6 @@
                         :current="request()->routeIs('courses') || request()->is('courses/*')" wire:navigate>
                         Courses
                     </flux:navlist.item>
-                    <flux:navlist.item icon="beaker" :href="route('tests')" :current="request()->routeIs('tests')"
-                        wire:navigate>Tests
-                    </flux:navlist.item>
-                    <flux:navlist.item icon="presentation-chart-line" :href="route('analytics')"
-                        :current="request()->routeIs('analytics')" wire:navigate>Analytics
-                    </flux:navlist.item>
                     <flux:navlist.item icon="credit-card" :href="route('billing')"
                         :current="request()->routeIs('billing')" wire:navigate>Billing
                     </flux:navlist.item>
