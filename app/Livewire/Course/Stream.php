@@ -13,13 +13,11 @@ class Stream extends Component
     public $course;
     public $activeTab = 'stream';
     public $postContent = '';
-    public $isStudent = false;
 
     public function mount($courseId)
     {
         $this->courseId = $courseId;
         $this->course = Course::findOrFail($this->courseId);
-        $this->isStudent = !Auth::check();
     }
 
     public function createPost()

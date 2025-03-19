@@ -1,9 +1,5 @@
 <div class="relative w-full">
-    @if($isStudent)
-        <x-student-header :course="$course" :activeTab="$activeTab" />
-    @else
-        <x-course-header :course="$course" :activeTab="$activeTab" />
-    @endif
+    <x-course-header :course="$course" :activeTab="$activeTab" />
 
     <div class="p-6 max-w-7xl mx-auto">
         <!-- Hero Section with Course Banner -->
