@@ -41,8 +41,8 @@ class Attendance extends Component
 
     public function generateAvailableDates()
     {
-        $startDate = Carbon::createFromDate(2023, 3, 10);
-        $endDate = Carbon::now();
+        $startDate = Carbon::parse($this->course->date_start);
+        $endDate = Carbon::parse($this->course->date_end);
 
         $currentDate = clone $startDate;
 

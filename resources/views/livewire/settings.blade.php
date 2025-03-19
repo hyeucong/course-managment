@@ -1,7 +1,7 @@
-<div class="relative mb-6 w-full" x-data="{ activeTab: 'details' }">
+<div class="relative w-full" x-data="{ activeTab: 'details' }">
     <x-course-header :course="$course" :activeTab="$activeTab" />
 
-    <div class="p-6">
+    <div class="p-6 max-w-7xl mx-auto">
         <div class="flex justify-between">
             <div>
                 <flux:heading size="xl" level="1">Settings</flux:heading>
@@ -9,9 +9,7 @@
             </div>
         </div>
 
-        <flux:separator class="mb-6" variant="subtle" />
-
-        <div class="flex gap-5 flex-col w-fit">
+        <div class="grid grid-cols-1 gap-5 md:max-w-3xl">
             <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
                 <div class="w-full" wire:init="edit({{$course->id}})">
                     <livewire:course.course-edit />

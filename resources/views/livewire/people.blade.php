@@ -1,7 +1,7 @@
-<div class="relative mb-6 w-full">
+<div class="relative w-full">
     <x-course-header :course="$course" :activeTab="$activeTab" />
 
-    <div class="p-6 space-y-8">
+    <div class="p-6 max-w-7xl mx-auto space-y-8">
         <div>
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-semibold">Teachers</h2>

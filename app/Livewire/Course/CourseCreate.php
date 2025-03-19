@@ -19,11 +19,11 @@ class CourseCreate extends Component
     public $date_end;
     public $schedule;
     public $description;
-    public $selected_students = []; // Add this property for student selection
+    public $selected_students = [];
 
     public function render()
     {
-        $students = Student::all(); // Get all students for selection
+        $students = Student::all();
         return view('livewire.course-create', ['students' => $students]);
     }
 
@@ -55,7 +55,6 @@ class CourseCreate extends Component
 
         $course->teachers()->attach(Auth::id(), ['role' => 'creator']);
 
-        // Create enrollments for selected students
         if (!empty($this->selected_students)) {
             foreach ($this->selected_students as $studentId) {
                 Enrollment::create([

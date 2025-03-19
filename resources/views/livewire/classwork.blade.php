@@ -1,67 +1,100 @@
-<div class="relative mb-6 w-full">
+<div class="relative w-full">
     <x-course-header :course="$course" :activeTab="$activeTab" />
 
-    <div class="p-6">
-        <div class="flex justify-between mb-6">
-            <flux:heading size="xl" level="1">Classwork</flux:heading>
+    <div class="p-6 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+            <div>
+                <flux:heading size="xl" level="1" class="mb-2">Classwork</flux:heading>
+                <flux:subheading size="lg" class="text-neutral-600 dark:text-neutral-400">
+                    Manage assignments and classwork for this course.
+                </flux:subheading>
+            </div>
             <flux:modal.trigger name="create-classwork">
                 <flux:button variant="primary">
                     <div class="flex items-center gap-2">
-                        <flux:icon.plus-circle />
-                        Create
+                        <flux:icon.plus-circle variant="mini" class="size-4" />
+                        <span>Create</span>
                     </div>
                 </flux:button>
             </flux:modal.trigger>
         </div>
 
         <div class="space-y-4">
-            @foreach($classworks as $classwork)
+            @forelse($classworks as $classwork)
                 <div
-                    class="p-4 border border-neutral-200 dark:border-neutral-700 rounded-xl hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors">
-                    <div class="flex items-start gap-4">
-                        <div class="p-2 border border-neutral-200 dark:border-neutral-700 rounded-xl">
-                            <flux:icon.document-text />
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex justify-between">
-                                <h3 class="font-semibold">{{ $classwork->title }}</h3>
-                                <p class="text-sm text-neutral-600 dark:text-neutral-400">Due
-                                    {{ \Carbon\Carbon::parse($classwork->due_date)->format('M d, H:i A') }}
-                                </p>
+                    class="bg-white dark:bg-zinc-800 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between gap-4">
+                            <div class="flex items-start gap-4 flex-grow">
+                                <div class="p-3 bg-neutral-100 dark:bg-neutral-700 rounded-xl">
+                                    <flux:icon.document-text class="size-6 text-neutral-500 dark:text-neutral-400" />
+                                </div>
+                                <div class="flex-grow">
+                                    <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+                                        {{ $classwork->title }}
+                                    </h3>
+                                    <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+                                        {{ Str::limit($classwork->description, 100) }}
+                                    </p>
+
+                                </div>
                             </div>
-                            <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
-                                {{ Str::limit($classwork->description, 100) }}
+                            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+                                Due {{ \Carbon\Carbon::parse($classwork->due_date)->format('M d, H:i A') }}
                             </p>
-                            <div class="flex justify-between items-center mt-3">
-                                <div class="flex gap-2">
-                                    <flux:badge>{{ $classwork->points }} points</flux:badge>
-                                    <flux:badge>Assignment</flux:badge>
-                                </div>
-                                <div class="flex gap-2">
-                                    <flux:button wire:click="editClasswork({{ $classwork->id }})" size="sm">Edit
-                                    </flux:button>
-                                    <flux:button wire:click="deleteClasswork({{ $classwork->id }})" size="sm"
-                                        variant="danger">Delete</flux:button>
-                                </div>
+                            <flux:dropdown position="bottom" align="end">
+                                <flux:button variant="ghost">
+                                    <flux:icon.ellipsis-vertical />
+                                </flux:button>
+                                <flux:navmenu>
+                                    <flux:navmenu.item icon="pencil" wire:click="editClasswork({{ $classwork->id }})">Edit
+                                    </flux:navmenu.item>
+                                    <flux:navmenu.item icon="trash" variant="danger"
+                                        wire:click="deleteClasswork({{ $classwork->id }})">Delete</flux:navmenu.item>
+                                </flux:navmenu>
+                            </flux:dropdown>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-3 mt-3">
+                            <div class="flex gap-2">
+                                <flux:badge color="primary">{{ $classwork->points }} points</flux:badge>
+                                <flux:badge color="secondary">Assignment</flux:badge>
                             </div>
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div
+                    class="bg-white dark:bg-zinc-800 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm overflow-hidden">
+                    <div class="p-6 text-center">
+                        <div class="flex flex-col items-center justify-center gap-3">
+                            <div class="p-4 rounded-full bg-neutral-100 dark:bg-neutral-800">
+                                <flux:icon.document-text class="size-8 text-neutral-400 dark:text-neutral-500" />
+                            </div>
+                            <div class="text-lg font-medium text-neutral-900 dark:text-neutral-100">
+                                No assignments found
+                            </div>
+                            <div class="text-sm text-neutral-500 dark:text-neutral-400">
+                                Create an assignment to get started
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforelse
         </div>
     </div>
+
     <!-- Create Classwork Modal -->
     <flux:modal name="create-classwork" class="md:w-[500px]">
         <form wire:submit.prevent="createClasswork">
             <div class="space-y-6">
                 <div>
-                    <flux:heading size="lg">Create Assignment</flux:heading>
+                    <flux:heading size="lg">Create</flux:heading>
                 </div>
 
                 <div class="space-y-4">
                     <flux:input type="text" label="Title" wire:model="title" placeholder="Enter assignment title" />
 
-                    <flux:textarea label="description" wire:model="description"
+                    <flux:textarea label="Description" wire:model="description"
                         placeholder="Provide detailed description" rows="4" />
 
                     <div class="grid grid-cols-2 gap-4">

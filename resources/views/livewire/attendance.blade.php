@@ -11,7 +11,6 @@
             </div>
             <div class="flex flex-col sm:flex-row gap-3">
                 <flux:select wire:model.live="selectedDate" class="min-w-[200px]" wire:loading.attr="disabled">
-                    <flux:select.option value="">Select a date</flux:select.option>
                     @foreach($availableDates as $dateValue => $dateLabel)
                         <flux:select.option value="{{ $dateValue }}">{{ $dateLabel }}</flux:select.option>
                     @endforeach
@@ -19,7 +18,6 @@
                 <flux:button variant="primary" class="cursor-pointer" wire:click="saveAttendance"
                     wire:loading.attr="disabled">
                     <div class="flex items-center gap-2">
-                        <flux:icon.check variant="mini" class="size-4" wire:loading.class="hidden" />
                         <flux:icon.loading variant="mini" class="size-4 animate-spin" wire:loading />
                         <span wire:loading.class="hidden">Save</span>
                         <span wire:loading>Saving...</span>
@@ -36,7 +34,6 @@
                 class="absolute inset-0 bg-white/50 dark:bg-zinc-800/50 z-10 flex items-center justify-center pt-6">
                 <div class="text-center">
                     <flux:icon.loading variant="outline" class="size-8 animate-spin mx-auto text-primary-500" />
-                    <p class="mt-2 text-neutral-600 dark:text-neutral-400">Loading attendance data...</p>
                 </div>
             </div>
 

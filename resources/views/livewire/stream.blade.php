@@ -44,7 +44,7 @@
                                     <flux:icon.link />
                                 </flux:button>
                             </div>
-                            <flux:button type="submit" variant="primary">Post Announcement</flux:button>
+                            <flux:button type="submit" variant="primary">Post</flux:button>
                         </div>
                     </form>
                 </div>
