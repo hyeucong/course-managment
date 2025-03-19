@@ -22,83 +22,81 @@
             </div>
         </div>
 
-        @if(!$isStudent)
-            <!-- Main Content Area -->
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-                <!-- Main Content - Post Stream -->
-                <div class="lg:col-span-3 space-y-6">
-                    <!-- Create Post Card -->
-                    <div
-                        class="p-5 border border-neutral-200 dark:border-neutral-700 rounded-xl bg-white dark:bg-neutral-800/50">
-                        <h2 class="font-semibold text-xl mb-4">Create Announcement</h2>
-                        <form wire:submit.prevent="createPost">
-                            <flux:textarea wire:model="postContent" placeholder="Share an announcement with your class..."
-                                class="mb-4" />
-                            <div class="flex justify-between items-center">
-                                <div class="flex gap-3">
-                                    <flux:button variant="ghost" type="button" title="Upload file"
-                                        class="border border-neutral-200 dark:border-neutral-700 rounded-lg">
-                                        <flux:icon.arrow-up-on-square />
-                                    </flux:button>
-                                    <flux:button variant="ghost" type="button" title="Add link"
-                                        class="border border-neutral-200 dark:border-neutral-700 rounded-lg">
-                                        <flux:icon.link />
-                                    </flux:button>
-                                </div>
-                                <flux:button type="submit" variant="primary">Post</flux:button>
+        <!-- Main Content Area -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <!-- Main Content - Post Stream -->
+            <div class="lg:col-span-3 space-y-6">
+                <!-- Create Post Card -->
+                <div
+                    class="p-5 border border-neutral-200 dark:border-neutral-700 rounded-xl bg-white dark:bg-neutral-800/50">
+                    <h2 class="font-semibold text-xl mb-4">Create Announcement</h2>
+                    <form wire:submit.prevent="createPost">
+                        <flux:textarea wire:model="postContent" placeholder="Share an announcement with your class..."
+                            class="mb-4" />
+                        <div class="flex justify-between items-center">
+                            <div class="flex gap-3">
+                                <flux:button variant="ghost" type="button" title="Upload file"
+                                    class="border border-neutral-200 dark:border-neutral-700 rounded-lg">
+                                    <flux:icon.arrow-up-on-square />
+                                </flux:button>
+                                <flux:button variant="ghost" type="button" title="Add link"
+                                    class="border border-neutral-200 dark:border-neutral-700 rounded-lg">
+                                    <flux:icon.link />
+                                </flux:button>
                             </div>
-                        </form>
-                    </div>
+                            <flux:button type="submit" variant="primary">Post</flux:button>
+                        </div>
+                    </form>
+                </div>
 
-                    <!-- Posts Feed -->
-                    <div class="space-y-4">
-                        <h2 class="font-semibold text-xl px-1">Recent Announcements</h2>
+                <!-- Posts Feed -->
+                <div class="space-y-4">
+                    <h2 class="font-semibold text-xl px-1">Recent Announcements</h2>
 
-                        @forelse($posts as $post)
-                            <div
-                                class="p-5 border border-neutral-200 dark:border-neutral-700 rounded-xl bg-white dark:bg-neutral-800/50">
-                                <div class="flex justify-between items-start mb-4">
-                                    <div class="flex items-center">
-                                        <img src="{{ $post->user->avatar }}" alt="{{ $post->user->name }}"
-                                            class="w-10 h-10 rounded-full mr-3 border border-neutral-200 dark:border-neutral-700">
-                                        <div>
-                                            <div class="font-semibold">{{ $post->user->name }}</div>
-                                            <div class="text-sm text-neutral-500 dark:text-neutral-400">
-                                                {{ $post->created_at->diffForHumans() }}
-                                            </div>
+                    @forelse($posts as $post)
+                        <div
+                            class="p-5 border border-neutral-200 dark:border-neutral-700 rounded-xl bg-white dark:bg-neutral-800/50">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="flex items-center">
+                                    <img src="{{ $post->user->avatar }}" alt="{{ $post->user->name }}"
+                                        class="w-10 h-10 rounded-full mr-3 border border-neutral-200 dark:border-neutral-700">
+                                    <div>
+                                        <div class="font-semibold">{{ $post->user->name }}</div>
+                                        <div class="text-sm text-neutral-500 dark:text-neutral-400">
+                                            {{ $post->created_at->diffForHumans() }}
                                         </div>
                                     </div>
-
-                                    <flux:dropdown position="bottom" align="end">
-                                        <flux:button variant="ghost"
-                                            class="border border-neutral-200 dark:border-neutral-700 rounded-lg">
-                                            <flux:icon.ellipsis-vertical />
-                                        </flux:button>
-                                        <flux:navmenu>
-                                            <flux:navmenu.item icon="pencil">Edit</flux:navmenu.item>
-                                            <flux:navmenu.item icon="eye">View Details</flux:navmenu.item>
-                                            <flux:navmenu.item icon="trash" variant="danger">Delete</flux:navmenu.item>
-                                        </flux:navmenu>
-                                    </flux:dropdown>
                                 </div>
 
-                                <div class="prose dark:prose-invert max-w-none">
-                                    <p>{{ $post->content }}</p>
-                                </div>
+                                <flux:dropdown position="bottom" align="end">
+                                    <flux:button variant="ghost"
+                                        class="border border-neutral-200 dark:border-neutral-700 rounded-lg">
+                                        <flux:icon.ellipsis-vertical />
+                                    </flux:button>
+                                    <flux:navmenu>
+                                        <flux:navmenu.item icon="pencil">Edit</flux:navmenu.item>
+                                        <flux:navmenu.item icon="eye">View Details</flux:navmenu.item>
+                                        <flux:navmenu.item icon="trash" variant="danger">Delete</flux:navmenu.item>
+                                    </flux:navmenu>
+                                </flux:dropdown>
                             </div>
-                        @empty
-                            <div
-                                class="p-8 border border-neutral-200 dark:border-neutral-700 rounded-xl text-center bg-white dark:bg-neutral-800/50">
-                                <flux:icon.chat-bubble-left-ellipsis class="mx-auto h-12 w-12 text-neutral-400" />
-                                <h3 class="mt-2 text-lg font-medium">No announcements yet</h3>
-                                <p class="mt-1 text-neutral-500 dark:text-neutral-400">
-                                    Create your first announcement to get started.
-                                </p>
+
+                            <div class="prose dark:prose-invert max-w-none">
+                                <p>{{ $post->content }}</p>
                             </div>
-                        @endforelse
-                    </div>
+                        </div>
+                    @empty
+                        <div
+                            class="p-8 border border-neutral-200 dark:border-neutral-700 rounded-xl text-center bg-white dark:bg-neutral-800/50">
+                            <flux:icon.chat-bubble-left-ellipsis class="mx-auto h-12 w-12 text-neutral-400" />
+                            <h3 class="mt-2 text-lg font-medium">No announcements yet</h3>
+                            <p class="mt-1 text-neutral-500 dark:text-neutral-400">
+                                Create your first announcement to get started.
+                            </p>
+                        </div>
+                    @endforelse
                 </div>
-        @endif
+            </div>
 
             <!-- Sidebar with Stats (moved to right) -->
             <div class="lg:col-span-1 space-y-6">
