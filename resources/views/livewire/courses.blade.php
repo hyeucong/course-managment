@@ -1,6 +1,6 @@
 <div class="flex h-full w-full flex-1 flex-col gap-6 rounded-xl mt-6">
     <div class="grid auto-rows-min gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        @foreach ($courses as $course)
+        @forelse ($courses as $course)
             <a class="group relative overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between p-6 h-[220px]"
                 href="{{route('stream', $course)}}" wire:navigate>
 
@@ -53,6 +53,10 @@
                     class="absolute inset-0 bg-gradient-to-r from-primary-500/5 to-primary-500/0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                 </div>
             </a>
-        @endforeach
+        @empty
+            <div class="col-span-full text-center text-neutral-500 dark:text-neutral-400">
+                <p>Create a course to get started</p>
+            </div>
+        @endforelse
     </div>
 </div>

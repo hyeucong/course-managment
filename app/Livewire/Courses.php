@@ -6,6 +6,7 @@ use App\Models\Course;
 use Flux\Flux;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 class Courses extends Component
 {
@@ -14,7 +15,7 @@ class Courses extends Component
 
     public function mount()
     {
-        $this->loadCoursesWithStudentCounts();
+        $this->loadUserCourses();
     }
 
     public function render()
@@ -25,12 +26,16 @@ class Courses extends Component
     #[On('reloadCourses')]
     public function reloadCourses()
     {
-        $this->loadCoursesWithStudentCounts();
+        $this->loadUserCourses();
     }
 
-    private function loadCoursesWithStudentCounts()
+    private function loadUserCourses()
     {
-        $this->courses = Course::withCount('enrollments as student_count')->get();
+        $user = Auth::user();
+        $this->courses = $user->courses()
+            ->wherePivotIn('role', ['creator', 'teacher'])
+            ->withCount('enrollments as student_count')
+            ->get();
     }
 
     public function delete($id)
