@@ -16,6 +16,7 @@ class CreateGradesTable extends Migration
             $table->string('title');
             $table->integer('score');
             $table->integer('max_score');
+            $table->foreignId('graded_by')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
         });
     }

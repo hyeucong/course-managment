@@ -2,83 +2,58 @@
     <x-course-header :course="$course" :activeTab="'classwork'" />
 
     <div class="p-6 max-w-7xl mx-auto">
-
         <div class="mt-8">
-            <flux:heading size="xl">{{ $classwork->title }}</flux:heading>
+            <h1 class="text-3xl font-bold">{{ $classwork->title }}</h1>
             <p class="mt-2 text-neutral-600 dark:text-neutral-400">{{ $classwork->description }}</p>
-            <div class="mt-4">
-                <flux:badge color="primary">{{ $classwork->points }} points</flux:badge>
-                <flux:badge color="secondary">Due {{ $classwork->due_date->format('M d, Y H:i A') }}</flux:badge>
+            <div class="mt-4 space-x-2">
+                <flux:badge variant="primary">{{ $classwork->points }} points</flux:badge>
+                <flux:badge>Due {{ $classwork->due_date->format('M d, Y H:i A') }}</flux:badge>
             </div>
         </div>
 
-        <div class="mt-12">
-            <flux:heading size="lg">Submissions</flux:heading>
-            @if($submissions->count() > 0)
-                <div
-                    class="mt-4 bg-white dark:bg-zinc-800 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm overflow-hidden">
-                    <div class="overflow-x-auto">
-                        <table class="w-full">
-                            <thead>
-                                <tr class="bg-zinc-50 dark:bg-zinc-900">
-                                    <th
-                                        class="px-6 py-4 text-left text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                                        Student Name</th>
-                                    <th
-                                        class="px-6 py-4 text-left text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                                        Submitted At</th>
-                                    <th
-                                        class="px-6 py-4 text-left text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                                        Content</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-neutral-200 dark:divide-neutral-700">
-                                @foreach($submissions as $submission)
-                                    <tr class="hover:bg-zinc-50 dark:hover:bg-zinc-800/70 transition-colors">
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center gap-3">
-                                                <div class="flex-shrink-0 bg-neutral-100 dark:bg-neutral-700 rounded-full p-2">
-                                                    <flux:icon.user variant="mini"
-                                                        class="size-5 text-neutral-500 dark:text-neutral-400" />
-                                                </div>
-                                                <div class="font-medium text-neutral-900 dark:text-neutral-100">
-                                                    {{ $submission->student->first_name }} {{ $submission->student->last_name }}
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-600 dark:text-neutral-400">
-                                            {{ $submission->created_at->format('M d, Y H:i A') }}
-                                        </td>
-                                        <td class="px-6 py-4 text-sm text-neutral-600 dark:text-neutral-400">
-                                            @if($submission->content)
-                                                {{ Str::limit($submission->content, 100) }}
-                                            @else
-                                                <span class="text-neutral-400 dark:text-neutral-500">No content</span>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            @else
-                <div
-                    class="mt-4 bg-white dark:bg-zinc-800 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm p-6 text-center">
-                    <div class="flex flex-col items-center justify-center gap-3">
-                        <div class="p-4 rounded-full bg-neutral-100 dark:bg-neutral-800">
-                            <flux:icon.document-text variant="outline"
-                                class="size-8 text-neutral-400 dark:text-neutral-500" />
+        <div class="mt-8">
+            <h2 class="font-semibold text-xl mb-4">Submissions</h2>
+            <div class="space-y-4">
+                @foreach ($submissions as $submission)
+                    <div
+                        class="p-5 border border-neutral-200 dark:border-neutral-700 rounded-xl bg-white dark:bg-neutral-800/50">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-center">
+                                <img src="{{ $submission->student->avatar }}" alt="{{ $submission->student->name }}"
+                                    class="w-10 h-10 rounded-full mr-3 border border-neutral-200 dark:border-neutral-700">
+                                <div>
+                                    <div class="font-semibold">{{ $submission->student->name }}</div>
+                                    <div class="text-sm text-neutral-500 dark:text-neutral-400">
+                                        Submitted: {{ $submission->created_at->format('M d, Y H:i A') }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                @if ($editingGrade === $submission->student_id)
+                                    <form wire:submit.prevent="saveGrade({{ $submission->student_id }})">
+                                        <flux:input type="number" wire:model="grades.{{ $submission->student_id }}" min="0"
+                                            max="{{ $classwork->points }}" class="w-20 mr-2" />
+                                        <flux:button type="submit" variant="primary" size="sm" class="mr-2">Save</flux:button>
+                                        <flux:button wire:click="cancelEditGrade" size="sm">
+                                            Cancel</flux:button>
+                                    </form>
+                                @else
+                                    <p class="font-semibold mb-2">
+                                        Grade: {{ $grades[$submission->student_id] ?? 'Not graded' }} / {{ $classwork->points }}
+                                    </p>
+                                    <flux:button wire:click="editGrade({{ $submission->student_id }})" variant="ghost" size="sm"
+                                        class="border border-neutral-200 dark:border-neutral-700 rounded-lg">
+                                        Edit Grade
+                                    </flux:button>
+                                @endif
+                            </div>
                         </div>
-                        <div class="text-lg font-medium text-neutral-900 dark:text-neutral-100">
-                            No submissions yet
-                        </div>
-                        <div class="text-sm text-neutral-500 dark:text-neutral-400">
-                            Students haven't submitted any work for this assignment
+                        <div class="mt-4 prose dark:prose-invert max-w-none">
+                            <p>{{ $submission->content }}</p>
                         </div>
                     </div>
-                </div>
-            @endif
+                @endforeach
+            </div>
         </div>
     </div>
 </div>
