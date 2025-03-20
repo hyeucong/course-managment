@@ -30,7 +30,9 @@ class Classwork extends Component
     {
         $this->courseId = $courseId;
         $this->course = Course::findOrFail($this->courseId);
+        $this->isStudent = request()->routeIs('student.classwork');
     }
+
 
     public function render()
     {
@@ -106,5 +108,14 @@ class Classwork extends Component
     public function cancelEdit()
     {
         $this->reset(['editingClassworkId', 'title', 'description', 'points', 'dueDate']);
+    }
+
+    public function openClassworkDetails($classworkId)
+    {
+        if ($this->isStudent) {
+            return $this->redirect(route('student.classwork.detail', ['courseId' => $this->courseId, 'classworkId' => $classworkId]), navigate: true);
+        } else {
+            return $this->redirect(route('classwork.detail', ['courseId' => $this->courseId, 'classworkId' => $classworkId]), navigate: true);
+        }
     }
 }

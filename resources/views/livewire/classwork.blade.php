@@ -29,8 +29,8 @@
 
         <div class="space-y-4">
             @forelse($classworks as $classwork)
-                <div
-                    class="bg-white dark:bg-zinc-800 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm overflow-hidden hover:shadow-md transition-shadow cursor-pointer">
+                <div class="bg-white dark:bg-zinc-800 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
+                    wire:click="openClassworkDetails({{ $classwork->id }})">
                     <div class="p-6">
                         <div class="flex items-center justify-between gap-4 ">
                             <div class="flex items-start gap-4 flex-grow">
