@@ -22,10 +22,6 @@ class Stream extends Component
 
     public function createPost()
     {
-        if ($this->isStudent) {
-            abort(403, 'Unauthorized action.');
-        }
-
         $this->validate([
             'postContent' => 'required|min:3',
         ]);
