@@ -40,14 +40,26 @@ class Grades extends Component
     private function loadGrades()
     {
         $grades = Grade::where('course_id', $this->courseId)->get();
+        $gradeCount = [];
 
         foreach ($grades as $grade) {
             $this->grades[$grade->student_id][$grade->classwork_id] = $grade->score;
 
             if (!isset($this->totalGrades[$grade->student_id])) {
                 $this->totalGrades[$grade->student_id] = 0;
+                $gradeCount[$grade->student_id] = 0;
             }
             $this->totalGrades[$grade->student_id] += $grade->score;
+            $gradeCount[$grade->student_id]++;
+        }
+
+        foreach ($this->totalGrades as $studentId => $total) {
+            if ($gradeCount[$studentId] > 0) {
+                $this->totalGrades[$studentId] = round($total / $gradeCount[$studentId], 2);
+            } else {
+                $this->totalGrades[$studentId] = 0;
+            }
         }
     }
+
 }

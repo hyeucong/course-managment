@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Course;
 
+use Flux\Flux;
 use Livewire\Component;
 use App\Models\StreamPost;
 use App\Models\Course;
-use Illuminate\Support\Facades\Auth;
 
 class Stream extends Component
 {
@@ -13,11 +13,13 @@ class Stream extends Component
     public $course;
     public $activeTab = 'stream';
     public $postContent = '';
+    public $backgroundUrl;
 
     public function mount($courseId)
     {
         $this->courseId = $courseId;
         $this->course = Course::findOrFail($this->courseId);
+        $this->backgroundUrl = $this->course->background_url;
     }
 
     public function createPost()
@@ -33,6 +35,16 @@ class Stream extends Component
         ]);
 
         $this->postContent = '';
+    }
+
+    public function updateBackgroundUrl()
+    {
+        $this->validate([
+            'backgroundUrl' => 'required|url',
+        ]);
+
+        $this->course->update(['background_url' => $this->backgroundUrl]);
+        Flux::modal('edit-background')->close();
     }
 
     public function render()

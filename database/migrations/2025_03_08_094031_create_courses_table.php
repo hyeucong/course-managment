@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->enum('status', ['active', 'inactive', 'completed'])->default('active');
             $table->text('schedule')->nullable();
             $table->text('description')->nullable();
+            $table->string('background_url')->default('https://images.unsplash.com/photo-1740166260052-b41e5381bcbb?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
             $table->timestamps();
         });
     }
