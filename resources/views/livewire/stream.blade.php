@@ -1,5 +1,9 @@
 <div class="relative w-full">
-    <x-course-header :course="$course" :activeTab="$activeTab" />
+    @if(request()->routeIs('student.stream'))
+        <x-student-header :course="$course" :activeTab="$activeTab" />
+    @else
+        <x-course-header :course="$course" :activeTab="$activeTab" />
+    @endif
 
     <div class="p-6 max-w-7xl mx-auto">
         <!-- Hero Section with Course Banner -->
@@ -12,14 +16,18 @@
                     {{ $course->course_code ?? 'Course updates and announcements' }}
                 </p>
             </div>
-            <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                <flux:modal.trigger name="edit-background">
-                    <flux:button variant="filled">
-                        <flux:icon.pencil class="mr-1" />
-                        Edit Banner
-                    </flux:button>
-                </flux:modal.trigger>
-            </div>
+            @if (request()->routeIs('student.stream'))
+
+            @else
+                <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <flux:modal.trigger name="edit-background">
+                        <flux:button variant="filled">
+                            <flux:icon.pencil class="mr-1" />
+                            Edit Banner
+                        </flux:button>
+                    </flux:modal.trigger>
+                </div>
+            @endif
         </div>
 
         <!-- Main Content Area -->
@@ -27,27 +35,31 @@
             <!-- Main Content - Post Stream -->
             <div class="lg:col-span-3 space-y-6">
                 <!-- Create Post Card -->
-                <div
-                    class="p-5 border border-neutral-200 dark:border-neutral-700 rounded-xl bg-white dark:bg-neutral-800/50">
-                    <h2 class="font-semibold text-xl mb-4">Create Announcement</h2>
-                    <form wire:submit.prevent="createPost">
-                        <flux:textarea wire:model="postContent" placeholder="Share an announcement with your class..."
-                            class="mb-4" />
-                        <div class="flex justify-between items-center">
-                            <div class="flex gap-3">
-                                <flux:button variant="ghost" type="button" title="Upload file"
-                                    class="border border-neutral-200 dark:border-neutral-700 rounded-lg">
-                                    <flux:icon.arrow-up-on-square />
-                                </flux:button>
-                                <flux:button variant="ghost" type="button" title="Add link"
-                                    class="border border-neutral-200 dark:border-neutral-700 rounded-lg">
-                                    <flux:icon.link />
-                                </flux:button>
+                @if (request()->routeIs('student.stream'))
+
+                @else
+                    <div
+                        class="p-5 border border-neutral-200 dark:border-neutral-700 rounded-xl bg-white dark:bg-neutral-800/50">
+                        <h2 class="font-semibold text-xl mb-4">Create Announcement</h2>
+                        <form wire:submit.prevent="createPost">
+                            <flux:textarea wire:model="postContent" placeholder="Share an announcement with your class..."
+                                class="mb-4" />
+                            <div class="flex justify-between items-center">
+                                <div class="flex gap-3">
+                                    <flux:button variant="ghost" type="button" title="Upload file"
+                                        class="border border-neutral-200 dark:border-neutral-700 rounded-lg">
+                                        <flux:icon.arrow-up-on-square />
+                                    </flux:button>
+                                    <flux:button variant="ghost" type="button" title="Add link"
+                                        class="border border-neutral-200 dark:border-neutral-700 rounded-lg">
+                                        <flux:icon.link />
+                                    </flux:button>
+                                </div>
+                                <flux:button type="submit" variant="primary">Post</flux:button>
                             </div>
-                            <flux:button type="submit" variant="primary">Post</flux:button>
-                        </div>
-                    </form>
-                </div>
+                        </form>
+                    </div>
+                @endif
 
                 <!-- Posts Feed -->
                 <div class="space-y-4">
