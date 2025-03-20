@@ -22,7 +22,6 @@ class ClassworkDetail extends Component
     public $currentStudentId;
     public $currentSubmission;
 
-
     public function mount($courseId, $classworkId)
     {
         $this->courseId = $courseId;
@@ -100,10 +99,5 @@ class ClassworkDetail extends Component
     public function editGrade($studentId)
     {
         $this->editingGrade = $studentId;
-    }
-
-    public function cancelEditGrade()
-    {
-        $this->editingGrade = null;
     }
 }

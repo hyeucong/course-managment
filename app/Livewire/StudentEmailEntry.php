@@ -3,6 +3,8 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use App\Models\Student;
+use App\Models\Enrollment;
 
 class StudentEmailEntry extends Component
 {
@@ -26,6 +28,22 @@ class StudentEmailEntry extends Component
             'email' => 'required|email|exists:students,email',
             'courseId' => 'required|exists:courses,id',
         ]);
+
+        $student = Student::where('email', $this->email)->first();
+
+        if (!$student) {
+            $this->addError('email', 'Invalid student email.');
+            return;
+        }
+
+        $enrollment = Enrollment::where('student_id', $student->id)
+            ->where('course_id', $this->courseId)
+            ->first();
+
+        if (!$enrollment) {
+            $this->addError('email', 'You are not enrolled in this course.');
+            return;
+        }
 
         session(['student_email' => $this->email]);
 

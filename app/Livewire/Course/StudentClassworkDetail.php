@@ -16,6 +16,8 @@ class StudentClassworkDetail extends Component
     public $classwork;
     public $content;
     public $submission;
+    public $editMode = false;
+    public $student;
 
     public function mount($courseId, $classworkId)
     {
@@ -23,9 +25,11 @@ class StudentClassworkDetail extends Component
         $this->classworkId = $classworkId;
         $this->course = Course::findOrFail($this->courseId);
         $this->classwork = ClassworkModel::findOrFail($this->classworkId);
-        $this->submission = ClassworkSubmission::where('user_id', auth()->id())
-            ->where('classwork_id', $this->classworkId)
-            ->first();
+
+        // Get the student based on the email in the session
+        $this->student = Student::where('email', session('student_email'))->firstOrFail();
+
+        $this->checkSubmission();
     }
 
     public function render()
@@ -33,27 +37,81 @@ class StudentClassworkDetail extends Component
         return view('livewire.student-classwork-detail');
     }
 
+    private function checkSubmission()
+    {
+        $this->submission = ClassworkSubmission::where('student_id', $this->student->id)
+            ->where('classwork_id', $this->classworkId)
+            ->first();
+
+        if ($this->submission) {
+            $this->content = $this->submission->content;
+        }
+    }
+
     public function submitAssignment()
     {
+        if ($this->submission) {
+            $this->dispatch('notify', [
+                'type' => 'error',
+                'message' => 'You have already submitted this assignment.'
+            ]);
+            return;
+        }
+
+        if (now() > $this->classwork->due_date) {
+            $this->dispatch('notify', [
+                'type' => 'error',
+                'message' => 'The due date for this assignment has passed.'
+            ]);
+            return;
+        }
+
         $this->validate([
             'content' => 'required|string',
         ]);
 
         ClassworkSubmission::create([
             'classwork_id' => $this->classworkId,
-            'student_id' => auth()->id(),
+            'student_id' => $this->student->id,
             'content' => $this->content,
         ]);
 
-        $this->submission = ClassworkSubmission::where('classwork_id', $this->classworkId)
-            ->where('student_id', auth()->id())
-            ->first();
-
+        $this->checkSubmission();
         $this->reset(['content']);
 
         $this->dispatch('notify', [
             'type' => 'success',
             'message' => 'Assignment submitted successfully!'
+        ]);
+    }
+
+    public function editSubmission()
+    {
+        $this->editMode = true;
+    }
+
+    public function cancelEdit()
+    {
+        $this->editMode = false;
+        $this->content = $this->submission->content;
+    }
+
+    public function updateSubmission()
+    {
+        $this->validate([
+            'content' => 'required|string',
+        ]);
+
+        $this->submission->update([
+            'content' => $this->content,
+        ]);
+
+        $this->editMode = false;
+        $this->checkSubmission();
+
+        $this->dispatch('notify', [
+            'type' => 'success',
+            'message' => 'Submission updated successfully!'
         ]);
     }
 }

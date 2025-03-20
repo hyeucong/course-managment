@@ -29,31 +29,29 @@
 
         <div class="space-y-4">
             @forelse($classworks as $classwork)
-                <div class="bg-white dark:bg-zinc-800 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
+                <div class="bg-white rounded-xl border border-neutral-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
                     wire:click="openClassworkDetails({{ $classwork->id }})">
                     <div class="p-6">
                         <div class="flex items-center justify-between gap-4 ">
                             <div class="flex items-start gap-4 flex-grow">
-                                <div class="p-3 bg-neutral-100 dark:bg-neutral-700 rounded-xl">
-                                    <flux:icon.document-text class="size-6 text-neutral-500 dark:text-neutral-400" />
+                                <div class="p-3 bg-neutral-100 rounded-xl">
+                                    <flux:icon.document-text class="size-6 text-neutral-500 " />
                                 </div>
                                 <div class="flex-grow">
                                     <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
                                         {{ $classwork->title }}
                                     </h3>
-                                    <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
+                                    <p class="text-sm text-neutral-600  mt-1">
                                         {{ Str::limit($classwork->description, 100) }}
                                     </p>
-
                                 </div>
                             </div>
-                            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+                            <p class="text-sm text-neutral-600 ">
                                 Due {{ \Carbon\Carbon::parse($classwork->due_date)->format('M d, H:i A') }}
                             </p>
                             @if (request()->routeIs('student.classwork'))
-
                             @else
-                                <flux:dropdown position="bottom" align="end">
+                                <flux:dropdown position="bottom" align="end" wire:click.stop>
                                     <flux:button variant="ghost">
                                         <flux:icon.ellipsis-vertical />
                                     </flux:button>
@@ -96,4 +94,5 @@
     </div>
 
     <x-modal.create-classwork />
+    <x-modal.edit-classwork />
 </div>

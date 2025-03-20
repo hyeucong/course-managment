@@ -24,7 +24,8 @@
                             @foreach($classworks as $classwork)
                                 <th
                                     class="px-6 py-4 text-center text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                                    {{ $classwork->title }}</th>
+                                    {{ $classwork->title }}
+                                </th>
                             @endforeach
                             <th
                                 class="px-6 py-4 text-center text-sm font-medium text-neutral-700 dark:text-neutral-300">

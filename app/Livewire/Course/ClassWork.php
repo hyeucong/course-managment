@@ -22,8 +22,8 @@ class Classwork extends Component
     protected $rules = [
         'title' => 'required|string|max:255',
         'description' => 'required|string',
-        'points' => 'required|integer|min:0',
-        'dueDate' => 'required|date',
+        'points' => 'required|integer|min:0|max:100',
+        'dueDate' => 'required|date|after:now',
     ];
 
     public function mount($courseId)
@@ -73,6 +73,8 @@ class Classwork extends Component
         $this->description = $classwork->description;
         $this->points = $classwork->points;
         $this->dueDate = $classwork->due_date->format('Y-m-d\TH:i');
+
+        Flux::modal('edit-classwork')->show();
     }
 
     public function updateClasswork()
@@ -92,6 +94,8 @@ class Classwork extends Component
             'type' => 'success',
             'message' => 'Assignment updated successfully!'
         ]);
+
+        Flux::modal('edit-classwork')->close();
     }
 
     public function deleteClasswork($classworkId)
