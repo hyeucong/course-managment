@@ -107,7 +107,6 @@
             </div>
 
             <div class="lg:col-span-1 space-y-6">
-                <!-- Upcoming Card -->
                 <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 p-5">
                     <div class="flex items-center">
                         <div class="p-3 border border-neutral-200 dark:border-neutral-700 rounded-xl mr-3">
@@ -115,35 +114,20 @@
                         </div>
                         <div>
                             <h2 class="font-bold text-lg">Upcoming</h2>
-                            <p class="text-sm text-neutral-500 dark:text-neutral-400">Next class activities</p>
+                            <p class="text-sm text-neutral-500 dark:text-neutral-400">Next class activity</p>
                         </div>
                     </div>
                     <div class="border-t border-neutral-200 dark:border-neutral-700 mt-4 pt-3">
-                        <p class="text-sm">No upcoming events</p>
-                    </div>
-                </div>
-
-                <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 p-5">
-                    <div class="flex items-center">
-                        <div class="p-3 border border-neutral-200 dark:border-neutral-700 rounded-xl mr-3">
-                            <flux:icon.presentation-chart-line />
-                        </div>
-                        <div>
-                            <h2 class="font-bold text-lg">85%</h2>
-                            <p class="text-sm text-neutral-500 dark:text-neutral-400">Attendance Rate</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 p-5">
-                    <div class="flex items-center">
-                        <div class="p-3 border border-neutral-200 dark:border-neutral-700 rounded-xl mr-3">
-                            <flux:icon.calendar-days />
-                        </div>
-                        <div>
-                            <h2 class="font-bold text-lg">Course Progress</h2>
-                            <p class="text-sm text-neutral-500 dark:text-neutral-400">45% completed</p>
-                        </div>
+                        @if($upcomingClasswork)
+                            <div class="text-sm">
+                                <p class="font-semibold">{{ $upcomingClasswork->title }}</p>
+                                <p class="text-neutral-500 dark:text-neutral-400">Due:
+                                    {{ $upcomingClasswork->due_date->format('M d, Y H:i') }}
+                                </p>
+                            </div>
+                        @else
+                            <p class="text-sm">No upcoming events</p>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -2,10 +2,12 @@
 
 namespace App\Livewire\Course;
 
+use Carbon\Carbon;
 use Flux\Flux;
 use Livewire\Component;
 use App\Models\StreamPost;
 use App\Models\Course;
+use App\Models\Classwork;
 
 class Stream extends Component
 {
@@ -19,12 +21,23 @@ class Stream extends Component
     public $editPostUrl;
     public $editingPostId;
     public $attachedUrl = '';
+    public $upcomingClasswork;
 
     public function mount($courseId)
     {
         $this->courseId = $courseId;
         $this->course = Course::findOrFail($this->courseId);
         $this->backgroundUrl = $this->course->background_url;
+        $this->loadSidebarData();
+    }
+
+    private function loadSidebarData()
+    {
+        $this->upcomingClasswork = Classwork::where('course_id', $this->courseId)
+            ->where('due_date', '>', Carbon::now())
+            ->where('due_date', '<=', Carbon::now()->addWeek())
+            ->orderBy('due_date')
+            ->first();
     }
 
     public function editPost($postId)
@@ -97,6 +110,7 @@ class Stream extends Component
 
         return view('livewire.stream', [
             'posts' => $posts,
+            'upcomingClasswork' => $this->upcomingClasswork,
         ]);
     }
 }
