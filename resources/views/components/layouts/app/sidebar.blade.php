@@ -5,9 +5,8 @@
         @include('partials.head')
     </head>
 
-    <body class="min-h-screen bg-white dark:bg-zinc-800">
-        <flux:sidebar sticky stashable
-            class="border-r border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
+    <body class="min-h-screen bg-gray-50 dark:bg-zinc-800">
+        <flux:sidebar sticky stashable class="border-r border-zinc-200 bg-zinc-50">
             <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
             <a href="{{ route('courses') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
@@ -59,7 +58,7 @@
                                 <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                                     <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-sm">
                                         <span
-                                            class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
+                                            class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black">
                                             @if (auth()->user()->avatar)
                                                 <img src="{{ auth()->user()->avatar }}" />
                                             @else
@@ -118,7 +117,7 @@
                                             <img src="{{ auth()->user()->avatar }}" />
                                         @else
                                             <span
-                                                class="flex h-full w-full items-center justify-center rounded-sm bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
+                                                class="flex h-full w-full items-center justify-center rounded-sm bg-neutral-200 text-black">
                                                 {{ auth()->user()->initials() }}
                                             </span>
                                         @endif

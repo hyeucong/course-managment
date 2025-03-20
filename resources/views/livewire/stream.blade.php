@@ -80,17 +80,20 @@
                                     </div>
                                 </div>
 
-                                <flux:dropdown position="bottom" align="end">
-                                    <flux:button variant="ghost"
-                                        class="border border-neutral-200 dark:border-neutral-700 rounded-lg">
-                                        <flux:icon.ellipsis-vertical />
-                                    </flux:button>
-                                    <flux:navmenu>
-                                        <flux:navmenu.item icon="pencil">Edit</flux:navmenu.item>
-                                        <flux:navmenu.item icon="eye">View Details</flux:navmenu.item>
-                                        <flux:navmenu.item icon="trash" variant="danger">Delete</flux:navmenu.item>
-                                    </flux:navmenu>
-                                </flux:dropdown>
+                                @if (request()->routeIs('student.stream'))
+                                @else
+                                    <flux:dropdown position="bottom" align="end">
+                                        <flux:button variant="ghost"
+                                            class="border border-neutral-200 dark:border-neutral-700 rounded-lg">
+                                            <flux:icon.ellipsis-vertical />
+                                        </flux:button>
+                                        <flux:navmenu>
+                                            <flux:navmenu.item icon="pencil">Edit</flux:navmenu.item>
+                                            <flux:navmenu.item icon="eye">View Details</flux:navmenu.item>
+                                            <flux:navmenu.item icon="trash" variant="danger">Delete</flux:navmenu.item>
+                                        </flux:navmenu>
+                                    </flux:dropdown>
+                                @endif
                             </div>
 
                             <div class="prose dark:prose-invert max-w-none">

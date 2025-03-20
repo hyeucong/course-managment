@@ -3,8 +3,8 @@
 namespace App\Livewire\Course;
 
 use App\Models\Course;
-use App\Models\Enrollment; // Add this import
-use App\Models\Student;    // Add this import
+use App\Models\Enrollment;
+use App\Models\Student;
 use Auth;
 use Flux\Flux;
 use Livewire\Component;
@@ -40,7 +40,6 @@ class CourseCreate extends Component
             'description' => 'required',
         ]);
 
-        // Create the course
         $course = Course::create([
             'course_name' => $this->course_name,
             'course_code' => $this->course_code,
