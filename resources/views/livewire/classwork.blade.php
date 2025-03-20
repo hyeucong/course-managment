@@ -6,29 +6,33 @@
     @endif
 
     <div class="p-6 max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-            <div>
-                <flux:heading size="xl" level="1" class="mb-2">Classwork</flux:heading>
-                <flux:subheading size="lg" class="text-neutral-600 dark:text-neutral-400">
-                    Manage assignments and classwork for this course.
-                </flux:subheading>
+        @if (request()->routeIs('student.classwork'))
+
+        @else
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                <div>
+                    <flux:heading size="xl" level="1" class="mb-2">Classwork</flux:heading>
+                    <flux:subheading size="lg" class="text-neutral-600 dark:text-neutral-400">
+                        Manage assignments and classwork for this course.
+                    </flux:subheading>
+                </div>
+                <flux:modal.trigger name="create-classwork">
+                    <flux:button variant="primary">
+                        <div class="flex items-center gap-2">
+                            <flux:icon.plus-circle variant="mini" class="size-4" />
+                            <span>Create</span>
+                        </div>
+                    </flux:button>
+                </flux:modal.trigger>
             </div>
-            <flux:modal.trigger name="create-classwork">
-                <flux:button variant="primary">
-                    <div class="flex items-center gap-2">
-                        <flux:icon.plus-circle variant="mini" class="size-4" />
-                        <span>Create</span>
-                    </div>
-                </flux:button>
-            </flux:modal.trigger>
-        </div>
+        @endif
 
         <div class="space-y-4">
             @forelse($classworks as $classwork)
                 <div
-                    class="bg-white dark:bg-zinc-800 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                    class="bg-white dark:bg-zinc-800 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm overflow-hidden hover:shadow-md transition-shadow cursor-pointer">
                     <div class="p-6">
-                        <div class="flex items-center justify-between gap-4">
+                        <div class="flex items-center justify-between gap-4 ">
                             <div class="flex items-start gap-4 flex-grow">
                                 <div class="p-3 bg-neutral-100 dark:bg-neutral-700 rounded-xl">
                                     <flux:icon.document-text class="size-6 text-neutral-500 dark:text-neutral-400" />
@@ -46,17 +50,21 @@
                             <p class="text-sm text-neutral-600 dark:text-neutral-400">
                                 Due {{ \Carbon\Carbon::parse($classwork->due_date)->format('M d, H:i A') }}
                             </p>
-                            <flux:dropdown position="bottom" align="end">
-                                <flux:button variant="ghost">
-                                    <flux:icon.ellipsis-vertical />
-                                </flux:button>
-                                <flux:navmenu>
-                                    <flux:navmenu.item icon="pencil" wire:click="editClasswork({{ $classwork->id }})">Edit
-                                    </flux:navmenu.item>
-                                    <flux:navmenu.item icon="trash" variant="danger"
-                                        wire:click="deleteClasswork({{ $classwork->id }})">Delete</flux:navmenu.item>
-                                </flux:navmenu>
-                            </flux:dropdown>
+                            @if (request()->routeIs('student.classwork'))
+
+                            @else
+                                <flux:dropdown position="bottom" align="end">
+                                    <flux:button variant="ghost">
+                                        <flux:icon.ellipsis-vertical />
+                                    </flux:button>
+                                    <flux:navmenu>
+                                        <flux:navmenu.item icon="pencil" wire:click="editClasswork({{ $classwork->id }})">Edit
+                                        </flux:navmenu.item>
+                                        <flux:navmenu.item icon="trash" variant="danger"
+                                            wire:click="deleteClasswork({{ $classwork->id }})">Delete</flux:navmenu.item>
+                                    </flux:navmenu>
+                                </flux:dropdown>
+                            @endif
                         </div>
                         <div class="flex flex-wrap items-center gap-3 mt-3">
                             <div class="flex gap-2">
