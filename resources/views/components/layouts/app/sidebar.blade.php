@@ -5,7 +5,7 @@
         @include('partials.head')
     </head>
 
-    <body class="min-h-screen bg-gray-50 dark:bg-zinc-800">
+    <body class="min-h-screen">
         <flux:sidebar sticky stashable class="border-r border-zinc-200 bg-zinc-50">
             <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 

@@ -1,10 +1,9 @@
-<div name="edit-course" class="w-full">
-
+<div name="edit-course" class="w-full" wire:cloak wire:show="loaded">
     <flux:fieldset>
-        <flux:legend size="lg">Create a course</flux:legend>
+        <flux:legend size="lg">Edit Class</flux:legend>
         <div class="space-y-6">
-            <flux:input wire:model="course_name" label="Course name" placeholder="Course name" />
-            <flux:input wire:model="course_code" label="Course code" placeholder="Course code" />
+            <flux:input wire:model="course_name" label="Class name" placeholder="Class name" />
+            <flux:input wire:model="course_code" label="Class code" placeholder="Class code" />
 
             <div class="grid grid-cols-2 gap-x-4 gap-y-6">
                 <flux:input wire:model="lecturer" label="Lecturer" placeholder="Lecturer" />
@@ -12,7 +11,10 @@
                 <flux:input type="date" wire:model="date_start" label="Date Start" placeholder="Date Start" />
                 <flux:input type="date" wire:model="date_end" label="Date End" placeholder="Date End" />
             </div>
-            <flux:input wire:model="shedule" label="Schedule" placeholder="Schedule" />
+            <flux:select wire:model="schedule">
+                <flux:select.option value="246">2 - 4 - 6</flux:select.option>
+                <flux:select.option value="357">3 - 5 - 7</flux:select.option>
+            </flux:select>
             <flux:textarea wire:model="description" label="Your description" placeholder="Your description" />
         </div>
 

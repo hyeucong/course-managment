@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Course;
 
+use App\Models\Course;
 use App\Models\Enrollment;
 use App\Models\Student;
+use App\Models\User;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -17,7 +19,7 @@ class People extends Component
 
     public function mount()
     {
-        $this->course = \App\Models\Course::findOrFail($this->courseId);
+        $this->course = Course::findOrFail($this->courseId);
         $this->loadEnrolledStudents();
         $this->loadTeachers();
     }
@@ -97,7 +99,6 @@ class People extends Component
 
     public function removeStudent($id)
     {
-        $student = Student::findOrFail($id);
         $enrollment = Enrollment::where('student_id', $id)
             ->where('course_id', $this->courseId)
             ->first();
@@ -117,9 +118,32 @@ class People extends Component
         }
     }
 
+    public function removeTeacher($teacherId)
+    {
+        $course = Course::findOrFail($this->courseId);
+
+        if ($course->teachers()->where('user_id', $teacherId)->where('role', 'creator')->exists()) {
+            $this->dispatch('notify', [
+                'type' => 'error',
+                'message' => 'Cannot remove the course creator.'
+            ]);
+            return;
+        }
+
+        $course->teachers()->detach($teacherId);
+
+        $this->dispatch('notify', [
+            'type' => 'success',
+            'message' => 'Teacher removed successfully!'
+        ]);
+
+        $this->reloadTeachers();
+    }
 
     public function render()
     {
-        return view('livewire.people', ['course' => $this->course]);
+        return view('livewire.people', [
+            'course' => $this->course,
+        ]);
     }
 }

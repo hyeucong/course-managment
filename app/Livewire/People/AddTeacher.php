@@ -5,7 +5,6 @@ namespace App\Livewire\People;
 use Flux\Flux;
 use Livewire\Component;
 use App\Models\User;
-use App\Models\Course;
 
 class AddTeacher extends Component
 {
@@ -24,14 +23,13 @@ class AddTeacher extends Component
         ]);
 
         $user = User::where('email', $this->email)->first();
-        $course = Course::findOrFail($this->courseId);
 
-        if ($course->teachers()->where('user_id', $user->id)->exists()) {
+        if ($user->courses()->where('course_id', $this->courseId)->exists()) {
             $this->addError('email', 'This teacher is already assigned to the course.');
             return;
         }
 
-        $course->teachers()->attach($user->id);
+        $user->courses()->attach($this->courseId, ['role' => 'teacher']);
 
         $this->reset('email');
         $this->dispatch('teacher-added');

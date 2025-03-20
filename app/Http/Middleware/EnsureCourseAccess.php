@@ -16,8 +16,6 @@ class EnsureCourseAccess
         if (!$courseId || !$user) {
             abort(403, 'Unauthorized action.');
         }
-
-        $course = Course::findOrFail($courseId);
         $hasAccess = $user->courses()
             ->where('course_id', $courseId)
             ->wherePivotIn('role', ['creator', 'teacher'])

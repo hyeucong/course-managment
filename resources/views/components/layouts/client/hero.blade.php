@@ -9,7 +9,7 @@
 
         <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight relative z-10">
             Better <span class="relative inline-block">
-                <span class="relative z-10">courses</span>
+                <span class="relative z-10">class</span>
                 <span class="absolute bottom-2 left-0 w-full h-3 bg-indigo-300 opacity-40 z-0"></span>
             </span> management
             <br /><span class="text-indigo-600">for teachers</span>

@@ -2,19 +2,26 @@
     <flux:modal name="course-create" class="max-w-xl w-full mx-auto">
         <div class="space-y-4">
             <flux:fieldset>
-                <flux:legend size="lg" class="font-semibold text-center mb-4">New Course</flux:legend>
+                <flux:legend size="lg" class="font-semibold text-center mb-4">Create New Class</flux:legend>
 
                 <div class="space-y-4">
-                    <flux:input wire:model="course_name" label="Course Title" placeholder="Enter course title" />
-                    <flux:input wire:model="course_code" label="Course Code" placeholder="e.g., CS101" />
-                    <flux:input wire:model="lecturer" label="Instructor" placeholder="Instructor's name" />
-                    <flux:input wire:model="room" label="Room" placeholder="Enter room number or name" />
+                    <flux:input wire:model="course_name" label="Class Title" placeholder="Enter course title" />
+                    <flux:input wire:model="course_code" label="Class Code" placeholder="e.g., CS101" />
+                    <div class="grid grid-cols-2 gap-4">
+                        <flux:input wire:model="lecturer" label="Instructor" placeholder="Instructor's name" />
+                        <flux:input wire:model="room" label="Room" placeholder="Enter room number or name" />
+                    </div>
+                    <flux:select wire:model="schedule" label="Select Schedule">
+                        <flux:select.option value="">Select schedule</flux:select.option>
+                        <flux:select.option value="246">2 - 4 - 6</flux:select.option>
+                        <flux:select.option value="357">3 - 5 - 7</flux:select.option>
+                    </flux:select>
                     <div class="grid grid-cols-2 gap-4">
                         <flux:input type="date" wire:model="date_start" label="Start Date" />
                         <flux:input type="date" wire:model="date_end" label="End Date" />
                     </div>
-                    <flux:textarea wire:model="description" label="Description" placeholder="Brief course overview"
-                        rows="3" />
+                    <flux:textarea badge="Optional" wire:model="description" label="Description"
+                        placeholder="Brief class overview" rows="3" />
                 </div>
                 <div class="flex justify-end mt-6 space-x-3">
                     <flux:modal.close>
