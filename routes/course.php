@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SubmissionController;
 use App\Http\Middleware\CheckStudentEmail;
 use App\Http\Middleware\EnsureCourseAccess;
 use App\Livewire\Course\{Attendance, ClassWork, Grades, People, Settings, Stream};

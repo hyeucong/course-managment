@@ -3,17 +3,18 @@
 namespace App\Livewire\Course;
 
 use App\Models\ClassworkSubmission;
+use App\Models\Student;
 use Livewire\Component;
 use App\Models\Classwork as ClassworkModel;
 use App\Models\Course;
-use App\Models\Submission;
 
 class StudentClassworkDetail extends Component
 {
     public $courseId;
     public $classworkId;
-    public $classwork;
     public $course;
+    public $classwork;
+    public $content;
     public $submission;
 
     public function mount($courseId, $classworkId)
@@ -32,9 +33,24 @@ class StudentClassworkDetail extends Component
         return view('livewire.student-classwork-detail');
     }
 
-    public function submit()
+    public function submitAssignment()
     {
-        // Implement submission logic here
+        $this->validate([
+            'content' => 'required|string',
+        ]);
+
+        ClassworkSubmission::create([
+            'classwork_id' => $this->classworkId,
+            'student_id' => auth()->id(),
+            'content' => $this->content,
+        ]);
+
+        $this->submission = ClassworkSubmission::where('classwork_id', $this->classworkId)
+            ->where('student_id', auth()->id())
+            ->first();
+
+        $this->reset(['content']);
+
         $this->dispatch('notify', [
             'type' => 'success',
             'message' => 'Assignment submitted successfully!'

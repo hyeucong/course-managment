@@ -2,7 +2,6 @@
     <x-student-header :course="$course" :activeTab="'classwork'" />
 
     <div class="p-6 max-w-7xl mx-auto">
-
         <div class="mt-8">
             <flux:heading size="xl">{{ $classwork->title }}</flux:heading>
             <p class="mt-2 text-neutral-600 dark:text-neutral-400">{{ $classwork->description }}</p>
@@ -16,7 +15,12 @@
             @if($submission)
                 <p class="text-green-600 dark:text-green-400">You have already submitted this assignment.</p>
             @else
-                <flux:button wire:click="submit" variant="primary">Submit Assignment</flux:button>
+                <form wire:submit.prevent="submitAssignment">
+                    <flux:textarea wire:model="content" label="Your submission" rows="5"></flux:textarea>
+                    <div class="mt-4">
+                        <flux:button type="submit" variant="primary">Submit Assignment</flux:button>
+                    </div>
+                </form>
             @endif
         </div>
     </div>
