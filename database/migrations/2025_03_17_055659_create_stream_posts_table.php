@@ -13,6 +13,7 @@ class CreateStreamPostsTable extends Migration
             $table->foreignId('course_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->text('content');
+            $table->string('attached_url')->nullable();
             $table->timestamps();
         });
     }

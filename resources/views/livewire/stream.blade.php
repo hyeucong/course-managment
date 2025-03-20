@@ -29,22 +29,20 @@
                 @if (request()->routeIs('student.stream'))
 
                 @else
-                    <div
-                        class="p-5 border border-neutral-200 dark:border-neutral-700 rounded-xl bg-white dark:bg-neutral-800/50">
+                    <div class="p-5 border border-neutral-200 rounded-xl bg-whit">
                         <h2 class="font-semibold text-xl mb-4">Create Announcement</h2>
                         <form wire:submit.prevent="createPost">
                             <flux:textarea wire:model="postContent" placeholder="Share an announcement with your class..."
                                 class="mb-4" />
                             <div class="flex justify-between items-center">
-                                <div class="flex gap-3">
-                                    <flux:button variant="ghost" type="button" title="Upload file"
-                                        class="border border-neutral-200 dark:border-neutral-700 rounded-lg">
-                                        <flux:icon.arrow-up-on-square />
-                                    </flux:button>
+                                <div class="flex gap-3" x-data="{ showUrlInput: false }">
                                     <flux:button variant="ghost" type="button" title="Add link"
-                                        class="border border-neutral-200 dark:border-neutral-700 rounded-lg">
+                                        class="border border-neutral-200  rounded-lg" @click="showUrlInput = !showUrlInput">
                                         <flux:icon.link />
                                     </flux:button>
+                                    <div x-show="showUrlInput" class="relative" wire:cloak>
+                                        <flux:input wire:model="attachedUrl" placeholder="Enter URL" />
+                                    </div>
                                 </div>
                                 <flux:button type="submit" variant="primary">Post</flux:button>
                             </div>
@@ -56,12 +54,11 @@
                     <h2 class="font-semibold text-xl px-1">Recent Announcements</h2>
 
                     @forelse($posts as $post)
-                        <div
-                            class="p-5 border border-neutral-200 dark:border-neutral-700 rounded-xl bg-white dark:bg-neutral-800/50">
+                        <div class="p-5 border border-neutral-200 rounded-xl bg-white">
                             <div class="flex justify-between items-start mb-4">
                                 <div class="flex items-center">
                                     <img src="{{ $post->user->avatar }}" alt="{{ $post->user->name }}"
-                                        class="w-10 h-10 rounded-full mr-3 border border-neutral-200 dark:border-neutral-700">
+                                        class="w-10 h-10 rounded-full mr-3 border border-neutral-200 ">
                                     <div>
                                         <div class="font-semibold">{{ $post->user->name }}</div>
                                         <div class="text-sm text-neutral-500 dark:text-neutral-400">
@@ -77,17 +74,23 @@
                                             class="border border-neutral-200 dark:border-neutral-700 rounded-lg">
                                             <flux:icon.ellipsis-vertical />
                                         </flux:button>
-                                        <flux:navmenu>
-                                            <flux:navmenu.item icon="pencil">Edit</flux:navmenu.item>
-                                            <flux:navmenu.item icon="eye">View Details</flux:navmenu.item>
-                                            <flux:navmenu.item icon="trash" variant="danger">Delete</flux:navmenu.item>
-                                        </flux:navmenu>
+                                        <flux:menu>
+                                            <flux:menu.item icon="pencil" wire:click="editPost({{ $post->id }})">Edit
+                                            </flux:menu.item>
+                                            <flux:menu.item icon="trash" variant="danger"
+                                                wire:click="deletePost({{ $post->id }})">Delete</flux:menu.item>
+                                        </flux:menu>
                                     </flux:dropdown>
                                 @endif
                             </div>
 
                             <div class="prose dark:prose-invert max-w-none">
                                 <p>{{ $post->content }}</p>
+                                @if($post->attached_url)
+                                    <a href="{{ $post->attached_url }}" target="_blank" class="text-blue-500 hover:underline">
+                                        {{ $post->attached_url }}
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     @empty
@@ -147,23 +150,6 @@
         </div>
     </div>
 
-    <flux:modal name="edit-background" class="md:max-w-md">
-        <form wire:submit.prevent="updateBackgroundUrl">
-            <div class="space-y-4">
-                <flux:heading size="lg">Edit Course Banner</flux:heading>
-                <p class="text-sm text-neutral-500 dark:text-neutral-400">
-                    Choose a new banner image for your course.
-                </p>
-
-                <div class="space-y-6">
-                    <flux:input type="url" wire:model="backgroundUrl" label="Image URL"
-                        placeholder="Paste an image URL" />
-                </div>
-
-                <div class="flex justify-end">
-                    <flux:button type="submit" variant="primary">Save</flux:button>
-                </div>
-            </div>
-        </form>
-    </flux:modal>
+    <x-modal.edit-background />
+    <x-modal.edit-post />
 </div>
