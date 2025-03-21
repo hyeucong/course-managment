@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 
     <head>
         <meta charset="utf-8">
@@ -15,7 +15,7 @@
             <div class="flex justify-between items-center">
                 <nav class="text-[#1b1b18] font-bold text-xl sm:text-2xl">
                     <a href="/" class="flex items-center">
-                        <span class="text-indigo-600">lecture</span><span>space</span>
+                        <span class="text-green-800">lecture</span><span>space</span>
                     </a>
                 </nav>
 
@@ -32,17 +32,17 @@
 
                 <!-- Desktop navigation -->
                 <nav class="space-x-6 font-medium hidden lg:flex items-center">
-                    <a href="/" class="hover:text-indigo-600 transition-colors duration-300">Product</a>
-                    <a href="#" class="hover:text-indigo-600 transition-colors duration-300">Pricing</a>
+                    <a href="/" class="hover:text-green-800 transition-colors duration-300">Product</a>
+                    <a href="#" class="hover:text-green-800 transition-colors duration-300">Pricing</a>
                     @if (Route::has('login'))
                         @auth
                             <a href="{{ url('/courses') }}"
-                                class="px-5 py-2 border border-transparent rounded-md bg-white text-indigo-600 shadow-sm hover:bg-gray-50 transition-colors duration-300">
+                                class="px-5 py-2 border border-transparent rounded-md bg-white text-green-800 shadow-sm hover:bg-gray-50 transition-colors duration-300">
                                 Dashboard
                             </a>
                         @else
                             <a href="{{ route('login') }}"
-                                class="px-5 py-2 border border-transparent rounded-md bg-white text-indigo-600 shadow-sm hover:bg-gray-50 transition-colors duration-300">
+                                class="px-5 py-2 border border-transparent rounded-md bg-white text-green-800 shadow-sm hover:bg-gray-50 transition-colors duration-300">
                                 Log in
                             </a>
                         @endauth
@@ -53,16 +53,16 @@
             <!-- Mobile navigation (hidden by default) -->
             <div class="hidden lg:hidden mt-4 pb-3 border-b border-gray-200">
                 <nav class="flex flex-col space-y-4 font-medium">
-                    <a href="/" class="hover:text-indigo-600 transition-colors duration-300">Product</a>
-                    <a href="#" class="hover:text-indigo-600 transition-colors duration-300">Pricing</a>
+                    <a href="/" class="hover:text-green-800 transition-colors duration-300">Product</a>
+                    <a href="#" class="hover:text-green-800 transition-colors duration-300">Pricing</a>
                     @if (Route::has('login'))
                         @auth
-                            <a href="{{ url('/courses') }}" class="hover:text-indigo-600 transition-colors duration-300">
+                            <a href="{{ url('/courses') }}" class="hover:text-green-800 transition-colors duration-300">
                                 Dashboard
                             </a>
                         @else
                             <a href="{{ route('login') }}"
-                                class="inline-block mt-2 px-5 py-2 border border-transparent rounded-md bg-white text-indigo-600 shadow-sm hover:bg-gray-50 transition-colors duration-300">
+                                class="inline-block mt-2 px-5 py-2 border border-transparent rounded-md bg-white text-green-800 shadow-sm hover:bg-gray-50 transition-colors duration-300">
                                 Log in
                             </a>
                         @endauth
@@ -73,6 +73,12 @@
 
         <main class="flex-grow">
             <x-layouts.client.hero />
+            <x-layouts.client.problem />
+            <x-layouts.client.review />
+            <x-layouts.client.product />
+            <x-layouts.client.pricing />
+            <x-layouts.client.contact />
+
         </main>
 
         <footer>
