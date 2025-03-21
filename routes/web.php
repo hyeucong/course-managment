@@ -10,6 +10,7 @@ Route::get('/', function () {
 Route::middleware(['auth', ValidateSessionWithWorkOS::class])->group(function () {
     Route::view('billing', 'sidebar.billing')->name('billing');
     Route::view('courses', 'sidebar.courses')->name('courses');
+    Route::view('archived', 'sidebar.archived')->name('archived');
 });
 
 require __DIR__ . '/settings.php';

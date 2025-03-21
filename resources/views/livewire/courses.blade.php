@@ -1,7 +1,7 @@
-<div class="flex h-full w-full flex-1 flex-col gap-6 rounded-xl mt-6">
+<div class="flex h-full w-full flex-1 flex-col gap-6 rounded-xl">
     <div class="grid auto-rows-min gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         @forelse ($courses as $course)
-            <a class="group relative overflow-hidden rounded-xl border border-neutral-200 bg-gray-100 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between p-6 h-[220px]"
+            <div class="group relative overflow-hidden rounded-xl border border-zinc-200 shadow-sm flex flex-col justify-between p-6 h-[220px] cursor-pointer"
                 href="{{route('stream', $course)}}" wire:navigate>
 
                 <div class="flex flex-col gap-3">
@@ -30,19 +30,16 @@
                     </div>
                 </div>
 
-                <div class="flex justify-between items-center pt-3 border-t border-neutral-100 mt-2">
+                <div class="flex justify-between items-center pt-3 border-t border-zinc-200 mt-2">
                     <div class="flex items-center gap-1.5">
-                        <span class="flex items-center justify-center bg-neutral-100 rounded-full h-6 w-6">
+                        <flux:badge class="flex items-center justify-center bg-stone-200 rounded-full h-6 w-6">
                             <flux:icon.academic-cap class="h-3.5 w-3.5 text-neutral-600" />
-                        </span>
+                        </flux:badge>
                         <span class="text-sm text-neutral-600">{{$course->student_count}}
                             students</span>
                     </div>
-                    <div class="opacity-0 group-hover:opacity-100 transition-opacity">
-                        <flux:icon.arrow-right class="h-4 w-4 text-neutral-500" />
-                    </div>
                 </div>
-            </a>
+            </div>
         @empty
             <div class="col-span-full text-center text-neutral-500">
                 <p>Create a course to get started</p>

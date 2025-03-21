@@ -36,7 +36,7 @@ class CourseEdit extends Component
     {
         $this->validate([
             'course_name' => 'required',
-            'course_code' => 'required|unique:courses,course_code',
+            'course_code' => 'required',
             'lecturer' => 'required',
             'room' => 'required',
             'date_start' => 'required|date',

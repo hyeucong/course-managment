@@ -2,11 +2,11 @@
     <flux:modal name="course-create" class="max-w-xl w-full mx-auto">
         <div class="space-y-4">
             <flux:fieldset>
-                <flux:legend size="lg" class="font-semibold text-center mb-4">Create New Class</flux:legend>
+                <flux:legend size="lg" class="font-semibold text-center mb-4">Create New Course</flux:legend>
 
                 <div class="space-y-4">
-                    <flux:input wire:model="course_name" label="Class Title" placeholder="Enter course title" />
-                    <flux:input wire:model="course_code" label="Class Code" placeholder="e.g., CS101" />
+                    <flux:input wire:model="course_name" label="Title" placeholder="Enter course title" />
+                    <flux:input wire:model="course_code" label="Code" placeholder="e.g., CS101" />
                     <div class="grid grid-cols-2 gap-4">
                         <flux:input wire:model="lecturer" label="Instructor" placeholder="Instructor's name" />
                         <flux:input wire:model="room" label="Room" placeholder="Enter room number or name" />
@@ -24,9 +24,6 @@
                         placeholder="Brief class overview" rows="3" />
                 </div>
                 <div class="flex justify-end mt-6 space-x-3">
-                    <flux:modal.close>
-                        <flux:button variant="ghost">Cancel</flux:button>
-                    </flux:modal.close>
                     <flux:button wire:listen="course-created" type="submit" variant="primary" wire:click="submit">
                         Create
                     </flux:button>

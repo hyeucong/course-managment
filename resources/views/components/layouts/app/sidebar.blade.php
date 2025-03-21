@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 
     <head>
         @include('partials.head')
     </head>
 
     <body class="min-h-screen">
-        <flux:sidebar sticky stashable class="border-r border-zinc-200 bg-zinc-50">
+        <flux:sidebar sticky stashable class="border-r border-zinc-200 bg-stone-100">
             <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
             <a href="{{ route('courses') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
@@ -21,11 +21,11 @@
                             Courses
                         </flux:navlist.item>
                     @else
-                        <flux:navlist.item icon="academic-cap" :href="route('courses')"
+                        <flux:navlist.item icon="academic-cap" :href="route('courses')" :accent="false"
                             :current="request()->routeIs('courses') || request()->is('courses/*')" wire:navigate>
                             Courses
                         </flux:navlist.item>
-                        <flux:navlist.item icon="credit-card" :href="route('billing')"
+                        <flux:navlist.item icon="credit-card" :href="route('billing')" :accent="false"
                             :current="request()->routeIs('billing')" wire:navigate>Billing
                         </flux:navlist.item>
                     @endif
@@ -39,8 +39,7 @@
 
             @else
                 <flux:navlist variant="outline">
-                    <flux:navlist.item icon="archive-box" :href="route('billing')" :current="request()->routeIs('archived')"
-                        wire:navigate>Archived
+                    <flux:navlist.item icon="archive-box" :href="route('archived')" :current="request()->routeIs('archived') || request()->is('archived/*')" wire:navigate>Archived
                     </flux:navlist.item>
                 </flux:navlist>
             @endif

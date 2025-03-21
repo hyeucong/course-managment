@@ -30,13 +30,13 @@ class CourseCreate extends Component
     {
         $this->validate([
             'course_name' => 'required',
-            'course_code' => 'required|unique:courses,course_code',
+            'course_code' => 'required',
             'lecturer' => 'required',
             'room' => 'required',
             'date_start' => 'required|date',
             'date_end' => 'required|date|after:date_start',
             'schedule' => 'required|in:246,357',
-            'description' => 'required',
+            'description' => 'nullable',
         ]);
 
         try {
