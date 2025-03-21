@@ -2,8 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Models\Course;
-use Flux\Flux;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
@@ -28,26 +26,13 @@ class Courses extends Component
     {
         $this->loadUserCourses();
     }
-
     private function loadUserCourses()
     {
         $user = Auth::user();
         $this->courses = $user->courses()
             ->wherePivotIn('role', ['creator', 'teacher'])
+            ->where('status', '!=', 'archived')
             ->withCount('enrollments as student_count')
             ->get();
-    }
-
-    public function delete($id)
-    {
-        $this->courseId = $id;
-        Flux::modal('delete-course')->show();
-    }
-
-    public function destroy()
-    {
-        Course::findOrFail($this->courseId)->delete();
-        Flux::modal('delete-course')->close();
-        $this->reloadCourses();
     }
 }

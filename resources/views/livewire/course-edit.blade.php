@@ -19,6 +19,7 @@
                 <flux:select wire:model="status" label="Status">
                     <flux:select.option value="active">Active</flux:select.option>
                     <flux:select.option value="inactive">Inactive</flux:select.option>
+                    <flux:select.option value="archived" disabled>Archived</flux:select.option>
                 </flux:select>
             </div>
             <flux:textarea wire:model="description" label="Your description" placeholder="Your description" />

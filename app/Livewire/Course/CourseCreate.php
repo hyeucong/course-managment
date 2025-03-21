@@ -97,8 +97,8 @@ class CourseCreate extends Component
         $this->room = "";
         $this->date_start = "";
         $this->date_end = "";
-        $this->schedule = '246';
-        $this->status = 'active';
+        $this->schedule = [];
+        $this->status = "";
         $this->description = "";
     }
 }
