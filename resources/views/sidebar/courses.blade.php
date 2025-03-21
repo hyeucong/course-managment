@@ -4,9 +4,6 @@
             <flux:heading size="xl" class="text-2xl md:text-3xl lg:text-4xl font-bold">Lecture Space</flux:heading>
 
             <div class="flex gap-4">
-                <div class="w-80">
-                    <flux:input icon="magnifying-glass" placeholder="Filter course name or code..." />
-                </div>
                 <flux:modal.trigger name="course-create">
                     <flux:button variant="primary" class="cursor-pointer">
                         Create Course

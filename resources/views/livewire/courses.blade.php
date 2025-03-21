@@ -1,4 +1,23 @@
 <div class="flex h-full w-full flex-1 flex-col gap-6 rounded-xl">
+    <div class="flex flex-wrap justify-between gap-4 items-center">
+        <flux:dropdown>
+            <flux:button icon-trailing="chevron-down">
+                Sort: {{ ucfirst($sortField) }} {{ $sortDirection === 'asc' ? '↑' : '↓' }}
+            </flux:button>
+
+            <flux:menu>
+                <flux:menu.item icon="pencil-square" kbd="⌘S" wire:click="sortBy('course_name')">Name</flux:menu.item>
+                <flux:menu.item icon="document-duplicate" kbd="⌘D" wire:click="sortBy('date')">Date</flux:menu.item>
+                <flux:menu.item icon="trash" variant="danger" kbd="⌘⌫" wire:click="clearSort">Clear</flux:menu.item>
+            </flux:menu>
+        </flux:dropdown>
+
+        <div class="w-80">
+            <flux:input icon="magnifying-glass" placeholder="Filter course name or code..." wire:model.live="search" />
+        </div>
+
+    </div>
+
     <div class="grid auto-rows-min gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         @forelse ($courses as $course)
             @if ($course->status !== 'archived')
