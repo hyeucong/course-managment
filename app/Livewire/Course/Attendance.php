@@ -46,8 +46,10 @@ class Attendance extends Component
         $endDate = Carbon::parse($this->course->date_end);
         $currentDate = clone $startDate;
 
+        $scheduleDays = $this->course->schedule === '135' ? [1, 3, 5] : [2, 4, 6];
+
         while ($currentDate->lte($endDate)) {
-            if (in_array($currentDate->dayOfWeek, [1, 3, 5])) {
+            if (in_array($currentDate->dayOfWeek, $scheduleDays)) {
                 $dateKey = $currentDate->format('Y-m-d');
                 $dateDisplay = $currentDate->format('Y M d (D)');
                 $hasAttendance = AttendanceModel::where('enrollment_id', function ($query) use ($dateKey) {

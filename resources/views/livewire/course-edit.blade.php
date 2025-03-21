@@ -13,8 +13,8 @@
             </div>
             <div class="grid grid-cols-2 gap-4">
                 <flux:select wire:model="schedule" label="Select Schedule">
-                    <flux:select.option value="246">2 - 4 - 6</flux:select.option>
-                    <flux:select.option value="357">3 - 5 - 7</flux:select.option>
+                    <flux:select.option value="135">2 - 4 - 6</flux:select.option>
+                    <flux:select.option value="246">3 - 5 - 7</flux:select.option>
                 </flux:select>
                 <flux:select wire:model="status" label="Status">
                     <flux:select.option value="active">Active</flux:select.option>

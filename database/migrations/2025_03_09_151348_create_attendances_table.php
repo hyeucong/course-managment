@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('enrollment_id')->constrained()->onDelete('cascade');
             $table->date('date');
-            $table->string('status'); // present, absent, late
+            $table->string('status');
             $table->timestamps();
             $table->unique(['enrollment_id', 'date']);
         });

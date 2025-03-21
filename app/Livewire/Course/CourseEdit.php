@@ -42,7 +42,7 @@ class CourseEdit extends Component
             'room' => 'required',
             'date_start' => 'required|date',
             'date_end' => 'required|date|after:date_start',
-            'schedule' => 'required|in:246,357',
+            'schedule' => 'required|in:135,246',
             'status' => 'required|in:active,inactive',
             'description' => 'nullable',
         ]);

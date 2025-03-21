@@ -21,14 +21,14 @@
                 </div>
             </div>
 
-            <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
+            <div class="rounded-xl border border-neutral-200 p-6">
                 <div class="w-full">
                     <div>
                         <flux:heading size="lg">Archive Course</flux:heading>
                         <flux:subheading class="mb-4">Archiving a course will set its status to 'archived' and hide it
                             from active courses.</flux:subheading>
                         <flux:modal.trigger name="archived-course">
-                            <flux:button>Edit profile</flux:button>
+                            <flux:button>Archive Course</flux:button>
                         </flux:modal.trigger>
                     </div>
                 </div>
