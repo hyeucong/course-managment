@@ -11,11 +11,16 @@
                         <flux:input wire:model="lecturer" label="Instructor" placeholder="Instructor's name" />
                         <flux:input wire:model="room" label="Room" placeholder="Enter room number or name" />
                     </div>
-                    <flux:select wire:model="schedule" label="Select Schedule">
-                        <flux:select.option value="">Select schedule</flux:select.option>
-                        <flux:select.option value="246">2 - 4 - 6</flux:select.option>
-                        <flux:select.option value="357">3 - 5 - 7</flux:select.option>
-                    </flux:select>
+                    <div class="grid grid-cols-2 gap-4">
+                        <flux:select wire:model="schedule" label="Select Schedule">
+                            <flux:select.option value="246">2 - 4 - 6</flux:select.option>
+                            <flux:select.option value="357">3 - 5 - 7</flux:select.option>
+                        </flux:select>
+                        <flux:select wire:model="status" label="Status">
+                            <flux:select.option value="active">Active</flux:select.option>
+                            <flux:select.option value="inactive">Inactive</flux:select.option>
+                        </flux:select>
+                    </div>
                     <div class="grid grid-cols-2 gap-4">
                         <flux:input type="date" wire:model="date_start" label="Start Date" />
                         <flux:input type="date" wire:model="date_end" label="End Date" />

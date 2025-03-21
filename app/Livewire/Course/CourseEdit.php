@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class CourseEdit extends Component
 {
-    public $course_name, $course_code, $lecturer, $room, $date_start, $date_end, $schedule, $description, $id;
+    public $course_name, $course_code, $lecturer, $room, $date_start, $date_end, $schedule, $description, $id, $status;
 
     #[On('editCourse')]
     public function editCourse($id)
@@ -23,6 +23,7 @@ class CourseEdit extends Component
         $this->date_start = $course->date_start;
         $this->date_end = $course->date_end;
         $this->schedule = $course->schedule;
+        $this->status = $course->status;
         $this->description = $course->description;
         Flux::modal('edit-course')->show();
     }
@@ -42,6 +43,7 @@ class CourseEdit extends Component
             'date_start' => 'required|date',
             'date_end' => 'required|date|after:date_start',
             'schedule' => 'required|in:246,357',
+            'status' => 'required|in:active,inactive',
             'description' => 'nullable',
         ]);
 
@@ -53,6 +55,7 @@ class CourseEdit extends Component
         $course->date_start = $this->date_start;
         $course->date_end = $this->date_end;
         $course->schedule = $this->schedule;
+        $course->status = $this->status;
         $course->description = $this->description;
         $course->save();
 

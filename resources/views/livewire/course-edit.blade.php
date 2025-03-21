@@ -11,10 +11,16 @@
                 <flux:input type="date" wire:model="date_start" label="Date Start" placeholder="Date Start" />
                 <flux:input type="date" wire:model="date_end" label="Date End" placeholder="Date End" />
             </div>
-            <flux:select wire:model="schedule">
-                <flux:select.option value="246">2 - 4 - 6</flux:select.option>
-                <flux:select.option value="357">3 - 5 - 7</flux:select.option>
-            </flux:select>
+            <div class="grid grid-cols-2 gap-4">
+                <flux:select wire:model="schedule" label="Select Schedule">
+                    <flux:select.option value="246">2 - 4 - 6</flux:select.option>
+                    <flux:select.option value="357">3 - 5 - 7</flux:select.option>
+                </flux:select>
+                <flux:select wire:model="status" label="Status">
+                    <flux:select.option value="active">Active</flux:select.option>
+                    <flux:select.option value="inactive">Inactive</flux:select.option>
+                </flux:select>
+            </div>
             <flux:textarea wire:model="description" label="Your description" placeholder="Your description" />
         </div>
 

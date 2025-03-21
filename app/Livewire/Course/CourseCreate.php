@@ -19,6 +19,7 @@ class CourseCreate extends Component
     public $date_end;
     public $schedule;
     public $description;
+    public $status;
 
     public function render()
     {
@@ -36,6 +37,7 @@ class CourseCreate extends Component
             'date_start' => 'required|date',
             'date_end' => 'required|date|after:date_start',
             'schedule' => 'required|in:246,357',
+            'status' => 'required|in:active,inactive',
             'description' => 'nullable',
         ]);
 
@@ -49,6 +51,7 @@ class CourseCreate extends Component
                 'date_start' => $this->date_start,
                 'date_end' => $this->date_end,
                 'schedule' => $this->schedule,
+                'status' => $this->status,
                 'description' => $this->description,
             ]);
 
@@ -94,7 +97,8 @@ class CourseCreate extends Component
         $this->room = "";
         $this->date_start = "";
         $this->date_end = "";
-        $this->schedule = [];
+        $this->schedule = '246';
+        $this->status = 'active';
         $this->description = "";
     }
 }

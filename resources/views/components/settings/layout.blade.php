@@ -1,7 +1,7 @@
-<div class="flex items-start max-md:flex-col">
+<div class="flex items-start max-md:flex-col p-6">
     <flux:separator class="md:hidden" />
 
-    <div class="flex-1 self-stretch max-md:pt-6">
+    <div class="flex-1 self-stretc">
         <flux:heading>{{ $heading ?? '' }}</flux:heading>
         <flux:subheading>{{ $subheading ?? '' }}</flux:subheading>
 
