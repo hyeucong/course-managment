@@ -17,7 +17,8 @@
                 <flux:navlist.group class="grid">
                     @if(request()->is('student/*'))
                         <flux:navlist.item icon="academic-cap" :href="route('courses')"
-                            :current="request()->routeIs('courses') || request()->is('student/*')" wire:navigate>
+                            :current="request()->routeIs('courses') || request()->is('student/*')" wire:navigate
+                            :accent="false">
                             Courses
                         </flux:navlist.item>
                     @else
@@ -39,7 +40,7 @@
 
             @else
                 <flux:navlist variant="outline">
-                    <flux:navlist.item icon="archive-box" :href="route('archived')" :current="request()->routeIs('archived') || request()->is('archived/*')" wire:navigate>Archived
+                    <flux:navlist.item icon="archive-box" :href="route('archived')" :current="request()->routeIs('archived') || request()->is('archived/*')" wire:navigate :accent="false">Archived
                     </flux:navlist.item>
                 </flux:navlist>
             @endif

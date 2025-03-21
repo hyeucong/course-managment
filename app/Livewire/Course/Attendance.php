@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Livewire\Course;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Carbon\Carbon;
 use App\Models\Attendance as AttendanceModel;
@@ -43,14 +44,23 @@ class Attendance extends Component
     {
         $startDate = Carbon::parse($this->course->date_start);
         $endDate = Carbon::parse($this->course->date_end);
-
         $currentDate = clone $startDate;
 
         while ($currentDate->lte($endDate)) {
             if (in_array($currentDate->dayOfWeek, [1, 3, 5])) {
                 $dateKey = $currentDate->format('Y-m-d');
                 $dateDisplay = $currentDate->format('Y M d (D)');
-                $this->availableDates[$dateKey] = $dateDisplay;
+                $hasAttendance = AttendanceModel::where('enrollment_id', function ($query) use ($dateKey) {
+                    $query->select('id')
+                        ->from('enrollments')
+                        ->where('course_id', $this->courseId)
+                        ->limit(1);
+                })->where('date', $dateKey)->exists();
+
+                $this->availableDates[$dateKey] = [
+                    'display' => $dateDisplay,
+                    'hasAttendance' => $hasAttendance
+                ];
             }
             $currentDate->addDay();
         }
@@ -107,6 +117,8 @@ class Attendance extends Component
             }
         }
 
+        $this->generateAvailableDates();
+
         $this->dispatch('notify', [
             'message' => 'Attendance saved successfully!',
             'type' => 'success'
@@ -133,6 +145,12 @@ class Attendance extends Component
             ->count();
 
         return round(($presentDays / $totalDays) * 100);
+    }
+
+    #[Computed]
+    public function availableDatesWithAttendance()
+    {
+        return $this->availableDates;
     }
 
     public function render()

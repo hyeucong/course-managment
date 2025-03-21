@@ -29,7 +29,7 @@
 
         <div class="space-y-4">
             @forelse($classworks as $classwork)
-                <div class="bg-white rounded-xl border border-neutral-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
+                <div class="bg-white rounded-xl border border-neutral-200 shadow-sm overflow-hidden cursor-pointer"
                     wire:click="openClassworkDetails({{ $classwork->id }})">
                     <div class="p-6">
                         <div class="flex items-center justify-between gap-4 ">
@@ -55,12 +55,12 @@
                                     <flux:button variant="ghost">
                                         <flux:icon.ellipsis-vertical />
                                     </flux:button>
-                                    <flux:navmenu>
-                                        <flux:navmenu.item icon="pencil" wire:click="editClasswork({{ $classwork->id }})">Edit
-                                        </flux:navmenu.item>
-                                        <flux:navmenu.item icon="trash" variant="danger"
-                                            wire:click="deleteClasswork({{ $classwork->id }})">Delete</flux:navmenu.item>
-                                    </flux:navmenu>
+                                    <flux:menu>
+                                        <flux:menu.item icon="pencil" wire:click="editClasswork({{ $classwork->id }})">Edit
+                                        </flux:menu.item>
+                                        <flux:menu.item icon="trash" variant="danger"
+                                            wire:click="deleteClasswork({{ $classwork->id }})">Delete</flux:menu.item>
+                                    </flux:menu>
                                 </flux:dropdown>
                             @endif
                         </div>

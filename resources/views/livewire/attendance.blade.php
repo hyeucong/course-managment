@@ -11,8 +11,10 @@
             </div>
             <div class="flex flex-col sm:flex-row gap-3">
                 <flux:select wire:model.live="selectedDate" class="min-w-[200px]" wire:loading.attr="disabled">
-                    @foreach($availableDates as $dateValue => $dateLabel)
-                        <flux:select.option value="{{ $dateValue }}">{{ $dateLabel }}
+                    @foreach($this->availableDatesWithAttendance as $dateValue => $dateInfo)
+                        <flux:select.option value="{{ $dateValue }}"
+                            class="{{ $dateInfo['hasAttendance'] ? 'bg-green-100' : '' }}">
+                            {{ $dateInfo['display'] }}
                         </flux:select.option>
                     @endforeach
                 </flux:select>
@@ -20,6 +22,7 @@
                     Save
                 </flux:button>
             </div>
+
         </div>
 
         <div class="bg-white rounded-xl border border-neutral-200 shadow-sm overflow-hidden relative">

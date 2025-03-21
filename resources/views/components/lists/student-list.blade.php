@@ -1,4 +1,4 @@
-<div class="flex items-center justify-between p-4 rounded-lg border border-neutral-200">
+<div class="flex items-center justify-between p-4 rounded-lg border border-neutral-200 shadow-sm">
     <div class="flex items-center gap-4">
         <div class="w-12 h-12 rounded-full mr-4 bg-neutral-100 flex items-center justify-center">
             <flux:icon.user class="w-6 h-6 text-neutral-500" />
@@ -15,10 +15,8 @@
             <flux:icon.ellipsis-vertical />
         </flux:button>
         <flux:menu>
-            <flux:modal.trigger name="edit-student">
-                <flux:menu.item icon="user" wire:click="editStudent({{ $student->id }})">Edit
-                </flux:menu.item>
-            </flux:modal.trigger>
+            <flux:menu.item icon="user" wire:click="editStudent({{ $student->id }})">Edit
+            </flux:menu.item>
             <flux:menu.item icon="trash" variant="danger" wire:click="removeStudent({{ $student->id }})">Remove
             </flux:menu.item>
         </flux:menu>

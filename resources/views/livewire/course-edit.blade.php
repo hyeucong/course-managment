@@ -1,6 +1,6 @@
-<div name="edit-course" class="w-full" wire:cloak wire:show="loaded">
+<flux:modal name="edit-course" class="w-full" wire:cloak>
     <flux:fieldset>
-        <flux:legend size="lg">Edit Class</flux:legend>
+        <flux:legend size="lg" class="text-center">Edit Class</flux:legend>
         <div class="space-y-6">
             <flux:input wire:model="course_name" label="Class name" placeholder="Class name" />
             <flux:input wire:model="course_code" label="Class code" placeholder="Class code" />
@@ -23,4 +23,4 @@
                 class="cursor-pointer">Save</flux:button>
         </div>
     </flux:fieldset>
-</div>
+</flux:modal>

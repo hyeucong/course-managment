@@ -10,21 +10,24 @@
         </div>
 
         <div class="grid grid-cols-1 gap-5 md:max-w-3xl">
-            <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
-                <div class="w-full" wire:init="edit({{$course->id}})">
+            <div class="rounded-xl border border-neutral-200 shadow-sm p-6">
+                <div class="w-full">
+                    <flux:heading size="lg">Edit Course</flux:heading>
+                    <flux:subheading class="mb-4">Modify the details of this course</flux:subheading>
+                    <div class="flex">
+                        <flux:button wire:click="edit({{$course->id}})">Edit Course</flux:button>
+                    </div>
                     <livewire:course.course-edit />
                 </div>
             </div>
 
-            <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
-                <div class="w-full" wire:init="edit({{$course->id}})">
-                    <div>
-                        <flux:heading size="lg">Delete Course</flux:heading>
-                        <flux:subheading class="mb-4">The following actions are destructive and cannot be reversed.
-                        </flux:subheading>
-                        <div class="flex">
-                            <flux:button wire:click="delete({{$course->id}})">Delete Course</flux:button>
-                        </div>
+            <div class="rounded-xl border border-neutral-200 shadow-sm p-6">
+                <div class="w-full">
+                    <flux:heading size="lg">Delete Course</flux:heading>
+                    <flux:subheading class="mb-4">The following actions are destructive and cannot be reversed.
+                    </flux:subheading>
+                    <div class="flex">
+                        <flux:button wire:click="delete({{$course->id}})">Delete Course</flux:button>
                     </div>
                 </div>
             </div>

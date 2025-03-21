@@ -29,7 +29,7 @@
                 @if (request()->routeIs('student.stream'))
 
                 @else
-                    <div class="p-5 border border-neutral-200 rounded-xl bg-whit">
+                    <div class="p-5 border border-neutral-200 rounded-xl shadow-sm">
                         <h2 class="font-semibold text-xl mb-4">Create Announcement</h2>
                         <form wire:submit.prevent="createPost">
                             <flux:textarea wire:model="postContent" placeholder="Share an announcement with your class..."
@@ -54,7 +54,7 @@
                     <h2 class="font-semibold text-xl px-1">Recent Announcements</h2>
 
                     @forelse($posts as $post)
-                        <div class="p-5 border border-neutral-200 rounded-xl bg-white">
+                        <div class="p-5 border border-neutral-200 rounded-xl bg-white shadow-sm">
                             <div class="flex justify-between items-start mb-4">
                                 <div class="flex items-center">
                                     <img src="{{ $post->user->avatar }}" alt="{{ $post->user->name }}"
@@ -70,8 +70,7 @@
                                 @if (request()->routeIs('student.stream'))
                                 @else
                                     <flux:dropdown position="bottom" align="end">
-                                        <flux:button variant="ghost"
-                                            class="border border-neutral-200 dark:border-neutral-700 rounded-lg">
+                                        <flux:button variant="ghost" class="border border-neutral-200 rounded-lg">
                                             <flux:icon.ellipsis-vertical />
                                         </flux:button>
                                         <flux:menu>
@@ -94,8 +93,7 @@
                             </div>
                         </div>
                     @empty
-                        <div
-                            class="p-8 border border-neutral-200 dark:border-neutral-700 rounded-xl text-center bg-white dark:bg-neutral-800/50">
+                        <div class="p-8 border border-neutral-200 rounded-xl text-center bg-white shadow-sm">
                             <flux:icon.chat-bubble-left-ellipsis class="mx-auto h-12 w-12 text-neutral-400" />
                             <h3 class="mt-2 text-lg font-medium">No announcements yet</h3>
                             <p class="mt-1 text-neutral-500 dark:text-neutral-400">
@@ -106,22 +104,22 @@
                 </div>
             </div>
 
-            <div class="lg:col-span-1 space-y-6">
-                <div class="rounded-xl border border-neutral-200 dark:border-neutral-700 p-5">
+            <div class="lg:col-span-1 space-y-6 ">
+                <div class="rounded-xl border border-neutral-200 p-5 shadow-sm">
                     <div class="flex items-center">
-                        <div class="p-3 border border-neutral-200 dark:border-neutral-700 rounded-xl mr-3">
+                        <div class="p-3 border border-neutral-200 rounded-xl mr-3">
                             <flux:icon.clipboard-document-check />
                         </div>
                         <div>
                             <h2 class="font-bold text-lg">Upcoming</h2>
-                            <p class="text-sm text-neutral-500 dark:text-neutral-400">Next class activity</p>
+                            <p class="text-sm text-neutral-500 ">Next class activity</p>
                         </div>
                     </div>
-                    <div class="border-t border-neutral-200 dark:border-neutral-700 mt-4 pt-3">
+                    <div class="border-t border-neutral-200 mt-4 pt-3">
                         @if($upcomingClasswork)
                             <div class="text-sm">
                                 <p class="font-semibold">{{ $upcomingClasswork->title }}</p>
-                                <p class="text-neutral-500 dark:text-neutral-400">Due:
+                                <p class="text-neutral-500 ">Due:
                                     {{ $upcomingClasswork->due_date->format('M d, Y H:i') }}
                                 </p>
                             </div>

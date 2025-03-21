@@ -32,7 +32,7 @@
                 @forelse($students as $student)
                     <x-lists.student-list :student="$student" />
                 @empty
-                    <div class="bg-white rounded-xl border border-neutral-200shadow-sm overflow-hidden">
+                    <div class="bg-white rounded-xl border border-neutral-200 shadow-sm overflow-hidden">
                         <div class="p-6 text-center">
                             <div class="flex flex-col items-center justify-center gap-3">
                                 <div class="p-4 rounded-full bg-neutral-100 ">

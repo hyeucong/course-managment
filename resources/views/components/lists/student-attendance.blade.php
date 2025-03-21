@@ -1,9 +1,9 @@
 @props(['student', 'attendanceStatus', 'attendanceRate'])
 
-<tr class="hover:bg-zinc-50 dark:hover:bg-zinc-800/70 transition-colors">
+<tr>
     <td class="px-6 py-4 whitespace-nowrap">
         <div class="flex items-center gap-3">
-            <div class="flex-shrink-0 bg-neutral-100 dark:bg-neutral-700 rounded-full p-2">
+            <div class="flex-shrink-0 bg-neutral-100 rounded-full p-2">
                 <flux:icon.user variant="mini" class="size-5 text-neutral-500 dark:text-neutral-400" />
             </div>
             <div class="font-medium text-neutral-900 dark:text-neutral-100">

@@ -8,18 +8,17 @@ use Livewire\Component;
 class Settings extends Component
 {
     public $courseId, $activeTab = 'settings', $course, $settingsTab = 'details';
-    public $courseLoaded = false;
+    public $editing = false;
 
     public function edit($courseId)
     {
+        $this->editing = true;
         $this->dispatch('editCourse', $courseId);
     }
 
     public function mount()
     {
         $this->course = \App\Models\Course::findOrFail($this->courseId);
-        $this->edit($this->courseId);
-        $this->courseLoaded = true;
     }
 
     public function render()

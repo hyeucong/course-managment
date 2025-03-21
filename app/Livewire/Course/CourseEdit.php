@@ -3,13 +3,13 @@
 namespace App\Livewire\Course;
 
 use App\Models\Course;
+use Flux\Flux;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class CourseEdit extends Component
 {
     public $course_name, $course_code, $lecturer, $room, $date_start, $date_end, $schedule, $description, $id;
-    public $loaded = false;
 
     #[On('editCourse')]
     public function editCourse($id)
@@ -24,7 +24,7 @@ class CourseEdit extends Component
         $this->date_end = $course->date_end;
         $this->schedule = $course->schedule;
         $this->description = $course->description;
-        $this->loaded = true;
+        Flux::modal('edit-course')->show();
     }
 
     public function render()
@@ -42,7 +42,7 @@ class CourseEdit extends Component
             'date_start' => 'required|date',
             'date_end' => 'required|date|after:date_start',
             'schedule' => 'required|in:246,357',
-            'description' => 'required',
+            'description' => 'nullable',
         ]);
 
         $course = Course::find($this->id);

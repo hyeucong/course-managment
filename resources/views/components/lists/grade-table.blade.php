@@ -1,4 +1,4 @@
-<tr class="hover:bg-zinc-50 transition-colors">
+<tr>
     <td class="px-6 py-4 whitespace-nowrap">
         <div class="flex items-center gap-3">
             <div class="flex-shrink-0 bg-neutral-100 rounded-full p-2">

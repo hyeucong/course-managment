@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\Enrollment;
 use App\Models\Student;
 use App\Models\User;
+use Flux\Flux;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -72,6 +73,7 @@ class People extends Component
         $this->studentFirstName = $student->first_name;
         $this->studentLastName = $student->last_name;
         $this->studentEmail = $student->email;
+        Flux::modal('edit-student')->show();
     }
 
     public function updateStudent()
