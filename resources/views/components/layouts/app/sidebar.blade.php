@@ -29,6 +29,9 @@
                         <flux:navlist.item icon="credit-card" :href="route('billing')" :accent="false"
                             :current="request()->routeIs('billing')" wire:navigate>Billing
                         </flux:navlist.item>
+                        <flux:navlist.item icon="chat-bubble-oval-left-ellipsis" :href="route('contact-us')" :accent="false"
+                            :current="request()->routeIs('contact-us')" wire:navigate>Contact Us
+                        </flux:navlist.item>
                     @endif
 
                 </flux:navlist.group>

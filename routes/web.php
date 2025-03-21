@@ -9,6 +9,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth', ValidateSessionWithWorkOS::class])->group(function () {
     Route::view('billing', 'sidebar.billing')->name('billing');
+    Route::view('contact-us', 'sidebar.contact-us')->name('contact-us');
     Route::view('courses', 'sidebar.courses')->name('courses');
     Route::view('archived', 'sidebar.archived')->name('archived');
 });
