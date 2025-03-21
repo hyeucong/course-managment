@@ -14,7 +14,7 @@
 
         <livewire:course.course-create />
     </div>
-    <flux:separator variant="subtle" />
+    <flux:separator variant="primary" />
     <div class="relative w-full p-6">
         <livewire:courses />
     </div>

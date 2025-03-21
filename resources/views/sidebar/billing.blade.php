@@ -5,7 +5,7 @@
         </div>
     </div>
 
-    <flux:separator variant="subtle" />
+    <flux:separator variant="primary" />
 
     <div class="relative w-full p-6">
         <div class="flex flex-col lg:flex-row gap-4 lg:gap-6 max-w-3xl min-w-[400px]">
