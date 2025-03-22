@@ -15,31 +15,22 @@ class StudentCreated extends Mailable
 {
     use Queueable, SerializesModels;
     public Student $student;
-    /**
-     * Create a new message instance.
-     */
-    public function __construct($student)
+    public $courseId;
+
+    public function __construct(Student $student, $courseId)
     {
         $this->student = $student;
+        $this->courseId = $courseId;
     }
 
-    /**
-     * Get the message envelope.
-     */
     public function envelope(): Envelope
     {
         return new Envelope(
             from: new Address('jeffrey@example.com', 'Jeffrey Way'),
-            replyTo: [
-                new Address('taylor@example.com', 'Taylor Otwell'),
-            ],
-            subject: 'Order Shipped',
+            subject: 'Welcome to the Course',
         );
     }
 
-    /**
-     * Get the message content definition.
-     */
     public function content(): Content
     {
         return new Content(
@@ -47,6 +38,7 @@ class StudentCreated extends Mailable
             with: [
                 'name' => $this->student->first_name,
                 'email' => $this->student->email,
+                'courseId' => $this->courseId,
             ],
         );
     }

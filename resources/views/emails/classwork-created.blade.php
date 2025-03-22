@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Welcome to LectureSpace</title>
+        <title>New Assignment Posted - LectureSpace</title>
         <style>
             body {
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -115,30 +115,37 @@
                     </div>
                 </div>
 
-                <h1>Welcome to LectureSpace, {{ $name }}!</h1>
+                <h1>New Assignment Posted</h1>
 
                 <div class="content">
-                    <p>You have been invited to join a course on LectureSpace. Here are your registration details:</p>
+                    <p>A new assignment has been posted in your course {{ $courseName }}.</p>
 
                     <div class="details">
                         <div class="details-item">
-                            <div class="details-label">Email:</div>
-                            <div>{{ $email }}</div>
+                            <div class="details-label">Assignment:</div>
+                            <div>{{ $classworkTitle }}</div>
                         </div>
                         <div class="details-item">
-                            <div class="details-label">Course ID:</div>
-                            <div>{{ $courseId }}</div>
+                            <div class="details-label">Course:</div>
+                            <div>{{ $courseName }}</div>
                         </div>
+                        @if(isset($dueDate))
+                            <div class="details-item">
+                                <div class="details-label">Due Date:</div>
+                                <div>{{ $dueDate }}</div>
+                            </div>
+                        @endif
                     </div>
 
-                    <p>To complete your registration and access the course materials, please click the button below:</p>
+                    <p>To view the assignment details and submit your work, please click the button below:</p>
 
                     <div class="action-container">
-                        <a href="http://127.0.0.1:8000/student/email/{{ $courseId }}" class="btn">Complete
-                            Registration</a>
+                        <a href="http://127.0.0.1:8000/student/classwork/{{ $courseId }}/{{ $classworkId }}"
+                            class="btn">View
+                            Assignment</a>
                     </div>
 
-                    <p>If you didn't request this invitation, you can safely ignore this email.</p>
+                    <p>If you have any questions, please contact your instructor.</p>
                 </div>
 
                 <div class="footer">

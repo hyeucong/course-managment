@@ -59,7 +59,7 @@ class People extends Component
                 'enrollment_date' => now(),
             ]);
 
-            $this->sendEmailToStudent($studentId);
+            $this->sendEmailTostudent($studentId);
 
             $this->dispatch('notify', [
                 'type' => 'success',
@@ -68,7 +68,6 @@ class People extends Component
 
             $this->reloadStudents();
         }
-
     }
 
     public function editStudent($id)
@@ -129,10 +128,8 @@ class People extends Component
     {
         $student = Student::findOrFail($id);
 
-        // First remove all enrollments
         Enrollment::where('student_id', $id)->delete();
 
-        // Then delete the student
         $student->delete();
 
         $this->dispatch('notify', [
@@ -141,6 +138,8 @@ class People extends Component
         ]);
 
         $this->reloadStudents();
+
+        Flux::modal('delete-student')->close();
     }
 
 
@@ -170,13 +169,14 @@ class People extends Component
     {
         $student = Student::findOrFail($studentId);
 
-        Mail::to($student->email)->send(new StudentCreated($student));
+        Mail::to($student->email)->queue(new StudentCreated($student, $this->courseId));
 
         $this->dispatch('notify', [
             'type' => 'success',
-            'message' => 'Email sent to student successfully!'
+            'message' => 'Email will be sent to student shortly!'
         ]);
     }
+
 
     public function render()
     {

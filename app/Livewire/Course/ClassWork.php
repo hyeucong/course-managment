@@ -2,10 +2,13 @@
 
 namespace App\Livewire\Course;
 
+use App\Models\Enrollment;
+use App\Models\Student;
 use Flux\Flux;
 use Livewire\Component;
 use App\Models\Classwork as ClassworkModel;
 use App\Models\Course;
+use Mail;
 
 class Classwork extends Component
 {
@@ -47,7 +50,7 @@ class Classwork extends Component
     {
         $this->validate();
 
-        ClassworkModel::create([
+        $classwork = ClassworkModel::create([
             'course_id' => $this->courseId,
             'title' => $this->title,
             'description' => $this->description,
@@ -56,14 +59,32 @@ class Classwork extends Component
             // 'created_by' => Auth::id(),
         ]);
 
+        // Get all enrolled students for this course
+        $enrollments = Enrollment::where('course_id', $this->courseId)->get();
+
+        // Queue email to each enrolled student
+        foreach ($enrollments as $enrollment) {
+            $student = Student::find($enrollment->student_id);
+            if ($student && $student->email) {
+                Mail::to($student->email)->queue(new \App\Mail\ClassworkCreated(
+                    $student->email,
+                    $this->courseId,
+                    $classwork->id,
+                    $classwork->title,
+                    $this->course->course_name
+                ));
+            }
+        }
+
         $this->reset(['title', 'description', 'points', 'dueDate']);
         $this->dispatch('notify', [
             'type' => 'success',
-            'message' => 'Assignment created successfully!'
+            'message' => 'Assignment created successfully and notifications queued for students!'
         ]);
 
         Flux::modal("create-classwork")->close();
     }
+
 
     public function editClasswork($classworkId)
     {
