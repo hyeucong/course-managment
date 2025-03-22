@@ -32,19 +32,21 @@
 
                 <!-- Desktop navigation -->
                 <nav class="space-x-6 font-medium hidden lg:flex items-center">
-                    <a href="/" class="hover:text-green-800 transition-colors duration-300">Product</a>
                     <a href="#" class="hover:text-green-800 transition-colors duration-300">Pricing</a>
                     @if (Route::has('login'))
                         @auth
-                            <a href="{{ url('/courses') }}"
-                                class="px-5 py-2 border border-transparent rounded-md bg-white text-green-800 shadow-sm hover:bg-gray-50 transition-colors duration-300">
-                                Dashboard
-                            </a>
+                            <flux:button>
+                                <a href="{{ url('/courses') }}" class="py-2">
+                                    Dashboard
+                                </a>
+                            </flux:button>
+
                         @else
-                            <a href="{{ route('login') }}"
-                                class="px-5 py-2 border border-transparent rounded-md bg-white text-green-800 shadow-sm hover:bg-gray-50 transition-colors duration-300">
-                                Log in
-                            </a>
+                            <flux:button>
+                                <a href="{{ route('login') }}" class="py-2 ">
+                                    Log in
+                                </a>
+                            </flux:button>
                         @endauth
                     @endif
                 </nav>
@@ -53,7 +55,6 @@
             <!-- Mobile navigation (hidden by default) -->
             <div class="hidden lg:hidden mt-4 pb-3 border-b border-gray-200">
                 <nav class="flex flex-col space-y-4 font-medium">
-                    <a href="/" class="hover:text-green-800 transition-colors duration-300">Product</a>
                     <a href="#" class="hover:text-green-800 transition-colors duration-300">Pricing</a>
                     @if (Route::has('login'))
                         @auth
@@ -73,8 +74,11 @@
 
         <main class="flex-grow">
             <x-layouts.client.hero />
+            <flux:separator />
             <x-layouts.client.problem />
+            <flux:separator />
             <x-layouts.client.review />
+            <flux:separator />
             <x-layouts.client.product />
             <x-layouts.client.pricing />
             <x-layouts.client.contact />

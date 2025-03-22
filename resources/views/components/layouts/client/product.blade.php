@@ -9,58 +9,66 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Onboarding Card -->
-            <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Onboarding</h3>
-                <p class="text-gray-600 mb-4">
-                    We've crafted the ideal solution to tackle every question, making user onboarding faster than ever.
-                </p>
-                <!-- Image Placeholder (Onboarding) -->
-                <div class="relative w-full h-48 bg-gray-100 rounded-lg mb-4">
-                    <img src="https://i.imgur.com/jS9hFz7.png" alt="Onboarding UI"
-                        class="w-full h-full object-cover rounded-lg">
+            <div class="p-1 flex flex-col gap-1 rounded-[12px] border border-zinc-200 shadow-xs">
+                <div
+                    class="flex-1 relative overflow-hidden rounded-[8px] bg-zinc-100 border border-zinc-200 flex justify-center items-center">
+                    <img src="https://images.unsplash.com/photo-1740166260052-b41e5381bcbb?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt="">
+                </div>
+                <div
+                    class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-zinc-100to-transparent">
+                </div>
+                <div class="flex flex-col gap-1 px-4 py-3">
+                    <div class="text-sm font-medium text-zinc-800 ">Rich text editor</div>
+                    <div class="text-sm text-zinc-500 ">A powerful rich text editor component</div>
                 </div>
             </div>
 
-            <!-- AML Risk Score Card -->
-            <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">AML Risk score</h3>
-                <p class="text-gray-600 mb-4">
-                    Creating a specific risk score model across all your markets has never been this easy—nor this
-                    granular.
-                </p>
-                <!-- Image Placeholder (AML Risk Score) -->
-                <div class="relative w-full h-48 bg-gray-100 rounded-lg mb-4">
-                    <img src="https://i.imgur.com/c8o3Y6N.png" alt="AML Risk Score UI"
-                        class="w-full h-full object-cover rounded-lg">
+
+            <div class="p-1 flex flex-col gap-1 rounded-[12px] border border-zinc-200 shadow-xs">
+                <div
+                    class="flex-1 relative overflow-hidden rounded-[8px] bg-zinc-100 border border-zinc-200 flex justify-center items-center">
+                    <img src="https://images.unsplash.com/photo-1740166260052-b41e5381bcbb?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt="">
+                </div>
+                <div
+                    class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-zinc-100to-transparent">
+                </div>
+                <div class="flex flex-col gap-1 px-4 py-3">
+                    <div class="text-sm font-medium text-zinc-800 ">Rich text editor</div>
+                    <div class="text-sm text-zinc-500 ">A powerful rich text editor component</div>
                 </div>
             </div>
 
-            <!-- Case Management System Card -->
-            <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Case management system</h3>
-                <p class="text-gray-600 mb-4">
-                    A comprehensive workspace delivering a 360° experience for compliance professionals.
-                </p>
-                <!-- Image Placeholder (Case Management) -->
-                <div class="relative w-full h-64 bg-gray-100 rounded-lg mb-4">
-                    <img src="https://i.imgur.com/oI7bH5y.png" alt="Case Management UI"
-                        class="w-full h-full object-cover rounded-lg">
+
+            <div class="p-1 flex flex-col gap-1 rounded-[12px] border border-zinc-200 shadow-xs">
+                <div
+                    class="flex-1 relative overflow-hidden rounded-[8px] bg-zinc-100 border border-zinc-200 flex justify-center items-center">
+                    <img src="https://images.unsplash.com/photo-1740166260052-b41e5381bcbb?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt="">
+                </div>
+                <div
+                    class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-zinc-100to-transparent">
+                </div>
+                <div class="flex flex-col gap-1 px-4 py-3">
+                    <div class="text-sm font-medium text-zinc-800 ">Rich text editor</div>
+                    <div class="text-sm text-zinc-500 ">A powerful rich text editor component</div>
                 </div>
             </div>
 
-            <!-- Ongoing Due-Diligence Card -->
-            <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Ongoing due-diligence</h3>
-                <p class="text-gray-600 mb-4">
-                    We ensure your decisions are data-driven, fraud-resistant, and fully compliant.
-                </p>
-                <!-- Image Placeholder (Due Diligence) -->
-                <div class="relative w-full h-64 bg-gray-100 rounded-lg mb-4">
-                    <img src="https://i.imgur.com/kXn0m6R.png" alt="Due Diligence UI"
-                        class="w-full h-full object-cover rounded-lg">
+            <div class="p-1 flex flex-col gap-1 rounded-[12px] border border-zinc-200 shadow-xs">
+                <div
+                    class="flex-1 relative overflow-hidden rounded-[8px] bg-zinc-100 border border-zinc-200 flex justify-center items-center">
+                    <img src="https://images.unsplash.com/photo-1740166260052-b41e5381bcbb?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        alt="">
+                </div>
+                <div
+                    class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-zinc-100to-transparent">
+                </div>
+                <div class="flex flex-col gap-1 px-4 py-3">
+                    <div class="text-sm font-medium text-zinc-800 ">Rich text editor</div>
+                    <div class="text-sm text-zinc-500 ">A powerful rich text editor component</div>
                 </div>
             </div>
         </div>
-    </div>
 </section>

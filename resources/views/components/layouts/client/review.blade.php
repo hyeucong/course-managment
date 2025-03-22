@@ -1,4 +1,4 @@
-<section class="py-32">
+<section>
     <div class="bg-[#143327] text-white py-16 px-4">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row items-center justify-between gap-5 px-6">
