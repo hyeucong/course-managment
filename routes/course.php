@@ -27,4 +27,11 @@ Route::middleware([CheckStudentEmail::class])->group(function () {
     Route::get('/student/classwork/{courseId}/{classworkId}', StudentClassworkDetail::class)->name('student.classwork.detail');
 });
 
+Route::get('/student/logout', function () {
+    session()->forget('student_email');
+    session()->forget('student_id');
+
+    return redirect()->route('student.email');
+})->name('student.logout');
+
 Route::get('/student/email/{courseId?}', StudentEmailEntry::class)->name('student.email');

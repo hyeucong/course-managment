@@ -19,7 +19,7 @@
                             <th class="px-6 py-4 text-left text-sm font-medium text-neutral-700">
                                 Student Name</th>
                             <th class="px-6 py-4 text-left text-sm font-medium text-neutral-700">
-                                Student ID</th>
+                                Student Email</th>
                             @foreach($classworks as $classwork)
                                 <th class="px-6 py-4 text-center text-sm font-medium text-neutral-700">
                                     {{ $classwork->title }}

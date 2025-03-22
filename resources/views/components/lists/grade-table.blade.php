@@ -10,7 +10,7 @@
         </div>
     </td>
     <td class="px-6 py-4 whitespace-nowrap text-sm text-neutral-600">
-        {{ $student->id }}
+        {{ $student->email }}
     </td>
     @foreach($classworks as $classwork)
         <td class="px-6 py-4 text-center whitespace-nowrap">

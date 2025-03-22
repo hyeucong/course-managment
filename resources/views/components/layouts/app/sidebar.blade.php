@@ -49,7 +49,12 @@
             @endif
             <!-- Desktop User Menu -->
             @if(request()->is('student/*'))
-
+                <flux:navlist variant="outline">
+                    <flux:navlist.item icon="arrow-right-start-on-rectangle" href="{{ route('student.logout') }}"
+                        :accent="false">
+                        Log Out
+                    </flux:navlist.item>
+                </flux:navlist>
             @else
                 <flux:dropdown position="bottom" align="start">
                     <flux:profile :name="auth()->user()->name" :avatar="auth()->user()->avatar ?: null"
@@ -100,7 +105,21 @@
 
         <!-- Mobile User Menu -->
         @if(request()->is('student/*'))
+            <flux:header class="lg:hidden">
+                <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 
+                <flux:spacer />
+
+                <flux:dropdown position="top" align="end">
+                    <flux:profile icon="user" icon-trailing="chevron-down" />
+
+                    <flux:menu>
+                        <flux:menu.item href="{{ route('student.logout') }}" icon="arrow-right-start-on-rectangle">
+                            Log Out
+                        </flux:menu.item>
+                    </flux:menu>
+                </flux:dropdown>
+            </flux:header>
         @else
             <flux:header class="lg:hidden">
                 <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
