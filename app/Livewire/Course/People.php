@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Course;
 
+use App\Mail\StudentCreated;
 use App\Models\Course;
 use App\Models\Enrollment;
 use App\Models\Student;
@@ -9,6 +10,7 @@ use App\Models\User;
 use Flux\Flux;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Mail;
 
 class People extends Component
 {
@@ -57,6 +59,8 @@ class People extends Component
                 'enrollment_date' => now(),
             ]);
 
+            $this->sendEmailToStudent($studentId);
+
             $this->dispatch('notify', [
                 'type' => 'success',
                 'message' => 'Student created successfully and enrolled in the course!'
@@ -64,6 +68,7 @@ class People extends Component
 
             $this->reloadStudents();
         }
+
     }
 
     public function editStudent($id)
@@ -120,6 +125,25 @@ class People extends Component
         }
     }
 
+    public function deleteStudent($id)
+    {
+        $student = Student::findOrFail($id);
+
+        // First remove all enrollments
+        Enrollment::where('student_id', $id)->delete();
+
+        // Then delete the student
+        $student->delete();
+
+        $this->dispatch('notify', [
+            'type' => 'success',
+            'message' => 'Student deleted from the system successfully!'
+        ]);
+
+        $this->reloadStudents();
+    }
+
+
     public function removeTeacher($teacherId)
     {
         $course = Course::findOrFail($this->courseId);
@@ -140,6 +164,18 @@ class People extends Component
         ]);
 
         $this->reloadTeachers();
+    }
+
+    public function sendEmailToStudent($studentId)
+    {
+        $student = Student::findOrFail($studentId);
+
+        Mail::to($student->email)->send(new StudentCreated($student));
+
+        $this->dispatch('notify', [
+            'type' => 'success',
+            'message' => 'Email sent to student successfully!'
+        ]);
     }
 
     public function render()

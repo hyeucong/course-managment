@@ -31,6 +31,7 @@
             <div class="space-y-2">
                 @forelse($students as $student)
                     <x-lists.student-list :student="$student" />
+                    <x-modal.delete-student :student="$student" />
                 @empty
                     <div class="bg-white rounded-xl border border-neutral-200 shadow-sm overflow-hidden">
                         <div class="p-6 text-center">

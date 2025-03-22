@@ -17,8 +17,13 @@
         <flux:menu>
             <flux:menu.item icon="user" wire:click="editStudent({{ $student->id }})">Edit
             </flux:menu.item>
-            <flux:menu.item icon="trash" variant="danger" wire:click="removeStudent({{ $student->id }})">Remove
+            <flux:menu.item icon="minus-circle" variant="danger" wire:click="removeStudent({{ $student->id }})">Remove
             </flux:menu.item>
+            <flux:modal.trigger name="delete-student">
+                <flux:menu.item icon="backspace" variant="danger">
+                    Delete
+                </flux:menu.item>
+            </flux:modal.trigger>
         </flux:menu>
     </flux:dropdown>
 </div>
