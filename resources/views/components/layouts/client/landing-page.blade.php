@@ -76,16 +76,13 @@
             <x-layouts.client.hero />
             <flux:separator />
             <x-layouts.client.problem />
-            <flux:separator />
             <x-layouts.client.review />
-            <flux:separator />
             <x-layouts.client.product />
             <x-layouts.client.pricing />
-            <x-layouts.client.contact />
-
         </main>
 
         <footer>
+            <flux:separator />
             <x-layouts.client.footer />
         </footer>
     </body>

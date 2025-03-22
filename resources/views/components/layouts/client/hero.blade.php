@@ -38,6 +38,7 @@
         </div>
 
         <div class="mt-12 md:mt-16 relative">
+
             <!-- Decorative elements for the browser window -->
             <div class="absolute -z-10 inset-0 bg-gradient-to-tr rounded-2xl transform scale-102 overflow-hidden">
                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
