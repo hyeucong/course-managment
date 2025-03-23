@@ -9,7 +9,7 @@ class Classwork extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = ['course_id', 'title', 'description', 'due_date', 'points'];
 
     protected $casts = [
         'due_date' => 'datetime',

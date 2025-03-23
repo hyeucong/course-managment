@@ -9,7 +9,7 @@ class StreamPost extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = ['course_id', 'user_id', 'content', 'attached_url'];
 
     public function course()
     {

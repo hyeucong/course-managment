@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Enrollment extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+    protected $fillable = ['student_id', 'course_id', 'enrollment_date'];
 
     public function student()
     {

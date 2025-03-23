@@ -9,7 +9,7 @@ class ClassworkSubmission extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = ['classwork_id', 'student_id', 'content', 'points'];
 
     public function classwork()
     {

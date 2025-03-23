@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Attendance extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+    protected $fillable = ['enrollment_id', 'date', 'status'];
 
     /**
      * Get the enrollment that owns the attendance.

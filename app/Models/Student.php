@@ -11,7 +11,7 @@ class Student extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = ['first_name', 'last_name', 'email', 'phone'];
 
     /**
      * Get the enrollments for the student.

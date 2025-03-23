@@ -9,7 +9,7 @@ class Course extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = ['course_name', 'course_code', 'slug', 'lecturer', 'room', 'status', 'schedule', 'background_url', 'description', 'date_start', 'date_end'];
 
     public function enrollments()
     {
@@ -19,11 +19,6 @@ class Course extends Model
     public function students()
     {
         return $this->belongsToMany(Student::class, 'enrollments');
-    }
-
-    public function posts()
-    {
-        return $this->hasMany(CoursePost::class);
     }
 
     public function classworks()
