@@ -1,8 +1,8 @@
 <section class="bg-gray-50 py-20 px-4">
     <div class="max-w-7xl mx-auto px-6">
         <div class="text-center mb-12">
-            <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-gray-900">We've got your <span
-                    class="text-green-900">needs covered</span></h2>
+            <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-gray-900"> <span class="text-green-900">Easily
+                    manage</span> your courses</h2>
             <p class="mt-4 text-gray-600">
                 LectureSpace provides educators with powerful tools to create engaging learning environments and
                 streamline course management.
