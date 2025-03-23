@@ -19,6 +19,7 @@ class People extends Component
     public $courseId, $activeTab = 'people', $course;
     public $editingStudent = null;
     public $studentFirstName, $studentLastName, $studentEmail;
+    public $studentId;
 
     public function mount()
     {
@@ -100,7 +101,9 @@ class People extends Component
             'message' => 'Student updated successfully!'
         ]);
 
+        Flux::modal('edit-student')->close();
         $this->reloadStudents();
+
     }
 
     public function removeStudent($id)
