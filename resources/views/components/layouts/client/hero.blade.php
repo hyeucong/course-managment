@@ -32,9 +32,17 @@
                 Teaching without the spreadsheet headache. LectureSpace makes it a reality. Create engaging
                 lessons, organize your classroom, all with a simple hover and click
             </p>
-            <flux:button class="bg-gradient-to-r from-green-800 to-green-900 w-fit h-fit p-2" variant="primary">
-                <a class="text-lg" href="">Get Started</a>
-            </flux:button>
+            @if (Route::has('login'))
+                @auth
+                    <flux:button class="bg-gradient-to-r from-green-800 to-green-900 w-fit h-fit p-2" variant="primary">
+                        <a href="{{ url('/courses') }}" class="text-lg" href="">Get Started</a>
+                    </flux:button>
+                @else
+                    <flux:button class="bg-gradient-to-r from-green-800 to-green-900 w-fit h-fit p-2" variant="primary">
+                        <a class="text-lg" href="{{ route('login') }}">Get Started</a>
+                    </flux:button>
+                @endauth
+            @endif
         </div>
 
         <div class="mt-12 md:mt-16 relative">
@@ -85,9 +93,11 @@
                 </svg>
             </div>
 
+
+
             <div
                 class="w-full mx-auto rounded-xl overflow-hidden shadow-2xl border border-gray-200 bg-white transform transition-all duration-500 hover:shadow-black/50 hover:shadow-2xl">
-                <div class="h-10 bg-gray-100 flex items-center px-4">
+                <div class="h-10 bg-gray-100 flex items-center px-4 border-b border-gray-200">
                     <div class="flex space-x-2">
                         <div class="w-3 h-3 bg-red-500 rounded-full"></div>
                         <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
@@ -97,7 +107,7 @@
                 </div>
                 <div class="relative group">
                     <img class="w-full h-auto object-cover"
-                        src="https://tkkcv3kpdu.ufs.sh/f/BG98G0XFP4rNHJKPjbYSbePx9TdEyz6w0u4FUV7o8jtn1c2W"
+                        src="https://tkkcv3kpdu.ufs.sh/f/BG98G0XFP4rNYedCyEUgjbOdmoSUihRkcp6QusFWGXV1v4TA"
                         alt="LectureSpace dashboard preview">
                 </div>
             </div>

@@ -28,7 +28,7 @@
                             <h1 class="font-bold text-xl overflow-hidden max-w-[80%]">
                                 Free
                             </h1>
-                            <flux:button variant="filled">Current plan</flux:button>
+                            <flux:button disabled variant="filled">Current plan</flux:button>
                         </div>
                         <ul class="flex flex-col gap-2 text-sm text-neutral-700">
                             <li>- Create up to 5 courses</li>
@@ -44,7 +44,7 @@
                             <h1 class="font-bold text-xl overflow-hidden max-w-[80%]">
                                 5$<span class="text-sm font-light">/Month</span>
                             </h1>
-                            <flux:button>Switch to Personal</flux:button>
+                            <flux:button disabled>Switch to Personal</flux:button>
                         </div>
                         <ul class="flex flex-col gap-2 text-sm text-neutral-700">
                             <li>- Create unlimited courses</li>

@@ -8,8 +8,10 @@
                     <flux:input wire:model="course_name" label="Title" placeholder="Enter course title" />
                     <flux:input wire:model="course_code" label="Code" placeholder="e.g., CS101" />
                     <div class="grid grid-cols-2 gap-4">
-                        <flux:input wire:model="lecturer" label="Instructor" placeholder="Instructor's name" />
-                        <flux:input wire:model="room" label="Room" placeholder="Enter room number or name" />
+                        <flux:input badge="Optional" wire:model="lecturer" label="Instructor"
+                            placeholder="Instructor's name" />
+                        <flux:input badge="Optional" wire:model="room" label="Room"
+                            placeholder="Enter room number or name" />
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <flux:select wire:model="schedule" label="Select Schedule">

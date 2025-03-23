@@ -19,9 +19,17 @@
                     <p class="text-4xl font-bold text-gray-900 mb-4">
                         $0<span class="text-base font-normal text-gray-500">/month</span>
                     </p>
-                    <flux:button class="bg-gradient-to-r from-green-800 to-green-900 w-fit h-fit p-2" variant="primary">
-                        <a class="text-lg" href="">Get Started</a>
-                    </flux:button>
+                    @if (Route::has('login'))
+                        @auth
+                            <flux:button class="bg-gradient-to-r from-green-800 to-green-900 w-fit h-fit p-2" variant="primary">
+                                <a href="{{ url('/courses') }}" class="text-lg" href="">Get Started</a>
+                            </flux:button>
+                        @else
+                            <flux:button class="bg-gradient-to-r from-green-800 to-green-900 w-fit h-fit p-2" variant="primary">
+                                <a class="text-lg" href="{{ route('login') }}">Get Started</a>
+                            </flux:button>
+                        @endauth
+                    @endif
                     <ul class="mt-6 space-y-2">
                         <li class="flex items-center text-gray-600">
                             <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20"
@@ -63,9 +71,17 @@
                     <p class="text-4xl font-bold text-gray-900 mb-4">
                         $5<span class="text-base font-normal text-gray-500">/month</span>
                     </p>
-                    <flux:button class="bg-gradient-to-r from-green-800 to-green-900 w-fit h-fit p-2" variant="primary">
-                        <a class="text-lg" href="">Get Started</a>
-                    </flux:button>
+                    @if (Route::has('login'))
+                        @auth
+                            <flux:button class="bg-gradient-to-r from-green-800 to-green-900 w-fit h-fit p-2" variant="primary">
+                                <a href="{{ url('/courses') }}" class="text-lg" href="">Upgrade Now</a>
+                            </flux:button>
+                        @else
+                            <flux:button class="bg-gradient-to-r from-green-800 to-green-900 w-fit h-fit p-2" variant="primary">
+                                <a class="text-lg" href="{{ route('login') }}">Upgrade Now</a>
+                            </flux:button>
+                        @endauth
+                    @endif
                     <ul class="mt-6 space-y-2">
                         <li class="flex items-center text-gray-600">
                             <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20"

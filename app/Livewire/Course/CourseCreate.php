@@ -32,8 +32,8 @@ class CourseCreate extends Component
         $this->validate([
             'course_name' => 'required',
             'course_code' => 'required',
-            'lecturer' => 'required',
-            'room' => 'required',
+            'lecturer' => 'nullable',
+            'room' => 'nullable',
             'date_start' => 'required|date',
             'date_end' => 'required|date|after:date_start',
             'schedule' => 'required|in:135,246',
@@ -42,10 +42,12 @@ class CourseCreate extends Component
         ]);
 
         try {
+            $lecturer = $this->lecturer ?: Auth::user()->name;
+
             $course = Course::create([
                 'course_name' => $this->course_name,
                 'course_code' => $this->course_code,
-                'lecturer' => $this->lecturer,
+                'lecturer' => $lecturer,
                 'slug' => $this->course_code,
                 'room' => $this->room,
                 'date_start' => $this->date_start,

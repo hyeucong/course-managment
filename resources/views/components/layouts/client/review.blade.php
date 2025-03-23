@@ -14,7 +14,7 @@
                 </div>
                 <div>
                     <div class="bg-gray-50 rounded-lg p-4 w-[300px] h-[300px] mx-auto"> <!-- Added mx-auto here -->
-                        <img src="https://tkkcv3kpdu.ufs.sh/f/BG98G0XFP4rN5yNFMDmhXNaBSiQxWHwqOR5bsyjUK48GEYgm"
+                        <img src="https://tkkcv3kpdu.ufs.sh/f/BG98G0XFP4rNl7IFGZWdA2zZWQ8L5EPVoDCmRuTkgwevlfNK"
                             alt="Chris Powers" class="w-full h-full object-cover rounded-lg">
                     </div>
                 </div>

@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('course_name');
             $table->string('course_code')->unique();
             $table->string('slug')->unique();
-            $table->string('lecturer');
+            $table->string('lecturer')->nullable();
             $table->string('room')->nullable();
             $table->date('date_start')->nullable();
             $table->date('date_end')->nullable();

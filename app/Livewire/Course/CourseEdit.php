@@ -38,8 +38,8 @@ class CourseEdit extends Component
         $this->validate([
             'course_name' => 'required',
             'course_code' => 'required',
-            'lecturer' => 'required',
-            'room' => 'required',
+            'lecturer' => 'nullable',
+            'room' => 'nullable',
             'date_start' => 'required|date',
             'date_end' => 'required|date|after:date_start',
             'schedule' => 'required|in:135,246',
@@ -64,6 +64,6 @@ class CourseEdit extends Component
             'message' => 'Course updated successfully!'
         ]);
 
-        return redirect('courses/' . $course->id . '/settings');
+        return redirect('courses/settings/' . $course->id);
     }
 }

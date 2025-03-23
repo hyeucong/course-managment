@@ -20,18 +20,22 @@ Route::middleware(['auth', ValidateSessionWithWorkOS::class, EnsureCourseAccess:
     Route::get('/courses/classwork/{courseId}/{classworkId}', ClassworkDetail::class)->name('classwork.detail');
 });
 
-Route::middleware([CheckStudentEmail::class])->group(function () {
+Route::middleware([CheckStudentEmail::class, 'throttle:60,1'])->group(function () {
     Route::get('/student/stream/{courseId}', Stream::class)->name('student.stream');
     Route::get('/student/classwork/{courseId}', ClassWork::class)->name('student.classwork');
 
     Route::get('/student/classwork/{courseId}/{classworkId}', StudentClassworkDetail::class)->name('student.classwork.detail');
 });
 
-Route::get('/student/logout', function () {
-    session()->forget('student_email');
-    session()->forget('student_id');
+Route::middleware(['throttle:10,1'])->group(function () {
+    Route::get('/student/logout', function () {
+        session()->forget('student_email');
+        session()->forget('student_id');
 
-    return redirect()->route('student.email');
-})->name('student.logout');
+        return redirect()->route('student.email');
+    })->name('student.logout');
+});
 
-Route::get('/student/email/{courseId?}', StudentEmailEntry::class)->name('student.email');
+Route::middleware(['throttle:20,1'])->group(function () {
+    Route::get('/student/email/{courseId?}', StudentEmailEntry::class)->name('student.email');
+});
