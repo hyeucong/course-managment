@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: course-managment
+    env: docker
+    plan: free
+    branch: main
+    dockerfilePath: ./Dockerfile
+    startCommand: "" # leave empty so the image's CMD/entrypoint is used
+    releaseCommand: php artisan migrate --force && php artisan storage:link
+    autoDeploy: true
+    envVars: []
