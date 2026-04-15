@@ -18,6 +18,9 @@ COPY --chown=www-data:www-data . .
 # 3. Ensure built frontend exists (we commit `public/build` to repo for free-tier deploys)
 RUN test -d public/build || echo "Warning: public/build not found; ensure assets are built and committed"
 
+# 3b. Ensure SQLite file exists so Laravel can open the DB (required when using sqlite)
+RUN mkdir -p database && touch database/database.sqlite && chmod 664 database/database.sqlite && chown www-data:www-data database/database.sqlite || true
+
 # 4. Create missing folders and set permissions as root
 RUN mkdir -p storage/framework/sessions storage/framework/views storage/framework/cache storage/logs bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache public/build || true \

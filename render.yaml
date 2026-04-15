@@ -8,4 +8,8 @@ services:
     startCommand: php artisan serve --host 0.0.0.0 --port $PORT
     releaseCommand: php artisan migrate --force && php artisan storage:link
     autoDeploy: true
-    envVars: []
+    envVars:
+      - key: DB_CONNECTION
+        value: sqlite
+      - key: DB_DATABASE
+        value: /var/www/html/database/database.sqlite
