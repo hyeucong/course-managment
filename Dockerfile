@@ -1,10 +1,11 @@
 # Build frontend in a dedicated Node stage so we don't require npm in the PHP image
-FROM node:18-alpine AS node-build
+FROM node:18-slim AS node-build
 WORKDIR /src
 
 # Copy only package files first for caching
 COPY package.json package-lock.json ./
-RUN npm ci --silent --no-audit --no-fund
+# Skip optional native deps that often fail in CI (like tailwind native bindings)
+RUN npm ci --omit=optional --silent --no-audit --no-fund
 
 # Copy the rest and run the build
 COPY . .
