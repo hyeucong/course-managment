@@ -1,3 +1,16 @@
+# Build frontend in a dedicated Node stage so we don't require npm in the PHP image
+FROM node:18-alpine AS node-build
+WORKDIR /src
+
+# Copy only package files first for caching
+COPY package.json package-lock.json ./
+RUN npm ci --silent --no-audit --no-fund
+
+# Copy the rest and run the build
+COPY . .
+RUN npm run build --silent
+
+# Final image (PHP + nginx) — no npm required here
 FROM serversideup/php:8.4-fpm-nginx
 
 # Environment variables for Render
@@ -14,16 +27,17 @@ WORKDIR /var/www/html
 # 2. Copy code and assign ownership directly to the web user
 COPY --chown=www-data:www-data . .
 
-# 3. Create missing folders and set permissions as root
-RUN mkdir -p storage/framework/sessions storage/framework/views storage/framework/cache storage/logs bootstrap/cache \
-    && chmod -R 775 storage bootstrap/cache \
-    && chown -R www-data:www-data storage bootstrap/cache
+# 3. Copy built frontend from the Node stage
+COPY --from=node-build /src/public/build ./public/build
 
-# 4. SWITCH BACK TO WWW-DATA for security
+# 4. Create missing folders and set permissions as root
+RUN mkdir -p storage/framework/sessions storage/framework/views storage/framework/cache storage/logs bootstrap/cache \
+    && chmod -R 775 storage bootstrap/cache public/build \
+    && chown -R www-data:www-data storage bootstrap/cache public/build
+
+# 5. SWITCH BACK TO WWW-DATA for security
 USER www-data
 
-# 5. Run Composer safely (ignoring scripts to save RAM)
+# 6. Run Composer safely (ignoring scripts to save RAM)
 RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
 
-# Build frontend assets during build (recommended for consistent deploys)
-RUN if [ -f package.json ]; then npm ci --silent && npm run build --silent; fi
