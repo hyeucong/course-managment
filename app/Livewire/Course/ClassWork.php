@@ -3,17 +3,17 @@
 namespace App\Livewire\Course;
 
 use App\Models\Enrollment;
-use App\Models\Student;
-use Flux\Flux;
-use Livewire\Component;
 use App\Models\Classwork as ClassworkModel;
 use App\Models\Course;
+use Flux\Flux;
+use Livewire\Component;
 use Mail;
 
 class Classwork extends Component
 {
     public $courseId;
     public $course;
+    public $classworks = [];
     public $activeTab = 'classwork';
     public $title;
     public $description;
@@ -34,15 +34,22 @@ class Classwork extends Component
         $this->courseId = $courseId;
         $this->course = Course::findOrFail($this->courseId);
         $this->isStudent = request()->routeIs('student.classwork');
+        $this->loadClassworks();
     }
 
+    public function loadClassworks()
+    {
+        $this->classworks = ClassworkModel::query()
+            ->where('course_id', $this->courseId)
+            ->orderBy('due_date')
+            ->get(['id', 'course_id', 'title', 'description', 'points', 'due_date']);
+    }
 
     public function render()
     {
-        $classworks = ClassworkModel::where('course_id', $this->courseId)->orderBy('due_date')->get();
         return view('livewire.classwork', [
             'course' => $this->course,
-            'classworks' => $classworks,
+            'classworks' => $this->classworks,
         ]);
     }
 
@@ -60,11 +67,15 @@ class Classwork extends Component
         ]);
 
         // Get all enrolled students for this course
-        $enrollments = Enrollment::where('course_id', $this->courseId)->get();
+        $enrollments = Enrollment::query()
+            ->with('student:id,email')
+            ->where('course_id', $this->courseId)
+            ->get(['id', 'student_id', 'course_id']);
 
         // Queue email to each enrolled student
         foreach ($enrollments as $enrollment) {
-            $student = Student::find($enrollment->student_id);
+            $student = $enrollment->student;
+
             if ($student && $student->email) {
                 Mail::to($student->email)->queue(new \App\Mail\ClassworkCreated(
                     $student->email,
@@ -77,6 +88,7 @@ class Classwork extends Component
         }
 
         $this->reset(['title', 'description', 'points', 'dueDate']);
+        $this->loadClassworks();
         $this->dispatch('notify', [
             'type' => 'success',
             'message' => 'Assignment created successfully and notifications queued for students!'
@@ -111,6 +123,7 @@ class Classwork extends Component
         ]);
 
         $this->reset(['editingClassworkId', 'title', 'description', 'points', 'dueDate']);
+        $this->loadClassworks();
         $this->dispatch('notify', [
             'type' => 'success',
             'message' => 'Assignment updated successfully!'
@@ -123,6 +136,7 @@ class Classwork extends Component
     {
         $classwork = ClassworkModel::findOrFail($classworkId);
         $classwork->delete();
+        $this->loadClassworks();
 
         $this->dispatch('notify', [
             'type' => 'success',

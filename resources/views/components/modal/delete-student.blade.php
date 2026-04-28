@@ -8,8 +8,7 @@
         <div class="flex">
             <flux:spacer />
 
-            <flux:button type="submit" variant="danger" wire:click="deleteStudent({{ $student->id }})">
-                Delete
+            <flux:button type="submit" variant="danger" wire:click="deleteStudent({{ $student->id }})">Delete
             </flux:button>
         </div>
     </div>

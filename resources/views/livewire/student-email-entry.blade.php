@@ -19,8 +19,7 @@
             </div>
 
             <flux:button type="submit" variant="primary" class="w-full">
-                <span wire:loading.remove>Submit</span>
-                <span wire:loading>Submitting...</span>
+                Submit
             </flux:button>
         </form>
     </div>

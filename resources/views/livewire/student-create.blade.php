@@ -1,6 +1,6 @@
 <div>
     <flux:modal name="student-create" class="w-fit">
-        <div class="space-y-6">
+        <form wire:submit.prevent="submit" class="space-y-6">
 
             <flux:fieldset>
                 <flux:legend size="lg" class="text-center mb-4">Create Student</flux:legend>
@@ -16,10 +16,11 @@
 
                 <div class="flex mt-6">
                     <flux:spacer />
-                    <flux:button wire:listen="student-created" type="submit" variant="primary" wire:click="submit"
-                        class="cursor-pointer">Create Student</flux:button>
+                    <flux:button wire:listen="student-created" type="submit" variant="primary" class="cursor-pointer">
+                        Create Student
+                    </flux:button>
                 </div>
             </flux:fieldset>
-        </div>
+        </form>
     </flux:modal>
 </div>

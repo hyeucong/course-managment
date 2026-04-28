@@ -1,4 +1,4 @@
-<flux:modal wire:model="showGradingModal" title="Grade Submission" class="min-w-[500px]">
+<flux:modal wire:model="showGradingModal" title="Grade Submission" class="min-w-125">
     @if($currentSubmission)
         <div class="space-y-6">
             <div class="flex items-center justify-between border-gray-200">

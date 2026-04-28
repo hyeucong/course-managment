@@ -1,4 +1,4 @@
-<flux:modal name="edit-classwork" class="md:w-[500px]">
+<flux:modal name="edit-classwork" class="md:w-125">
     <form wire:submit.prevent="updateClasswork">
         <div class="space-y-6">
             <div>

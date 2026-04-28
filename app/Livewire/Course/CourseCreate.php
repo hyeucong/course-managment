@@ -4,7 +4,6 @@ namespace App\Livewire\Course;
 
 use App\Models\Course;
 use App\Models\Enrollment;
-use App\Models\Student;
 use Auth;
 use Flux\Flux;
 use Livewire\Component;
@@ -20,11 +19,11 @@ class CourseCreate extends Component
     public $schedule;
     public $description;
     public $status;
+    public array $selected_students = [];
 
     public function render()
     {
-        $students = Student::all();
-        return view('livewire.course-create', ['students' => $students]);
+        return view('livewire.course-create');
     }
 
     public function submit()
@@ -60,14 +59,15 @@ class CourseCreate extends Component
             $course->teachers()->attach(Auth::id(), ['role' => 'creator']);
 
             if (!empty($this->selected_students)) {
-                foreach ($this->selected_students as $studentId) {
-                    Enrollment::create([
+                $timestamp = now();
+
+                Enrollment::insert(array_map(fn ($studentId) => [
                         'course_id' => $course->id,
                         'student_id' => $studentId,
-                        'status' => 'active',
-                        'enrollment_date' => now(),
-                    ]);
-                }
+                        'enrollment_date' => $timestamp,
+                        'created_at' => $timestamp,
+                        'updated_at' => $timestamp,
+                    ], $this->selected_students));
             }
 
             session()->flash('success', 'Course created successfully with enrollments!');
@@ -99,8 +99,9 @@ class CourseCreate extends Component
         $this->room = "";
         $this->date_start = "";
         $this->date_end = "";
-        $this->schedule = [];
+        $this->schedule = "";
         $this->status = "";
         $this->description = "";
+        $this->selected_students = [];
     }
 }

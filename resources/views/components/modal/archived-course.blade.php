@@ -1,4 +1,4 @@
-<flux:modal name="archived-course" class="min-w-[22rem]">
+<flux:modal name="archived-course" class="min-w-88">
     <div class="space-y-6">
         <div>
             <flux:heading size="lg">Archive Course?</flux:heading>

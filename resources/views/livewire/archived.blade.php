@@ -1,7 +1,7 @@
 <div class="flex h-full w-full flex-1 flex-col gap-6 rounded-xl">
     <div class="grid auto-rows-min gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         @forelse ($courses as $course)
-            <div class="group relative overflow-hidden rounded-xl border border-zinc-200 shadow-sm flex flex-col justify-between p-6 h-[220px] cursor-pointer"
+            <div class="group relative overflow-hidden rounded-xl border border-zinc-200 shadow-sm flex flex-col justify-between p-6 h-55 cursor-pointer"
                 href="{{route('stream', $course)}}" wire:navigate>
 
                 <div class="flex flex-col gap-3">

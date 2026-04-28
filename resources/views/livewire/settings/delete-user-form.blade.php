@@ -11,7 +11,7 @@ new class extends Component {
     public function deleteUser(AuthKitAccountDeletionRequest $request): void
     {
         $request->delete(
-            using: fn (User $user) => $user->delete()
+            using: fn(User $user) => $user->delete()
         );
 
         $this->redirect('/', navigate: true);

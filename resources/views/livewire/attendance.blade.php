@@ -10,7 +10,7 @@
                 </flux:subheading>
             </div>
             <div class="flex flex-col sm:flex-row gap-3">
-                <flux:select wire:model.live="selectedDate" class="min-w-[200px]" wire:loading.attr="disabled">
+                <flux:select wire:model.live="selectedDate" class="min-w-50">
                     @foreach($this->availableDatesWithAttendance as $dateValue => $dateInfo)
                         <flux:select.option value="{{ $dateValue }}"
                             class="{{ $dateInfo['hasAttendance'] ? 'bg-green-100' : '' }}">
@@ -26,12 +26,6 @@
         </div>
 
         <div class="bg-white rounded-xl border border-neutral-200 shadow-sm overflow-hidden relative">
-            <div wire:loading.delay class="absolute inset-0 bg-white/50 z-10 flex items-center justify-center pt-6">
-                <div class="text-center">
-                    <flux:icon.loading variant="outline" class="size-8 animate-spin mx-auto text-primary-500" />
-                </div>
-            </div>
-
             <div class="overflow-x-auto">
                 <table class="w-full">
                     <thead>

@@ -6,7 +6,6 @@ use App\Mail\StudentCreated;
 use App\Models\Course;
 use App\Models\Enrollment;
 use App\Models\Student;
-use App\Models\User;
 use Flux\Flux;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -30,12 +29,16 @@ class People extends Component
 
     public function loadEnrolledStudents()
     {
-        $this->students = $this->course->students()->get();
+        $this->students = $this->course->students()
+            ->select('students.id', 'students.first_name', 'students.last_name', 'students.email', 'students.phone')
+            ->get();
     }
 
     public function loadTeachers()
     {
-        $this->teachers = $this->course->users()->get();
+        $this->teachers = $this->course->users()
+            ->select('users.id', 'users.name', 'users.email', 'users.avatar')
+            ->get();
     }
 
     #[On('reloadStudents')]
@@ -108,12 +111,12 @@ class People extends Component
 
     public function removeStudent($id)
     {
-        $enrollment = Enrollment::where('student_id', $id)
+        $deleted = Enrollment::query()
+            ->where('student_id', $id)
             ->where('course_id', $this->courseId)
-            ->first();
+            ->delete();
 
-        if ($enrollment) {
-            $enrollment->delete();
+        if ($deleted) {
             $this->dispatch('notify', [
                 'type' => 'success',
                 'message' => 'Student removed from the course successfully!'
@@ -148,9 +151,7 @@ class People extends Component
 
     public function removeTeacher($teacherId)
     {
-        $course = Course::findOrFail($this->courseId);
-
-        if ($course->teachers()->where('user_id', $teacherId)->where('role', 'creator')->exists()) {
+        if ($this->course->creator()->whereKey($teacherId)->exists()) {
             $this->dispatch('notify', [
                 'type' => 'error',
                 'message' => 'Cannot remove the course creator.'
@@ -158,7 +159,7 @@ class People extends Component
             return;
         }
 
-        $course->teachers()->detach($teacherId);
+        $this->course->teachers()->detach($teacherId);
 
         $this->dispatch('notify', [
             'type' => 'success',

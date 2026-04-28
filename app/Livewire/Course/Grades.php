@@ -2,11 +2,9 @@
 
 namespace App\Livewire\Course;
 
-use Livewire\Component;
 use App\Models\Course;
-use App\Models\Student;
-use App\Models\Classwork;
 use App\Models\Grade;
+use Livewire\Component;
 
 class Grades extends Component
 {
@@ -19,7 +17,13 @@ class Grades extends Component
     public function mount($courseId)
     {
         $this->courseId = $courseId;
-        $this->course = Course::findOrFail($this->courseId);
+        $this->course = Course::query()
+            ->with([
+                'students:id,first_name,last_name,email',
+                'classworks:id,course_id,title,points,due_date',
+            ])
+            ->findOrFail($this->courseId);
+
         $this->loadGrades();
     }
 
@@ -39,7 +43,10 @@ class Grades extends Component
 
     private function loadGrades()
     {
-        $grades = Grade::where('course_id', $this->courseId)->get();
+        $grades = Grade::query()
+            ->where('course_id', $this->courseId)
+            ->get(['student_id', 'classwork_id', 'score']);
+
         $gradeCount = [];
 
         foreach ($grades as $grade) {

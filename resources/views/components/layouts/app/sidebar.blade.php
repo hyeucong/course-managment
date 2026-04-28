@@ -6,6 +6,8 @@
     </head>
 
     <body class="min-h-screen">
+        @include('components.livewire-request-loader')
+
         <flux:sidebar sticky stashable class="border-r border-zinc-200 bg-stone-100">
             <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
@@ -43,7 +45,9 @@
 
             @else
                 <flux:navlist variant="outline">
-                    <flux:navlist.item icon="archive-box" :href="route('archived')" :current="request()->routeIs('archived') || request()->is('archived/*')" wire:navigate :accent="false">Archived
+                    <flux:navlist.item icon="archive-box" :href="route('archived')"
+                        :current="request()->routeIs('archived') || request()->is('archived/*')" wire:navigate
+                        :accent="false">Archived
                     </flux:navlist.item>
                 </flux:navlist>
             @endif

@@ -6,6 +6,8 @@
     </head>
 
     <body class="min-h-screen bg-white">
+        @include('components.livewire-request-loader')
+
         <flux:main>
             {{ $slot }}
         </flux:main>

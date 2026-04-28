@@ -7,8 +7,7 @@
 
     <div class="p-6 max-w-7xl mx-auto">
         <div class="relative group mb-8">
-            <img src="{{ $course->background_url }}" alt="Course Banner"
-                class="w-full h-[300px] object-cover rounded-xl">
+            <img src="{{ $course->background_url }}" alt="Course Banner" class="w-full h-75 object-cover rounded-xl">
             <div class="absolute bottom-4 left-4 bg-white/80  p-4 rounded-lg backdrop-blur-sm">
                 <h1 class="text-3xl font-bold">{{ $course->course_name }}</h1>
                 <p class="text-lg text-neutral-600 dark:text-neutral-300">{{ $course->course_code }}</p>

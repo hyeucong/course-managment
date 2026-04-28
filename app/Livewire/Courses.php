@@ -2,17 +2,21 @@
 
 namespace App\Livewire;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
 
 class Courses extends Component
 {
     public $courses = [];
+
     public $courseId;
-    public $sortField = 'course_name'; // Default sort field
-    public $sortDirection = 'asc'; // Default sort direction
-    public $search = ''; // Search term
+
+    public $sortField = 'course_name';
+
+    public $sortDirection = 'asc';
+
+    public $search = '';
 
     public function mount()
     {
@@ -60,19 +64,26 @@ class Courses extends Component
     {
         $user = Auth::user();
         $query = $user->courses()
+            ->select([
+                'courses.id',
+                'courses.course_name',
+                'courses.course_code',
+                'courses.slug',
+                'courses.lecturer',
+                'courses.status',
+                'courses.date_start',
+            ])
             ->wherePivotIn('role', ['creator', 'teacher'])
             ->where('status', '!=', 'archived')
             ->withCount('enrollments as student_count');
 
-        // Apply search if provided
-        if (!empty($this->search)) {
+        if (! empty($this->search)) {
             $query->where(function ($q) {
-                $q->where('course_name', 'like', '%' . $this->search . '%')
-                    ->orWhere('course_code', 'like', '%' . $this->search . '%');
+                $q->where('course_name', 'like', '%'.$this->search.'%')
+                    ->orWhere('course_code', 'like', '%'.$this->search.'%');
             });
         }
 
-        // Apply sorting
         if ($this->sortField === 'date') {
             $query->orderBy('date_start', $this->sortDirection);
         } else {

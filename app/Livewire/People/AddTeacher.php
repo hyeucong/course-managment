@@ -2,13 +2,14 @@
 
 namespace App\Livewire\People;
 
+use App\Models\User;
 use Flux\Flux;
 use Livewire\Component;
-use App\Models\User;
 
 class AddTeacher extends Component
 {
     public $email;
+
     public $courseId;
 
     public function mount($courseId)
@@ -19,13 +20,23 @@ class AddTeacher extends Component
     public function addTeacher()
     {
         $this->validate([
-            'email' => 'required|email|exists:users,email',
+            'email' => 'required|email',
         ]);
 
-        $user = User::where('email', $this->email)->first();
+        $user = User::query()
+            ->select('id')
+            ->where('email', $this->email)
+            ->first();
+
+        if (! $user) {
+            $this->addError('email', 'Teacher not found.');
+
+            return;
+        }
 
         if ($user->courses()->where('course_id', $this->courseId)->exists()) {
             $this->addError('email', 'This teacher is already assigned to the course.');
+
             return;
         }
 
@@ -35,10 +46,10 @@ class AddTeacher extends Component
         $this->dispatch('teacher-added');
         $this->dispatch('notify', [
             'type' => 'success',
-            'message' => 'Teacher added successfully!'
+            'message' => 'Teacher added successfully!',
         ]);
 
-        Flux::modal("add-teacher")->close();
+        Flux::modal('add-teacher')->close();
     }
 
     public function render()

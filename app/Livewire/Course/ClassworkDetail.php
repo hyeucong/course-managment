@@ -84,16 +84,16 @@ class ClassworkDetail extends Component
     public function loadSubmissions()
     {
         $this->submissions = ClassworkSubmission::where('classwork_id', $this->classworkId)
-            ->with('student')
+            ->with('student:id,first_name,last_name')
             ->get();
     }
 
     public function loadGrades()
     {
-        $grades = Grade::where('classwork_id', $this->classworkId)->get();
-        foreach ($grades as $grade) {
-            $this->grades[$grade->student_id] = $grade->score;
-        }
+        $this->grades = Grade::query()
+            ->where('classwork_id', $this->classworkId)
+            ->pluck('score', 'student_id')
+            ->all();
     }
 
     public function editGrade($studentId)

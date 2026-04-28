@@ -1,6 +1,6 @@
 <div>
     <flux:modal name="course-create" class="max-w-xl w-full mx-auto">
-        <div class="space-y-4">
+        <form wire:submit.prevent="submit" class="space-y-4">
             <flux:fieldset>
                 <flux:legend size="lg" class="font-semibold text-center mb-4">Create New Course</flux:legend>
 
@@ -33,11 +33,11 @@
                         placeholder="Brief class overview" rows="3" />
                 </div>
                 <div class="flex justify-end mt-6 space-x-3">
-                    <flux:button wire:listen="course-created" type="submit" variant="primary" wire:click="submit">
+                    <flux:button wire:listen="course-created" type="submit" variant="primary">
                         Create
                     </flux:button>
                 </div>
             </flux:fieldset>
-        </div>
+        </form>
     </flux:modal>
 </div>

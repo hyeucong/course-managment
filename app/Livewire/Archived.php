@@ -31,6 +31,15 @@ class Archived extends Component
     {
         $user = Auth::user();
         $this->courses = $user->courses()
+            ->select([
+                'courses.id',
+                'courses.course_name',
+                'courses.course_code',
+                'courses.slug',
+                'courses.lecturer',
+                'courses.status',
+                'courses.date_start',
+            ])
             ->wherePivotIn('role', ['creator', 'teacher'])
             ->where('status', 'archived')
             ->withCount('enrollments as student_count')
