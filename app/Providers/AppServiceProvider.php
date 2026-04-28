@@ -20,6 +20,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if ($this->app->environment('local')) {
+            URL::forceRootUrl(config('app.url'));
+        }
+
         // Force HTTPS in production (works with Render's proxy headers)
         if ($this->app->environment('production')) {
             URL::forceScheme('https');

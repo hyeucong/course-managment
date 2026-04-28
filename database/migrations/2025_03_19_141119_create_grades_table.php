@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateGradesTable extends Migration
 {
+    public $withinTransaction = false;
+
     public function up()
     {
         Schema::create('grades', function (Blueprint $table) {

@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateStreamPostsTable extends Migration
 {
+    public $withinTransaction = false;
+
     public function up()
     {
         Schema::create('stream_posts', function (Blueprint $table) {

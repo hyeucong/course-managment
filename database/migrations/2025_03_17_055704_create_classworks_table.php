@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateClassworksTable extends Migration
 {
+    public $withinTransaction = false;
+
     public function up()
     {
         Schema::create('classworks', function (Blueprint $table) {

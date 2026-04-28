@@ -46,7 +46,6 @@
             <x-layouts.client.problem />
             <x-layouts.client.review />
             <x-layouts.client.product />
-            <x-layouts.client.pricing />
         </main>
 
         <footer>
