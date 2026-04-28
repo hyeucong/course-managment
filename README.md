@@ -4,11 +4,11 @@ A professional, modern Course Management System built with Laravel and Livewire.
 
 ## Screenshots
 
-![Landing Page](media/landing_page.png)
+[![Landing Page](media/landing_page.png)](media/landing_page.png)
 
 | Courses | Classwork | Attendance |
 | :---: | :---: | :---: |
-| ![Courses](media/courses.png) | ![Classwork](media/classwork.png) | ![Attendance](media/attendance.png) |
+| [![Courses](media/courses.png)](media/courses.png) | [![Classwork](media/classwork.png)](media/classwork.png) | [![Attendance](media/attendance.png)](media/attendance.png) |
 
 ---
 
