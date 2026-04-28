@@ -7,14 +7,18 @@ use App\Models\Course;
 use App\Models\Enrollment;
 use App\Models\Student;
 use Flux\Flux;
+use Illuminate\Database\QueryException;
+use Illuminate\Validation\Rule;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Mail;
 
 class People extends Component
 {
-    public $students;
-    public $teachers;
+    use WithPagination;
+
+    public $teacherList = [];
     public $courseId, $activeTab = 'people', $course;
     public $editingStudent = null;
     public $studentFirstName, $studentLastName, $studentEmail;
@@ -23,20 +27,12 @@ class People extends Component
     public function mount()
     {
         $this->course = Course::findOrFail($this->courseId);
-        $this->loadEnrolledStudents();
         $this->loadTeachers();
-    }
-
-    public function loadEnrolledStudents()
-    {
-        $this->students = $this->course->students()
-            ->select('students.id', 'students.first_name', 'students.last_name', 'students.email', 'students.phone')
-            ->get();
     }
 
     public function loadTeachers()
     {
-        $this->teachers = $this->course->users()
+        $this->teacherList = $this->course->users()
             ->select('users.id', 'users.name', 'users.email', 'users.avatar')
             ->get();
     }
@@ -44,7 +40,7 @@ class People extends Component
     #[On('reloadStudents')]
     public function reloadStudents()
     {
-        $this->loadEnrolledStudents();
+        $this->resetPage(pageName: 'studentsPage');
     }
 
     #[On('teacher-added')]
@@ -70,7 +66,7 @@ class People extends Component
                 'message' => 'Student created successfully and enrolled in the course!'
             ]);
 
-            $this->reloadStudents();
+            $this->resetPage(pageName: 'studentsPage');
         }
     }
 
@@ -89,15 +85,30 @@ class People extends Component
         $this->validate([
             'studentFirstName' => 'required',
             'studentLastName' => 'required',
-            'studentEmail' => 'required|email',
+            'studentEmail' => [
+                'required',
+                'email',
+                Rule::unique('students', 'email')->ignore($this->studentId),
+            ],
         ]);
 
         $student = Student::findOrFail($this->studentId);
-        $student->update([
-            'first_name' => $this->studentFirstName,
-            'last_name' => $this->studentLastName,
-            'email' => $this->studentEmail,
-        ]);
+
+        try {
+            $student->update([
+                'first_name' => $this->studentFirstName,
+                'last_name' => $this->studentLastName,
+                'email' => $this->studentEmail,
+            ]);
+        } catch (QueryException $exception) {
+            if (($exception->errorInfo[0] ?? null) === '23505') {
+                $this->addError('studentEmail', 'This email is already registered to another student.');
+
+                return;
+            }
+
+            throw $exception;
+        }
 
         $this->dispatch('notify', [
             'type' => 'success',
@@ -105,7 +116,6 @@ class People extends Component
         ]);
 
         Flux::modal('edit-student')->close();
-        $this->reloadStudents();
 
     }
 
@@ -121,7 +131,7 @@ class People extends Component
                 'type' => 'success',
                 'message' => 'Student removed from the course successfully!'
             ]);
-            $this->reloadStudents();
+            $this->resetPage(pageName: 'studentsPage');
         } else {
             $this->dispatch('notify', [
                 'type' => 'error',
@@ -143,7 +153,7 @@ class People extends Component
             'message' => 'Student deleted from the system successfully!'
         ]);
 
-        $this->reloadStudents();
+        $this->resetPage(pageName: 'studentsPage');
 
         Flux::modal('delete-student')->close();
     }
@@ -186,6 +196,10 @@ class People extends Component
     {
         return view('livewire.people', [
             'course' => $this->course,
+            'teachers' => $this->teacherList,
+            'students' => $this->course->students()
+                ->select('students.id', 'students.first_name', 'students.last_name', 'students.email', 'students.phone')
+                ->paginate(10, pageName: 'studentsPage'),
         ]);
     }
 }

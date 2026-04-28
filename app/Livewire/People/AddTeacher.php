@@ -40,7 +40,9 @@ class AddTeacher extends Component
             return;
         }
 
-        $user->courses()->attach($this->courseId, ['role' => 'teacher']);
+        $user->courses()->syncWithoutDetaching([
+            $this->courseId => ['role' => 'teacher'],
+        ]);
 
         $this->reset('email');
         $this->dispatch('teacher-added');

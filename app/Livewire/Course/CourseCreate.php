@@ -6,6 +6,8 @@ use App\Models\Course;
 use App\Models\Enrollment;
 use Auth;
 use Flux\Flux;
+use Illuminate\Database\QueryException;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class CourseCreate extends Component
@@ -30,7 +32,7 @@ class CourseCreate extends Component
     {
         $this->validate([
             'course_name' => 'required',
-            'course_code' => 'required',
+            'course_code' => ['required', Rule::unique('courses', 'course_code')],
             'lecturer' => 'nullable',
             'room' => 'nullable',
             'date_start' => 'required|date',
@@ -38,6 +40,8 @@ class CourseCreate extends Component
             'schedule' => 'required|in:135,246',
             'status' => 'required|in:active,inactive',
             'description' => 'nullable',
+            'selected_students' => 'array',
+            'selected_students.*' => 'integer|exists:students,id|distinct',
         ]);
 
         try {
@@ -58,7 +62,9 @@ class CourseCreate extends Component
 
             $course->teachers()->attach(Auth::id(), ['role' => 'creator']);
 
-            if (!empty($this->selected_students)) {
+            $selectedStudents = array_values(array_unique($this->selected_students));
+
+            if (!empty($selectedStudents)) {
                 $timestamp = now();
 
                 Enrollment::insert(array_map(fn ($studentId) => [
@@ -67,7 +73,7 @@ class CourseCreate extends Component
                         'enrollment_date' => $timestamp,
                         'created_at' => $timestamp,
                         'updated_at' => $timestamp,
-                    ], $this->selected_students));
+                    ], $selectedStudents));
             }
 
             session()->flash('success', 'Course created successfully with enrollments!');
@@ -82,6 +88,18 @@ class CourseCreate extends Component
             $this->dispatch("reloadStudents");
 
             $this->resetForm();
+        } catch (QueryException $exception) {
+            if (($exception->errorInfo[0] ?? null) === '23505') {
+                $this->addError('course_code', 'This course code is already in use.');
+
+                return;
+            }
+
+            session()->flash('error', 'An error occurred while creating the course. Please try again.');
+            $this->dispatch('notify', [
+                'type' => 'error',
+                'message' => 'An error occurred while creating the course. Please try again.'
+            ]);
         } catch (\Exception $e) {
             session()->flash('error', 'An error occurred while creating the course. Please try again.');
             $this->dispatch('notify', [

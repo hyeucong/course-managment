@@ -7,13 +7,15 @@ use App\Models\Classwork as ClassworkModel;
 use App\Models\Course;
 use Flux\Flux;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Mail;
 
 class Classwork extends Component
 {
+    use WithPagination;
+
     public $courseId;
     public $course;
-    public $classworks = [];
     public $activeTab = 'classwork';
     public $title;
     public $description;
@@ -34,22 +36,16 @@ class Classwork extends Component
         $this->courseId = $courseId;
         $this->course = Course::findOrFail($this->courseId);
         $this->isStudent = request()->routeIs('student.classwork');
-        $this->loadClassworks();
-    }
-
-    public function loadClassworks()
-    {
-        $this->classworks = ClassworkModel::query()
-            ->where('course_id', $this->courseId)
-            ->orderBy('due_date')
-            ->get(['id', 'course_id', 'title', 'description', 'points', 'due_date']);
     }
 
     public function render()
     {
         return view('livewire.classwork', [
             'course' => $this->course,
-            'classworks' => $this->classworks,
+            'classworks' => ClassworkModel::query()
+                ->where('course_id', $this->courseId)
+                ->orderBy('due_date')
+                ->paginate(10, pageName: 'classworksPage'),
         ]);
     }
 
@@ -88,7 +84,7 @@ class Classwork extends Component
         }
 
         $this->reset(['title', 'description', 'points', 'dueDate']);
-        $this->loadClassworks();
+        $this->resetPage(pageName: 'classworksPage');
         $this->dispatch('notify', [
             'type' => 'success',
             'message' => 'Assignment created successfully and notifications queued for students!'
@@ -123,7 +119,6 @@ class Classwork extends Component
         ]);
 
         $this->reset(['editingClassworkId', 'title', 'description', 'points', 'dueDate']);
-        $this->loadClassworks();
         $this->dispatch('notify', [
             'type' => 'success',
             'message' => 'Assignment updated successfully!'
@@ -136,7 +131,7 @@ class Classwork extends Component
     {
         $classwork = ClassworkModel::findOrFail($classworkId);
         $classwork->delete();
-        $this->loadClassworks();
+        $this->resetPage(pageName: 'classworksPage');
 
         $this->dispatch('notify', [
             'type' => 'success',

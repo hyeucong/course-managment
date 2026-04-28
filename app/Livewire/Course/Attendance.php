@@ -15,7 +15,7 @@ class Attendance extends Component
 
     public $course;
 
-    public $students;
+    public $students = [];
 
     public $activeTab = 'attendance';
 

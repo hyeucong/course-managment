@@ -4,6 +4,8 @@ namespace App\Livewire\People;
 
 use App\Models\Student;
 use Flux\Flux;
+use Illuminate\Database\QueryException;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class StudentCreate extends Component
@@ -21,16 +23,26 @@ class StudentCreate extends Component
         $this->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email',
+            'email' => ['required', 'email', Rule::unique('students', 'email')],
             'phone' => 'required',
         ]);
 
-        $student = Student::create([
-            'first_name' => $this->first_name,
-            'last_name' => $this->last_name,
-            'email' => $this->email,
-            'phone' => $this->phone
-        ]);
+        try {
+            $student = Student::create([
+                'first_name' => $this->first_name,
+                'last_name' => $this->last_name,
+                'email' => $this->email,
+                'phone' => $this->phone
+            ]);
+        } catch (QueryException $exception) {
+            if (($exception->errorInfo[0] ?? null) === '23505') {
+                $this->addError('email', 'This email is already registered to another student.');
+
+                return;
+            }
+
+            throw $exception;
+        }
 
         $this->dispatch('notify', [
             'type' => 'success',

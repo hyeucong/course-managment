@@ -91,6 +91,12 @@
                 </div>
             @endforelse
         </div>
+
+        @if ($classworks->hasPages())
+            <div class="pt-6">
+                {{ $classworks->links() }}
+            </div>
+        @endif
     </div>
 
     <x-modal.create-classwork />

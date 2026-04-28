@@ -100,6 +100,12 @@
                             </p>
                         </div>
                     @endforelse
+
+                    @if ($posts->hasPages())
+                        <div class="pt-2">
+                            {{ $posts->links() }}
+                        </div>
+                    @endif
                 </div>
             </div>
 

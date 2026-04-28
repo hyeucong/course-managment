@@ -2,15 +2,19 @@
 
 namespace App\Livewire\Course;
 
+use App\Models\Classwork;
+use App\Models\Course;
+use App\Models\StreamPost;
 use Carbon\Carbon;
 use Flux\Flux;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use App\Models\StreamPost;
-use App\Models\Course;
-use App\Models\Classwork;
+use Livewire\WithPagination;
 
 class Stream extends Component
 {
+    use WithPagination;
+
     public $courseId;
     public $course;
     public $activeTab = 'stream';
@@ -26,14 +30,18 @@ class Stream extends Component
     public function mount($courseId)
     {
         $this->courseId = $courseId;
-        $this->course = Course::findOrFail($this->courseId);
+        $this->course = Course::query()
+            ->select('id', 'course_name', 'course_code', 'background_url')
+            ->findOrFail($this->courseId);
         $this->backgroundUrl = $this->course->background_url;
         $this->loadSidebarData();
     }
 
     private function loadSidebarData()
     {
-        $this->upcomingClasswork = Classwork::where('course_id', $this->courseId)
+        $this->upcomingClasswork = Classwork::query()
+            ->select('id', 'course_id', 'title', 'due_date')
+            ->where('course_id', $this->courseId)
             ->where('due_date', '>', Carbon::now())
             ->where('due_date', '<=', Carbon::now()->addWeek())
             ->orderBy('due_date')
@@ -77,18 +85,20 @@ class Stream extends Component
 
         StreamPost::create([
             'course_id' => $this->courseId,
-            'user_id' => auth()->id(),
+            'user_id' => Auth::id(),
             'content' => $this->postContent,
             'attached_url' => $this->attachedUrl,
         ]);
 
         $this->postContent = '';
         $this->attachedUrl = '';
+        $this->resetPage(pageName: 'postsPage');
     }
 
     public function deletePost($postId)
     {
         StreamPost::findOrFail($postId)->delete();
+        $this->resetPage(pageName: 'postsPage');
     }
 
     public function updateBackgroundUrl()
@@ -103,10 +113,12 @@ class Stream extends Component
 
     public function render()
     {
-        $posts = StreamPost::where('course_id', $this->courseId)
-            ->with('user')
+        $posts = StreamPost::query()
+            ->select('id', 'course_id', 'user_id', 'content', 'attached_url', 'created_at')
+            ->where('course_id', $this->courseId)
+            ->with('user:id,name,avatar')
             ->latest()
-            ->get();
+            ->paginate(10, pageName: 'postsPage');
 
         return view('livewire.stream', [
             'posts' => $posts,

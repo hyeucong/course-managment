@@ -28,11 +28,9 @@
                             :current="request()->routeIs('courses') || request()->is('courses/*')" wire:navigate>
                             Courses
                         </flux:navlist.item>
-                        <flux:navlist.item icon="credit-card" :href="route('billing')" :accent="false"
-                            :current="request()->routeIs('billing')" wire:navigate>Billing
-                        </flux:navlist.item>
-                        <flux:navlist.item icon="chat-bubble-oval-left-ellipsis" :href="route('contact-us')" :accent="false"
-                            :current="request()->routeIs('contact-us')" wire:navigate>Contact Us
+                        <flux:navlist.item icon="archive-box" :href="route('archived')" :accent="false"
+                            :current="request()->routeIs('archived') || request()->is('archived/*')" wire:navigate>
+                            Archived
                         </flux:navlist.item>
                     @endif
 
@@ -40,17 +38,6 @@
             </flux:navlist>
 
             <flux:spacer />
-
-            @if (request()->is('student/*'))
-
-            @else
-                <flux:navlist variant="outline">
-                    <flux:navlist.item icon="archive-box" :href="route('archived')"
-                        :current="request()->routeIs('archived') || request()->is('archived/*')" wire:navigate
-                        :accent="false">Archived
-                    </flux:navlist.item>
-                </flux:navlist>
-            @endif
             <!-- Desktop User Menu -->
             @if(request()->is('student/*'))
                 <flux:navlist variant="outline">
@@ -64,7 +51,7 @@
                     <flux:profile :name="auth()->user()->name" :avatar="auth()->user()->avatar ?: null"
                         :initials="auth()->user()->initials()" icon-trailing="chevrons-up-down" />
 
-                    <flux:menu class="w-[220px]">
+                    <flux:menu class="w-55">
                         <flux:menu.radio.group>
                             <div class="p-0 text-sm font-normal">
                                 <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">

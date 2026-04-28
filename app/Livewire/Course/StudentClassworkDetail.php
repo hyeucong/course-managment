@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Course;
 
+use App\Models\Classwork as ClassworkModel;
 use App\Models\ClassworkSubmission;
+use App\Models\Course;
 use App\Models\Student;
 use Livewire\Component;
-use App\Models\Classwork as ClassworkModel;
-use App\Models\Course;
 
 class StudentClassworkDetail extends Component
 {
@@ -26,10 +26,13 @@ class StudentClassworkDetail extends Component
         $this->course = Course::findOrFail($this->courseId);
         $this->classwork = ClassworkModel::findOrFail($this->classworkId);
 
-        // Get the student based on the email in the session
-        $this->student = Student::where('email', session('student_email'))->firstOrFail();
+        $this->student = Student::query()
+            ->select('id', 'email')
+            ->firstWhere('email', session('student_email'));
 
-        $this->checkSubmission();
+        abort_if(! $this->student, 404);
+
+        $this->loadSubmission();
     }
 
     public function render()
@@ -37,14 +40,18 @@ class StudentClassworkDetail extends Component
         return view('livewire.student-classwork-detail');
     }
 
-    private function checkSubmission()
+    private function loadSubmission()
     {
-        $this->submission = ClassworkSubmission::where('student_id', $this->student->id)
+        $this->submission = ClassworkSubmission::query()
+            ->select('id', 'classwork_id', 'student_id', 'content')
+            ->where('student_id', $this->student->id)
             ->where('classwork_id', $this->classworkId)
             ->first();
 
         if ($this->submission) {
             $this->content = $this->submission->content;
+        } else {
+            $this->content = '';
         }
     }
 
@@ -76,8 +83,8 @@ class StudentClassworkDetail extends Component
             'content' => $this->content,
         ]);
 
-        $this->checkSubmission();
-        $this->reset(['content']);
+        $this->loadSubmission();
+        $this->content = '';
 
         $this->dispatch('notify', [
             'type' => 'success',
@@ -107,7 +114,8 @@ class StudentClassworkDetail extends Component
         ]);
 
         $this->editMode = false;
-        $this->checkSubmission();
+        $this->submission->refresh();
+        $this->content = $this->submission->content;
 
         $this->dispatch('notify', [
             'type' => 'success',

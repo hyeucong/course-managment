@@ -11,9 +11,15 @@
             </div>
 
             <div class="space-y-2">
-                @foreach($teachers as $teacher)
+                @forelse($teachers as $teacher)
                     <x-lists.teacher-list :teacher="$teacher" />
-                @endforeach
+                @empty
+                    <div class="bg-white rounded-xl border border-neutral-200 shadow-sm overflow-hidden">
+                        <div class="p-6 text-center text-neutral-500">
+                            No teachers found
+                        </div>
+                    </div>
+                @endforelse
             </div>
         </div>
 
@@ -50,6 +56,12 @@
                     </div>
                 @endforelse
             </div>
+
+            @if ($students->hasPages())
+                <div class="pt-4">
+                    {{ $students->links() }}
+                </div>
+            @endif
 
             <x-modal.edit-student />
         </div>

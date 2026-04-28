@@ -3,9 +3,6 @@
         <div>
             © {{ date('Y') }} LectureSpace. All rights reserved.
         </div>
-        <div class="flex items-center gap-4">
-            <a href="#" class="hover:underline">Contact Us</a>
-        </div>
         <a class="w-6 h-6 cursor-pointer" href="https://github.com/hyeucong/course-managment" target="_blank">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                 <path
