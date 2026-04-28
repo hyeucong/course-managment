@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: course-managment
+    runtime: docker
+    plan: free
+    dockerContext: .
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: QUEUE_CONNECTION
+        value: database
+      - key: QUEUE_FAILED_DRIVER
+        value: database-uuids
+
+  - type: worker
+    name: course-managment-worker
+    runtime: docker
+    plan: free
+    dockerContext: .
+    dockerfilePath: ./Dockerfile
+    dockerCommand: php artisan queue:work database --sleep=1 --tries=3 --max-time=3600
+    autoDeploy: true
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: QUEUE_CONNECTION
+        value: database
+      - key: QUEUE_FAILED_DRIVER
+        value: database-uuids
