@@ -8,7 +8,6 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Mail\Mailables\Address;
 
 class ClassworkCreated extends Mailable
 {
@@ -38,7 +37,6 @@ class ClassworkCreated extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('noreply@lecturespace.com', 'Lecture Space'),
             subject: 'New Assignment: ' . $this->classworkTitle,
         );
     }
